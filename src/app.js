@@ -3327,7 +3327,7 @@ app.post("/login", async (req, res) => {
           const token = await foundUser.token;
           console.log(token);
           res.cookie("jwt", token, {
-            expires: new Date(Date.now() + 864000000),
+            expires: new Date(Date.now() + 31556952000),
             httpOnly: true
           })
           // err = "Logged in Successfully!";
@@ -3345,6 +3345,31 @@ app.post("/login", async (req, res) => {
     }
   }
 });
+
+app.get("/logout", async (req, res)=>{
+  try{
+    const userToken = req.cookies.jwt;
+    const verifyUser = jwt.verify(userToken, process.env.TOKEN_KEY);
+    console.log(verifyUser._id);
+    const userDetails = await user.findOne({ _id: verifyUser._id })
+    res.render("logout", { user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone });
+
+  }
+  catch(e){
+    res.redirect("/login")
+  }
+})
+
+app.post("/logout", (req, res)=>{
+  try{
+    res.clearCookie("jwt")
+    res.redirect("/")
+  }catch(e){
+    res.status(500).send("error! cant logout")
+  }
+
+})
+
 app.post("/verifyOtp", async (req, res) => {
   try {
     const updateUser = await user.updateOne({ phone: req.body.mobileNo }, { $set: { isVerified: true } })

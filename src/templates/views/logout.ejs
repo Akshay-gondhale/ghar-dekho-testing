@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Out - GharDekho.com</title>
+    <link rel="stylesheet" href="css/logout.css">
+    <link rel="stylesheet" media="screen and (max-width: 840px)" href="css/logout_mob.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" media="screen and (max-width: 840px)" href="css/navbar-mob.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body style="background-color: #fff">
+    <%- include ("navbar.ejs") %>
+    <section class="logout">
+        <div class="imgBx">
+            <img src="images/logout.gif" alt="">
+        </div>
+        <div class="message">
+            <p class="heading">
+                We Will Miss You!
+            </p>
+            <p class="msg">
+                If you have changed your mind, still you can go back. Or if you still have to logout please click on logout button.
+            </p>
+            <div class="logoutBtn">
+                <form action="/logout" method="POST">
+                    <button type="submit" class="logoutButton">Logout</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <%- include ("footer.ejs") %>
+</body>
+</html>

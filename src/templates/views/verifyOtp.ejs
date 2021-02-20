@@ -21,9 +21,9 @@
                 <p class="verifyHeading"><%= typeof verifyMsg != 'undefined' ? verifyMsg : "Please Verify Your Mobile Number" %></p>
                 <input id="num" type="text" class="MobileNo" name="mobileNo" value="<%= typeof phoneNo != 'undefined' ? phoneNo : "" %>" readonly>
                 <input type="text" id="otp" class="otpField hidden" name="email" placeholder="Enter OTP"  autocomplete="new-password">
-                <input id="send" class="button hidden" value="Send OTP">
+                <input id="send" class="button" value="Send OTP">
                 <input id="verify" class="button hidden" value="Verify OTP">
-                <input id="submit" type="submit" class="button" value="Submit">
+                <input id="submit" type="submit" class="button hidden" value="Submit">
             </form>
         </div>
     </div>
