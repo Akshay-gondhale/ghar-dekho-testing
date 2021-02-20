@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Details - GharDekho.com</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/flickity.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" media="screen and (max-width: 840px)" href="css/navbar-mob.css">
+    <link rel="stylesheet" media="screen and (max-width: 840px)" href="css/home_mob.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+
+</head>
+
+<body>
+
+    <%- include ("navbar.ejs") %>
+    <% if( typeof foundHome != 'undefined' && foundHome == false ){ %>
+        <script>
+            window.location.href = "/"
+        </script>
+    <% } %>
+    <% if( typeof interestSubmitted != 'undefined' && interestSubmitted == true ){ %>
+        <script>
+                        swal("Grabbed Your Interest!", "We have successfully registered your interest for this home. We will soon contact you. Thank You", "success")
+                            .then((value) => {
+                                if (value == true) {
+                                    window.location.href = "/"
+                                } else {
+                                    window.location.href = "/"
+                                }
+                            });
+                    
+         </script>
+    <% } %>
+    <% if( typeof foundHome != 'undefined' && foundHome == true ){ %>
+        <% getHome.forEach(function (home){ %>
+
+            <section class="home_details">
+                <header class="owner_details">
+                    <p class="ownerName" style="text-transform: capitalize;"><%= home.ownerName %>'s Home</p>
+                    <p class="ammount" style="text-transform: capitalize;"><span class="rent_sell"><%= home.sellOrRent %> :</span> <i class="fas fa-rupee-sign"></i> <%= home.ammount %></p>
+                </header>
+                <section class="carousel_imp_details">
+                    <div class="carouselDiv">
+                        <div class="main-carousel carousel">
+                            <div class="carousel-cell">
+                                <img src="uploads/<%= home.firstImage %>" alt="">
+                            </div>
+                            <div class="carousel-cell">
+                                <img src="uploads/<%= home.secondImage %>" alt="">
+                            </div>
+                            <div class="carousel-cell">
+                                <img src="uploads/<%= home.thirdImage %>" alt="">
+                            </div>
+                            <div class="carousel-cell">
+                                <img src="uploads/<%= home.fourthImage %>" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="imp_details">
+                        <div class="details">
+                            <div class="detailsCell">
+                                <p class="detailHeader"><i class="fas fa-home"></i> Home Type</p>
+                                <p class="detailValue"><%= home.homeType %></p>
+                            </div>
+                            <div class="detailsCell">
+                                <p class="detailHeader"><i class="fas fa-compass"></i> Location</p>
+                                <p class="detailValue"><%= home.add_areaName %>, <%= home.add_city %>.</p>
+                            </div>
+                            <div class="detailsCell">
+                                <p class="detailHeader"><i class="fas fa-thumbtack"></i> Nearest Landmark</p>
+                                <p class="detailValue"><%= home.add_landmark %></p>
+                            </div>
+                            <div class="detailsCell">
+                                <p class="detailHeader"><i class="fas fa-equals"></i> Carpet Area Of Home</p>
+                                <p class="detailValue"><%= home.carpetArea %> sq.ft.</p>
+                            </div>
+                            <div class="detailsCell">
+                                <p class="detailHeader"><i class="fas fa-car-side"></i> Parking</p>
+                                <p class="detailValue"><%= home.parking %></p>
+                            </div>
+                            <div class="detailsCell">
+                                <p class="detailHeader"><i class="fas fa-door-open"></i> Home Available On Floor</p>
+                                <p class="detailValue"><%= home.floor %> Floor</p>
+                            </div>
+                            <div class="detailsCell">
+                                <p class="detailHeader"><i class="fas fa-building"></i> Total Floors In Building</p>
+                                <p class="detailValue"><%= home.totalFloor %> Floors</p>
+                            </div>
+                            <div class="detailsCell">
+                                <p class="detailHeader"><i class="fas fa-birthday-cake"></i> Age Of The Property</p>
+                                <p class="detailValue"><%= home.age %> Years</p>
+                            </div>
+                            <% if( home.vegetarian == "yes" ){ %>
+                            <div class="detailsCell">
+                                <p class="detailHeader"><i class="fas fa-leaf"></i> Vegetarian Community!</p>
+                                <p class="detailValue">This owner wants to sell or rent only vegetarian people.</p>
+                            </div>
+                            <% } %>
+                        </div>
+                        <div class="show_interest_btn">
+                            <button onclick="DoFast('?home_id=<%= home._id %>&owner=<%= home.ownerName %>&sellOrRent=<%= home.sellOrRent %>&ammount=<%= home.ammount %>&firstImage=<%= home.firstImage %>&secondImage=<%= home.secondImage %>&thirdImage=<%= home.thirdImage %>&fourthImage=<%= home.fourthImage %>&homeType=<%= home.homeType %>&add_areaName=<%= home.add_areaName %>&add_city=<%= home.add_city %>&add_landmark=<%= home.add_landmark %>&carpetArea=<%= home.carpetArea %>&parking=<%= home.parking %>&floor=<%= home.floor %>&totalFloor=<%= home.totalFloor %>&age=<%= home.age %>&vegetarian=<%= home.vegetarian %>&user_id=<%= user %>&userName=<%= userName %>&userPhone=<%= userPhone %>')" class="showInterestBtn">Show Interest <i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <% }) %>
+    <!-- <section class="home_details">
+        <header class="owner_details">
+            <p class="ownerName"><%= getHome.ownerName %>'s Home</p>
+            <p class="ammount"><span class="rent_sell">Rent :</span> <i class="fas fa-rupee-sign"></i> 6000</p>
+        </header>
+        <section class="carousel_imp_details">
+            <div class="carouselDiv">
+                <div class="main-carousel carousel">
+                    <div class="carousel-cell">
+                        <img src="/fb-logo-maker.e3a68171.png" alt="">
+                    </div>
+                    <div class="carousel-cell">
+                        <img src="/fourthImage__1613201095587.jpg" alt="">
+                    </div>
+                    <div class="carousel-cell">
+                        <img src="/fourthImage__1613286258936.JPG" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="imp_details">
+                <div class="details">
+                    <div class="detailsCell">
+                        <p class="detailHeader"><i class="fas fa-home"></i> Home Type</p>
+                        <p class="detailValue">3BHK</p>
+                    </div>
+                    <div class="detailsCell">
+                        <p class="detailHeader"><i class="fas fa-compass"></i> Location</p>
+                        <p class="detailValue">Padmanagar, Bhiwandi.</p>
+                    </div>
+                    <div class="detailsCell">
+                        <p class="detailHeader"><i class="fas fa-thumbtack"></i> Nearest Landmark</p>
+                        <p class="detailValue">Don't Know</p>
+                    </div>
+                    <div class="detailsCell">
+                        <p class="detailHeader"><i class="fas fa-equals"></i> Carpet Area Of Home</p>
+                        <p class="detailValue">5000 sq.ft.</p>
+                    </div>
+                    <div class="detailsCell">
+                        <p class="detailHeader"><i class="fas fa-car-side"></i> Parking</p>
+                        <p class="detailValue">Not Available</p>
+                    </div>
+                    <div class="detailsCell">
+                        <p class="detailHeader"><i class="fas fa-door-open"></i> Home Available On Floor</p>
+                        <p class="detailValue">3 Floor</p>
+                    </div>
+                    <div class="detailsCell">
+                        <p class="detailHeader"><i class="fas fa-building"></i> Total Floors In Building</p>
+                        <p class="detailValue">5 Floors</p>
+                    </div>
+                    <div class="detailsCell">
+                        <p class="detailHeader"><i class="fas fa-birthday-cake"></i> Age Of The Property</p>
+                        <p class="detailValue">2 Years</p>
+                    </div>
+                    <div class="detailsCell">
+                        <p class="detailHeader"><i class="fas fa-leaf"></i> Vegetarian Community!</p>
+                        <p class="detailValue">This owner wants to sell or rent only vegetarian people.</p>
+                    </div>
+                </div>
+                <div class="show_interest_btn">
+                    <button class="showInterestBtn">Show Interest <i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+    </section> -->
+    <% } %>
+    <%- include("footer.ejs") %>
+
+
+    <script src="js/flickity.js"></script>
+    <script>
+        $('.main-carousel').flickity({
+            // options
+            cellAlign: 'center',
+            contain: true,
+            draggable: true,
+            wrapAround: true
+        });
+
+        function DoFast(str){
+            var inputString = str;
+            // window.location.href = "/homeInterest"+inputString;
+            var href = "/homeInterest" + inputString;
+            console.log(href)
+            window.location.href = href;
+        }
+    </script>
+
+</body>
+
+</html>

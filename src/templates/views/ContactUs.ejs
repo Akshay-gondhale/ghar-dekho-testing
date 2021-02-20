@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - GharDekho.com</title>
+    <link rel="stylesheet" href="css/ContactUs.css" />
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" media="screen and (max-width: 840px)" href="css/navbar-mob.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+    <%- include ("navbar.ejs") %>
+        <div class="container">
+            <span class="big-circle"></span>
+            <div class="form">
+                <div class="contact-info">
+                    <h3 class="title">Let's get in touch</h3>
+                    <p class="text">
+                        <span class="hiiLarge">Hii there,</span><br>
+                        <span class="smallMsg">If you have any queries about anythig or if you have to contact us. Please contact us on given details or drop your message for us here.</span>
+                    </p>
+
+                    <div class="info">
+                        <div class="information">
+                            <i class="fas fa-map-marker-alt custom_icons"></i>
+                            <p>Padmanagar, Bhiwandi</p>
+                        </div>
+                        <div class="information ">
+                            <i class="fas fa-envelope-open custom_icons"></i>
+                            <p>akshaygondhale2601@gmail.com</p>
+                        </div>
+                        <div class="information">
+                            <i class="fas fa-mobile custom_icons"></i>
+                            <p>+91 7276115611</p>
+                        </div>
+                    </div>
+
+                    <div class="social-media">
+                        <p>Connect with us :</p>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <span class="circle one"></span>
+                    <span class="circle two"></span>
+
+                    <form action="/ContactUs" method="POST" autocomplete="off">
+                        <h3 class="title">Contact us</h3>
+                        <div class="input-container">
+                            <input type="text" name="name" class="input" />
+                            <label for="">Name</label>
+                            <span>Name</span>
+                        </div>
+
+                        <div class="input-container">
+                            <input type="tel" name="phone" class="input" />
+                            <label for="">Phone</label>
+                            <span>Phone</span>
+                        </div>
+                        <div class="input-container textarea">
+                            <textarea name="message" class="input"></textarea>
+                            <label for="">Message</label>
+                            <span>Message</span>
+                        </div>
+                        <input type="submit" value="Send" class="btn" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <%- include ("footer.ejs") %>
+            <% if( typeof success !="undefined" ){ %>
+                <script>
+                    var success = "<%= success %>";
+                    if (success == "false") {
+                        swal("Please Enter Valid Mobile Number", "You entered mobile number is not in proper format. Please enter again.", "info");
+                    }
+                    else {
+                        swal("Message Sent", "Your message successfully sent to our servers. Thank You", "success")
+                            .then((value) => {
+                                if (value == true) {
+                                    window.location.href = "/"
+                                } else {
+                                    window.location.href = "/"
+                                }
+                            });
+                    }
+                </script>
+                <% } %>
+                    <script src="js/ContactUs.js"></script>
+                    <script>
+                        function userMenu() {
+                            var userMenu = document.getElementById("user");
+                            userMenu.classList.toggle("user_display")
+                        }
+
+                    </script>
+                    <script src="js/navbar.js"></script>
+</body>
+
+</html>

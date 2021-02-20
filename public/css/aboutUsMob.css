@@ -1,0 +1,22 @@
+.aboutUs{
+    width: 100%;
+    min-height: 100%;
+    margin-top: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* background-image: linear-gradient(to bottom, #fff, #A9DFBF, #fff); */
+}
+.aboutUsDesc{
+    margin-top: 100px;
+    height: 100%;
+    padding: 0px 25px;
+}
+
+.heading{
+    font-size: 3em;
+    font-family: 'Exo', sans-serif;
+    text-align: center;
+}

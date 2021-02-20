@@ -1,0 +1,17 @@
+.gif{
+    height: auto;
+    width: 100% !important;
+    margin-top: 50px;
+}
+
+.heading{
+    font-size: 1.7em;
+}
+
+.description{
+    font-size: .8em;
+}
+
+.goToHome{
+    font-size: .9em;
+}

@@ -1,0 +1,52 @@
+.text,
+.box {
+  flex: 0 !important;
+}
+.text {
+  font-weight: 300px;
+  text-align: center;
+  padding-bottom: 40px;
+
+  margin: 0px !important;
+}
+.box {
+  margin-left: 0 !important;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 30px;
+}
+.background {
+  background: url(Scenery.jpg) no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column !important;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 50px 0px;
+  overflow-y: scroll;
+}
+.form {
+  background: transparent;
+  color: #fff;
+  box-sizing: border-box;
+  display: flex;
+  /* flex-direction: row; */
+  width: 100% !important;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px !important;
+  backdrop-filter: blur(5px) !important;
+}
+input {
+  margin: 0px 0;
+  padding: 0px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: "Oswald", sans-serif;
+}

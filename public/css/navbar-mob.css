@@ -1,0 +1,144 @@
+.menu-bar {
+  display: inline-block !important;
+  margin: 0px 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px -5px #808080;
+  padding: 10px;
+  font-size: .8em;
+  border-radius: 50%;
+}
+
+.element {
+  display: none !important;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 25px 10px;
+  background-color: #fff;
+}
+
+.signup {
+  display: inline-block;
+  font-size: 1.3em;
+  justify-content: center;
+  align-items: center;
+  margin: auto 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.signup > a{
+  color: #000;
+}
+
+.logo {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  font-size: 1.7em;
+  position: relative;
+}
+
+.nav-element1>div>a>li {
+  display: inline-block;
+  font-size: .7em;
+}
+
+.nav-element1>div>a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: #000;
+}
+
+.nav-element1>div>a>i {
+  font-size: .7em;
+  align-items: center;
+  text-align: center;
+  width: 50px;
+}
+
+.menu-dropdown {
+  width: auto;
+  display: inline-block !important;
+  position: absolute;
+  padding: 40px 10px;
+  padding-right: 80px;
+  background-color: #fff !important;
+  top: 45px;
+  left: 10px;
+  box-shadow: 0 6px 10px -5px #808080;
+  animation-name: navbar;
+  animation-duration: .3s;
+}
+
+.user {
+  width: 0vw;
+}
+
+@keyframes navbar {
+  0% {
+    opacity: 0;
+    top: 0;
+  }
+  100% {
+    opacity: 1;
+    top: 45px;
+  }
+}
+
+
+.menu-dropdown-hidden {
+  display: none;
+}
+
+.user_menu {
+  font-size: 1em;
+}
+
+.user_menu>li>a:hover {
+  opacity: 1;
+  font-size: 1.23em;
+}
+.user_display {
+  visibility: visible !important;
+  right: 0px;
+  width: 80vw !important;
+}
+
+
+
+/* XX=======================footer===========================XX  */
+
+.main_footer_div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 60px 10px;
+}
+.logo_slogan{
+  width: auto;
+  margin: 30px 0px;
+}
+
+.about{
+  margin: 60px 0px;
+}
+
+.end_div{
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.madeBy{
+  margin: 20px 0px;
+}
+

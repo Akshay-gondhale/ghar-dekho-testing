@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/signup-style.css">
+    <link rel="stylesheet" href="css/signup_mob_style.css" media="screen and (max-width: 900px)">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Sign Up - GharDekho.com</title>
+</head>
+
+<body>
+    
+    <div class="background">
+        <div class="text">
+            <h1>Sign Up</h1>
+            <p>Have Acount ? <a href="/login">Login</a></p>
+        </div>
+        <div class="box">
+            <form class="form" id="userSignup" autocomplete="off" action="/signup" method="POST">
+                <% if(typeof err != 'undefined' ){ %>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Error!</strong><br> <%= err %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                <% } %>
+                <input type="text" style="text-transform: capitalize;" class="Fullname" name="fname" placeholder="Full Name" value='<%= typeof fname != 'undefined' ? fname : "" %>'>
+                <input type="text" class="Email" name="email" placeholder="Email" value="<%= typeof email != 'undefined' ? email : "" %>" autocomplete="new-password">
+                <input type="text" class="username" name="mnumb" placeholder="Mobile Number" value="<%= typeof mnumb != 'undefined' ? mnumb : "" %>" autocomplete="new-password">
+                <input type="password" class="password" name="pass" placeholder="Password" value="">
+                <input type="password" class="cnfpassword" name="cpass" placeholder="Confirm Password">
+                <input type="submit" class="button" value="Sign Up">
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+
+</html>

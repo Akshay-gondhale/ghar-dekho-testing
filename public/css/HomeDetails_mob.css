@@ -1,0 +1,33 @@
+.main_upload_menu{
+    margin: 15px 7px;
+    padding: 30px 30px;
+}
+
+.inputs{
+    flex-direction: column;
+}
+
+.input_with_label{
+    width: 100%;
+    padding: 10px 10px;
+    justify-content: center;
+    align-items: center;
+}
+.sectional_inputs{
+    display: flex;
+    flex-direction: column !important;
+}
+
+.input_with_label > input{
+    width: 100%;
+}
+
+
+.vegOrNot > label{
+    width: 100%;
+}
+
+.isVeg{
+    margin-left: 0px;
+    margin-top: 10px;
+}

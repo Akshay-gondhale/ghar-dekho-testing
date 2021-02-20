@@ -1,0 +1,25 @@
+{
+  "name": "home_browsing_site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon -e .js, .ejs src/app.js"
+  },
+  "author": "Akshay Gondhale",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "hbs": "^4.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.14",
+    "multer": "^1.4.2",
+    "sharp": "^0.27.1"
+  }
+}

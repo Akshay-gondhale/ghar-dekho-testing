@@ -1,0 +1,62 @@
+.owner_details {
+    padding: 20px 10px;
+    margin: 0px 3px;
+  }
+  
+  .ownerName {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+  
+  .rent_sell {
+    font-size: 0.9em;
+    font-family: "Poppins", sans-serif;
+    user-select: none;
+  }
+  .ammount {
+    font-size: 1.2em;
+    user-select: none;
+  }
+  .ammount > i {
+    font-size: 0.8em !important;
+    user-select: none;
+  }
+  
+  .carousel_imp_details {
+    margin: 5px 0px;
+    padding: 10px 5px;
+    /* display: flex; */
+  }
+  
+  .imp_details {
+    margin-top: 30px;
+  }
+  
+  .details {
+    padding: 10px 7px;
+  }
+  
+  .detailsCell {
+    width: 100%;
+    margin: 6px 9px;
+  }
+  
+  .showInterestBtn {
+    width: 90%;
+    padding: 20px 0px;
+    font-size: 1.2em;
+    font-family: "Poppins", sans-serif;
+    border: 0px;
+    border-radius: 8px;
+    background-color: #d5f5e3;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .carousel {
+    background: #283747 !important;
+    border-radius: 15px;
+    box-shadow: 0px 5px 19px rgba(0, 0, 0, 0.4);
+    padding: 40px 3px;
+  }
+  

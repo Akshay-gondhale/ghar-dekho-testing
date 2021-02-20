@@ -1,0 +1,107 @@
+<header id="navbar" class="navbar">
+    <div class="nav">
+      <div class="logo">
+        <i class="fas fa-bars menu-bar" onclick="dropdown()"></i>
+        <p><span>Ghar</span>Dekho</p>
+        <div id="menuDropdown" class="menu-dropdown-hidden">
+          <div class="nav-element1">
+            <div><a href="/">
+                <i class="fas fa-home"></i>
+                <li>Home</li>
+              </a>
+            </div>
+          </div>
+          <div class="nav-element1">
+            <div><a href="/properties">
+                <i class="fas fa-city"></i>
+                <li>Property</li>
+              </a>
+            </div>
+          </div>
+          <div class="nav-element1">
+            <div><a href="/ContactUs">
+                <i class="fas fa-headset"></i>
+                <li>Contact Us</li>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="element">
+        <div class="nav-element">
+          <div><a href="/">
+              <i class="fas fa-home"></i>
+              <li>Home</li>
+            </a>
+          </div>
+        </div>
+        <div class="nav-element">
+          <div><a href="/properties">
+              <i class="fas fa-city"></i>
+              <li>Property</li>
+            </a>
+          </div>
+        </div>
+        <div class="nav-element">
+          <div><a href="/ContactUs">
+              <i class="fas fa-headset"></i>
+              <li>Contact Us</li>
+            </a>
+          </div>
+        </div>
+        <% if( typeof user == 'undefined' ){ %>
+            <div class="nav-element">
+              <div><a href="http://localhost:5000/login">
+                  <i class="fas fa-sign-in-alt"></i>
+                  <li>LogIn</li>
+                  </a>
+              </div>
+            </div>
+        <% } %>
+        <% if( typeof user != 'undefined' ){ %>
+            <div class="nav-element">
+              <div onclick="userMenu()"><a>
+                  <i class="fas fa-user"></i>
+                  <li>User</li>
+                  </a>
+              </div>
+            </div>
+        <% } %>
+      </div>
+      <% if( typeof user == 'undefined' ){ %>
+        <div class="signup"><a href="/login">
+          <i class="fas fa-sign-in-alt"></i></a>
+        </div>
+      <% } %>
+      <% if( typeof user != 'undefined' ){ %>
+          <div onclick="userMenu()" class="signup"><a>
+            <i class="fas fa-user"></i></a>
+          </div>
+      <% } %>
+
+
+    </div>
+  </header>
+
+  <% if( typeof user != 'undefined' ){ %>
+    <section id="user" class="user">
+        <div class="user_header">
+        <p class="user_logo"><i class="fas fa-user-alt"></i></p>
+        <p class="user_name" style="text-transform: capitalize;"><%= userName %></p>
+        <p class="user_contact">+91 <%= userPhone %></p>
+        </div>
+        <div class="user_menu ">
+        <!-- <li><a href="#"><i class="fas fa-user-circle"></i>User Details</a></li> -->
+        <li><a href="/PostProperty"><i class="fas fa-folder-plus"></i>Sell/Rent Home</a></li>
+        <li><a href="/properties"><i class="fas fa-rocket"></i>Browse Home</a></li>
+        <li><a href="/ContactUs"><i class="fas fa-headset"></i>Contact Us</a></li>
+        <li><a href="/aboutUs"><i class="fas fa-info-circle"></i>About Us</a></li>
+        <li><a href="#"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+        <li onclick="userMenu()"><a><i class="far fa-times-circle"></i>Close</a></li>
+        </div>
+    </section>
+  <% } %>
+
+  
+  <script src="js/navbar.js"></script>

@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+body{
+  
+  background: #000;
+
+}
+.background
+{
+  
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center ;
+  
+}
+.background::before{
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: url(../images/demo2.jpg) no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  z-index: -100000000;
+}
+.text 
+{
+  
+  flex: 1;
+  font-family: 'Oswald', sans-serif !important;
+  
+}
+.box{
+   
+    flex: 1;
+}
+.text
+{
+  margin-left: 10%;
+  font-weight: 300px;
+}
+.box
+{
+  margin-left: 25%;
+  padding-right: 50px;
+}
+.text > h1{
+  font-size: 20px;
+  color: #fff;
+  font-weight: 500;
+}
+.text > p
+{
+  font-size: 20px;
+  color: #fff;
+  font-weight: 300;
+}
+.text > p > a
+{
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+.form{
+  border-radius: 20px;
+  background: transparent;
+  color: #fff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  padding: 20px 70px;
+  position: relative;
+  z-index: 20;
+  backdrop-filter: blur(25px);
+  
+}
+.hidden{
+  display: none !important;
+}
+
+
+.form > input
+{
+  margin: 20px 0;
+  padding: 10px;
+  background: transparent !important;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: 'Oswald', sans-serif !important;
+  
+}
+.username, .password, .Fullname, .Email, .cnfpassword
+{
+  border-bottom: 1px solid #fff !important;
+}
+.button
+{
+  background: transparent;
+  border: 1px solid rgb(99, 99, 99) !important;
+  color: #fff;
+  font-size: 10px;
+  font-size: .9em;
+}
+.button:hover
+{
+  background: rgb(162, 60, 60);
+  color: #000;
+}

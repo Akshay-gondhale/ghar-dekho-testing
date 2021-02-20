@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - GharDekho.com</title>
+    <link rel="stylesheet" href="css/404.css">
+    <link rel="stylesheet" media="screen and (max-width: 840px)" href="css/404_mob.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" media="screen and (max-width: 840px)" href="css/navbar-mob.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+</head>
+<body style="background-color: white;">
+    <%- include ("navbar.ejs") %>
+    
+    <section class="notFoundPage">
+        <img class="gif" src="images/404.gif" alt="">
+        <p class="heading">Looks Like You Are Lost</p>
+        <p class="description">The page you looking for is not available!.</p>
+        <a href="/" class="goToHome">Go To Home</a>
+    </section>
+
+    <%- include ("footer.ejs") %>
+</body>
+</html>

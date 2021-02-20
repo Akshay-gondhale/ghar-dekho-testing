@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell/Rent Home - GharDekho.com</title>
+    <link rel="stylesheet" href="css/HomeDetails.css">
+    <link rel="stylesheet" media="screen and (max-width: 840px)" href="css/HomeDetails_mob.css">
+    <link rel="stylesheet" href="css//navbar.css">
+    <link rel="stylesheet" media="screen and (max-width: 840px)" href="css/navbar-mob.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+    
+            <%- include ("navbar.ejs") %>
+                <section class="main_upload_menu">
+
+                    <form action="/PostProperty" autocomplete="off" method="POST" enctype="multipart/form-data">
+                        <div id="div1" class="upload_block active_div">
+                            <header class="div_heading">User Details</header>
+
+                            <div class="inputs">
+                                <div class="sectional_inputs">
+                                    <p class="input_heading">Uploaders Details</p>
+                                    <div class="input_with_label">
+                                        <p>Enter Uploader's Name:</p>
+                                        <input type="text" id="uploaderName" name="uploaderName"
+                                            placeholder="Enter uploaader's name" autocomplete="new-password"
+                                            value="<%= userName%>" readonly>
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Enter Uploader's Contact Number:</p>
+                                        <input type="text" id="uploaderContact" name="uploaderPhone"
+                                            placeholder="Enter uploaader's Contact Number" autocomplete="new-password"
+                                            value="<%= userPhone%>" readonly>
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Enter Uploader's Email:</p>
+                                        <input type="text" id="uploaderEmail" name="uploaderEmail"
+                                            placeholder="Enter uploaader's Email" autocomplete="new-password"
+                                            value="<%= userEmail%>" readonly>
+                                    </div>
+                                </div>
+                                <div class="sectional_inputs">
+                                    <div class="same_as_checkbox">
+                                        <p class="input_heading">Owner's Information </p>
+
+                                        <input type="checkbox" id="sameAsCheckbox" name="sameAsAbove" value="same"
+                                            class="checkBox" onchange="sameCheckbox()"><label class="same_checkbox">
+                                            Same as above</label></input>
+
+
+                                    </div>
+
+                                    <div class="input_with_label">
+                                        <p>Enter Owner's Name:</p>
+                                        <input type="text" id="ownerName" name="ownerName"
+                                            placeholder="Enter Owner's Name" autocomplete="new-password"
+                                            value="<%= typeof ownerName != 'undefined' ? ownerName : "" %>">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Enter Owner's Contact Number:</p>
+                                        <input type="text" id="ownerContact" name="ownerPhone"
+                                            placeholder="Enter Owner's Contact Number" autocomplete="new-password"
+                                            value="<%= typeof ownerPhone != 'undefined' ? ownerPhone : "" %>">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Enter Owner's Email:</p>
+                                        <input type="text" id="ownerEmail" name="ownerEmail"
+                                            placeholder="Enter Owner's Email" autocomplete="new-password"
+                                            value="<%= typeof ownerEmail != 'undefined' ? ownerEmail : "" %>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button_section">
+                                <div class="next_btn" onclick="next(1)">Next</div>
+                            </div>
+                        </div>
+                        <div id="div2" class="upload_block">
+                            <header class="div_heading">Home Details</header>
+
+                            <div class="inputs">
+                                <div class="sectional_inputs">
+                                    <p class="input_heading">Enter Full Address</p>
+
+                                    <div class="input_with_label">
+                                        <p>House Number:</p>
+                                        <input type="text" id="add_houseNumber" name="add_houseNumber"
+                                            value="<%= typeof add_houseNumber != 'undefined' ? add_houseNumber : "" %>"
+                                            placeholder="Enter House Number" autocomplete="new-password">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Street/Building/Locality Name:</p>
+                                        <input type="text" id="add_bldgAreaName" placeholder="Enter Street/Building/Locality Name"
+                                            name="add_bldgAreaName"
+                                            value="<%= typeof add_bldgAreaName != 'undefined' ? add_bldgAreaName : "" %>"
+                                            autocomplete="new-password">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Area:</p>
+                                        <input type="text" id="add_areaName" name="add_areaName"
+                                            value="<%= typeof add_areaName != 'undefined' ? add_areaName  : "" %>"
+                                            placeholder="Enter Area Name. eg- Padmanagar, Kamatghar,etc"
+                                            autocomplete="new-password">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>City <span class="small">(Note: We are currently available in Bhiwandi
+                                                only!)</span>:</p>
+                                        <input type="text" name="add_city" value="Bhiwandi" readonly
+                                            autocomplete="new-password">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Nearest Landmark:</p>
+                                        <input type="text" id="add_landmark" name="add_landmark"
+                                            value="<%= typeof add_landmark != 'undefined' ? add_landmark : "" %>"
+                                            placeholder="Enter Nearest Landmark. eg- Hospital, Mandir, etc"
+                                            autocomplete="new-password">
+                                    </div>
+
+                                </div>
+                                <br>
+                                <br>
+                                <div class="sectional_inputs">
+
+                                    <p class="input_heading">Enter Home Details</p>
+                                    <div class="input_with_label">
+                                        <p>Select Home Type</p>
+                                        <select id="homeType" name="homeType">
+                                            <option value="null">Choose One</option>
+                                            <option value="1RK">1RK</option>
+                                            <option value="1BHK">1BHK</option>
+                                            <option value="2BHK">2BHK</option>
+                                            <option value="3BHK">3BHK</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Is Parking Available There?</p>
+                                        <select name="parking" id="parking">
+                                            <option value="null">Choose One</option>
+                                            <option value="Not Available">Not Available</option>
+                                            <option value="Only Two Wheeler Parking">Only Two Wheeler Parking</option>
+                                            <option value="Two Wheeler And Four Wheeler Parking">Two Wheeler And Four
+                                                Wheeler Parking</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Home Available On Floor:</p>
+                                        <input type="number" min="0" id="floor" name="floor"
+                                            value="<%= typeof floor != 'undefined' ? floor : "" %>"
+                                            placeholder="Enter Floor Number. Eg- 1st, 2nd, etc"
+                                            autocomplete="new-password">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Total Floors Available In Building:</p>
+                                        <input type="number" min="0" id="totalFloor" name="totalFloor"
+                                            value="<%= typeof totalFloor != 'undefined' ? totalFloor : "" %>"
+                                            placeholder="Enter Total Floors Available in Building. Eg- 4, 5, etc"
+                                            autocomplete="new-password">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Carpet Area of Home <span class="small">(In sq.ft)</span>:</p>
+                                        <input type="number" min="0" id="carpetArea" name="carpetArea"
+                                            value="<%= typeof carpetArea != 'undefined' ? carpetArea : "" %>"
+                                            placeholder="Enter Carpet Area Of Home. Eg - 3000 sq.ft, etc"
+                                            autocomplete="new-password">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Age of Property <span class="small">(In years)</span>:</p>
+                                        <input type="number" min="0" id="age" name="age"
+                                            value="<%= typeof age != 'undefined' ? age : "" %>"
+                                            placeholder="Enter Age of Property. Eg - 3 years, etc"
+                                            autocomplete="new-password">
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="same_as_checkbox vegOrNot">
+                                        <label class="same_checkbox"> You have to sell/rent only vegetarians? If yes
+                                            please click here.</label>
+                                        <input type="checkbox" name="vegetarian" id="vegetarian" value="yes"
+                                            class="checkBox isVeg">
+                                        </input>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="button_section">
+                                <div class="back_btn" onclick="back(2)">Back</div>
+                                <div class="next_btn" onclick="next(2)">Next</div>
+                            </div>
+                        </div>
+                        <div id="div3" class="upload_block">
+                            <header class="div_heading">Upload Images</header>
+
+                            <div class="inputs">
+                                <div class="sectional_inputs">
+                                    <p class="input_heading">Please upload 4 best Images of your Home!. <br> <span
+                                            class="small_note">(Note:These images will be viewable to all users on
+                                            website who are
+                                            browsing homes.)</span></p>
+                                    <div class="input_with_label">
+                                        <p>First Image:</p>
+                                        <input type="file" id="firstImage" name="firstImage">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Second Image:</p>
+                                        <input type="file" id="secondImage" name="secondImage">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Third Image:</p>
+                                        <input type="file" id="thirdImage" name="thirdImage">
+                                    </div>
+                                    <div class="input_with_label">
+                                        <p>Fourth Image:</p>
+                                        <input type="file" id="fourthImage" name="fourthImage">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button_section">
+                                <div class="back_btn" onclick="back(3)">Back</div>
+                                <div class="next_btn" onclick="next(3); validate();">Next</div>
+                            </div>
+                        </div>
+                        <div id="div4" class="upload_block">
+                            <header class="div_heading">Rent or Sell</header>
+                            <div id="message">
+                            </div>
+                            <div class="inputs">
+                                <div class="sectional_inputs">
+                                    <p class="input_heading">Please select either you want to sell Home or to give it on
+                                        Rent:</p>
+                                    <div class="input_with_label">
+                                        <p>Select Type:</p>
+                                        <select id="sellOrRent" name="sellOrRent" onchange="sell_rent()">
+                                            <option value="null">Choose One</option>
+                                            <option value="sell">Sell</option>
+                                            <option value="rent">Rent</option>
+                                        </select>
+                                    </div>
+                                    <div class="input_with_label">
+                                        <div id="sell_rent" class="hidden">
+                                            <p id="sell_rent_label"></p>
+                                            <input type="text" id="ammount" name="ammount" placeholder="Enter Ammount"
+                                                autocomplete="new-password">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button_section">
+                                <div class="back_btn" onclick="back(4)">Back</div>
+                                <input type="submit" id="submit" class="next_btn low_opacity" disabled value="Submit">
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <%- include ("footer.ejs") %>
+                    <script src="https://code.jquery.com/jquery-3.5.1.js"
+                        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+                        crossorigin="anonymous"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+                        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+                        crossorigin="anonymous"></script>
+
+                    <script src="js/HomeDetails.js"></script>
+
+
+                    <script src="js/navbar.js"></script>
+                    <% if(typeof isDone !="undefined" ){ %>
+                        <script>
+                            var heading = "<%= head %>";
+                            var message = "<%= message %>";
+                            var type = "<%= type %>";
+                            swal(heading, message, type)
+                                .then((value) => {
+                                    if(value == true){
+                                        window.location.href = "/"
+                                    }else{
+                                        window.location.href = "/"
+                                    }
+                                });
+                        </script>
+                        <% } %>
+
+</body>
+
+</html>

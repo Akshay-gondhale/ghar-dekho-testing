@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/verifyOtp.css">
+    <link rel="stylesheet" href="css/verifyOtpMob.css" media="screen and (max-width: 900px)">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Verify Otp - GharDekho.com</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+    <div id="recaptcha-container"></div>
+    <div class="background">
+        <div class="box">
+            <form class="form" id="userSignup" autocomplete="off" action="/verifyOtp" method="POST">
+                <p class="verifyHeading"><%= typeof verifyMsg != 'undefined' ? verifyMsg : "Please Verify Your Mobile Number" %></p>
+                <input id="num" type="text" class="MobileNo" name="mobileNo" value="<%= typeof phoneNo != 'undefined' ? phoneNo : "" %>" readonly>
+                <input type="text" id="otp" class="otpField hidden" name="email" placeholder="Enter OTP"  autocomplete="new-password">
+                <input id="send" class="button hidden" value="Send OTP">
+                <input id="verify" class="button hidden" value="Verify OTP">
+                <input id="submit" type="submit" class="button" value="Submit">
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.0.1/firebase.js"></script>
+    <script src="js/verifyOtp.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+.landing {
+    margin-top: 85px !important;
+    height: 90vh;
+    justify-content: center;
+    flex-direction: column-reverse;
+    padding: 20px 20px;
+    margin: 0px 0px;
+  }
+  
+  .content .images {
+    height: 45vh;
+    width: 100%;
+  }
+  
+  .description {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .carousel {
+    width: 100%;
+  }
+  .card_heading{
+    min-width: none !important;
+  }
+  .services {
+    padding: 3px 0px;
+    margin: 2px 5px;
+  }
+  
+  .cards {
+    flex-direction: column;
+  }
+  
+  .service {
+    margin: 10px 10px;
+  }
+  
+  .browse{
+    padding: 10px 7px;
+    margin: 5px 0px;
+  }
+  .latest{
+    margin: 5px 0px;
+    padding: 10px 5px;
+    width: 100%;
+  
+  }
+  
+  .browse_heading {
+    font-size: 2em;
+  }
+  

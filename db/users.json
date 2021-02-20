@@ -1,0 +1,85 @@
+[{
+  "_id": {
+    "$oid": "6020cd53f3b35a2064ca8e48"
+  },
+  "created_at": "Mon Feb 08 2021 11:03:43 GMT+0530 (India Standard Time)",
+  "isVerified": true,
+  "name": "akshay gondhale",
+  "email": "akshay.pajv@gmail.com",
+  "phone": 7276115611,
+  "password": "$2b$07$yVgLOM45kupOkkHbiDUjQe/VRGI99rSUsFx9yT3GKM5CQlKEk3I7K",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIwY2Q1M2YzYjM1YTIwNjRjYThlNDgiLCJpYXQiOjE2MTI3NjI0NTF9.yLEg4Sxt2nYfYurNRCG-80dICFFTp0dKOy0B-dgq-jk",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6022d952d7d8b4ff188f9135"
+  },
+  "created_at": "Wed Feb 10 2021 00:13:07 GMT+0530 (India Standard Time)",
+  "isVerified": true,
+  "name": "Vanita Gondhale",
+  "email": "vanita@gmail.com",
+  "phone": 9699981068,
+  "password": "$2b$07$gDe2bM23.jmBg4S/J/wx8u8Oe6EovIO.AllYLXsKVUuWmJ96ax9du",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIyZDk1MmQ3ZDhiNGZmMTg4ZjkxMzUiLCJpYXQiOjE2MTI4OTY1OTR9.4gg3ly-JU09QtYH5Mg0gRjFGkEEKFhlkBfhvWLfazJE",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6026acc71dca982732620068"
+  },
+  "created_at": "Fri Feb 12 2021 21:47:34 GMT+0530 (India Standard Time)",
+  "isVerified": true,
+  "name": "Praneet",
+  "email": "praneetkundaram07@gmail.com",
+  "phone": 8317228070,
+  "password": "$2b$07$zW45ftCOr.6SEJB5zumwKugkEdFJPixvwKfMkX0o.h3c0Xax4w6hS",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDI2YWNjNzFkY2E5ODI3MzI2MjAwNjgiLCJpYXQiOjE2MTMxNDczMzV9.85onq2CZqyShJqhUYzPWFSivxFJeS7dmpGMLpp0TRgc",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60276b79bc073b29ba05c803"
+  },
+  "created_at": "Sat Feb 13 2021 10:55:59 GMT+0530 (India Standard Time)",
+  "isVerified": true,
+  "name": "Rishab Singh",
+  "email": "w3b.dev.rishu@gmail.com",
+  "phone": 9022489938,
+  "password": "$2b$07$Ef0k7hmy73cRxplbEB8W6.gSfwKIGgxzj.wxtFR/Sm8eFHejJ69ke",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDI3NmI3OWJjMDczYjI5YmEwNWM4MDMiLCJpYXQiOjE2MTMxOTYxNTN9.lZNFZvi9EuvzGFt_mI6Q7tKbKp3ait6y7vuCJKqETM8",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60277b420a1166a43d53002b"
+  },
+  "created_at": "Sat Feb 13 2021 12:36:05 GMT+0530 (India Standard Time)",
+  "isVerified": true,
+  "name": "pandey shubhangi",
+  "email": "abc@gmail.com",
+  "phone": 7888040705,
+  "password": "$2b$07$heZcaW84Jkh8gT80rutCBOwmawMTtSoJcxel.uDw6givjCYbLkdoC",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDI3N2I0MjBhMTE2NmE0M2Q1MzAwMmIiLCJpYXQiOjE2MTMyMDAxOTR9.l0_QzKj2xxeJFkrCj6jqTc9LZgNG-nddAXZxH_MXPGE",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "602a2e92c7940bf0a4f2eb15"
+  },
+  "created_at": "Mon Feb 15 2021 13:46:53 GMT+0530 (India Standard Time)",
+  "isVerified": true,
+  "name": "Sambharam Umesh",
+  "email": "sambharam143@gmail.com",
+  "phone": 7219309929,
+  "password": "$2b$07$Yob9gdrwDryJDa5I0YpGJOslW4M6wjZCnTTAi5rw4Bucztwi2x/Zm",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDJhMmU5MmM3OTQwYmYwYTRmMmViMTUiLCJpYXQiOjE2MTMzNzcxNzB9.OqaFTmcre8seU9cheuxecn446gSLhHhEOENynMxbJws",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "602e30331b3cd3c23251052d"
+  },
+  "created_at": "Thu Feb 18 2021 10:57:12 GMT+0530 (India Standard Time)",
+  "isVerified": true,
+  "name": "samarth chandrakant jedage",
+  "email": "jedagesamarthjedage@gmail.com",
+  "phone": 7219667633,
+  "password": "$2b$07$mRQqUivSuetfgg0Jv4uRNe7v3w.8EdcQA9CWvR4wU672pGO2BFaHG",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDJlMzAzMzFiM2NkM2MyMzI1MTA1MmQiLCJpYXQiOjE2MTM2Mzk3MzF9.8zGwlq7q5XITWRnERY0g8ZWcUeH470aCsnn5nTqYCx8",
+  "__v": 0
+}]

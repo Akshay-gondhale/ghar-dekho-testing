@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties - GharDekho.com</title>
+    <link rel="stylesheet" href="css/properties.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" media="screen and (max-width: 840px)" href="css/properties_mob.css">
+    <link rel="stylesheet" media="screen and (max-width: 840px)" href="css/navbar-mob.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+
+    <%- include ("navbar.ejs") %>
+        <section class="properties">
+            <header class="properties_header">Find Best Homes Here
+            </header>
+            <section class="filter">
+                <div class="filter_header" onclick="filter()">Filter <i class="fas fa-filter"></i></div>
+                <section id="filter_elements" class="filter_elements hidden">
+                    <div class="inputs">
+                        <div class="input_with_label">
+                            <p>Select Sell/Rent:</p>
+                            <select id="sellOrRent" name="sellOrRent" value="">
+                                <option value="null">All</option>
+                                <option value="sell">Sell</option>
+                                <option value="rent">Rent</option>
+                            </select>
+                        </div>
+                       
+                        <div class="input_with_label">
+                            <p>Select Home Type:</p>
+                            <select id="homeType" name="homeType">
+                                <option value="null">All</option>
+                                <option value="1RK">1RK</option>
+                                <option value="1BHK">1BHK</option>
+                                <option value="2BHK">2BHK</option>
+                                <option value="3BHK">3BHK</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input_with_label">
+                            <p>Enter Maximum Ammount Of Sell/Rent:</p>
+                            <input type="number" min="0" id="maxAmmount" name="maxAmmount" value="<%= typeof maxAmmount != 'undefined' ? maxAmmount : "" %>"
+                                placeholder="Enter Maximum Ammount Of Sell/Rent:" autocomplete="new-password">
+                        </div>
+                        <div class="input_with_label">
+                            <p>Minimum Carpet Area Required <span class="small">(In sq.ft)</span>:</p>
+                            <input type="number" id="carpetArea" name="carpetArea" value="<%= typeof carpetArea != 'undefined' ? carpetArea : "" %>"
+                                placeholder="Enter Carpet Area Of Home. Eg - 3000 sq.ft, etc"
+                                autocomplete="new-password">
+                        </div>
+                        <div class="input_with_label">
+                            <p>Maximum Age of Property Required <span class="small">(In years)</span>:</p>
+                            <input type="number" id="age" name="age" value="<%= typeof age != 'undefined' ? age : "" %>"
+                                placeholder="Enter Age of Property. Eg - 3 years, etc" autocomplete="new-password">
+                        </div>
+                        <div class="input_with_label">
+                            <p>Home Required On Floor:</p>
+                            <input type="number" id="floor" name="floor" value="<%= typeof floor != 'undefined' ? floor : "" %>"
+                                placeholder="Enter Home Required On Floor eg- 1st floor" autocomplete="new-password">
+                        </div>
+                        <div class="same_as_checkbox vegOrNot">
+                            <label class="same_checkbox"> Only Veg Locality: </label>
+                            <input type="checkbox" id="isVeg" name="isVeg" class="checkBox isVeg"
+                                >
+                            </input>
+                            <% if( typeof isVeg != "undefined" && isVeg == true){ %>
+                                <script>
+                                    document.getElementById("isVeg").setAttribute("checked")
+                                </script>
+                            <% } %>   
+                        </div>
+                        <div class="button_section">
+                            <div class="close_btn" onclick="filter()"> Close <i class="far fa-times-circle"></i> </div>
+
+                            <button onclick="filter_url()" class="submit_btn"> Submit <i
+                                    class="fas fa-arrow-circle-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+            <section class="homes">
+                
+
+                <% getHome.forEach(function (home){ %>
+
+                    <div class="home_div">
+                        <a href="/home?h_id=<%= home._id %>">
+                            <div class="img">
+                                <img src="uploads/<%= home.firstImage %>" alt="">
+                            </div>
+                            <div class="home_data">
+                                <div class="home_details">
+                                    <p class="home_header" style="text-transform: capitalize;">
+                                        <%= home.ownerName %>'s Home
+                                    </p>
+                                    <p class="amount" style="text-transform: capitalize;">
+                                        <%= home.sellOrRent %> Amount: <i class="fas fa-rupee-sign"></i>
+                                            <%= home.ammount %>
+                                    </p>
+                                    <p class="home_add">Location: <%= home.add_areaName %>, <%= home.add_city %>.</p>
+                                </div>
+                                <div class="home_other_details">
+                                    <p class="other_details">
+                                        <%= home.homeType %>
+                                    </p>
+                                    <p class="other_details">Parking: <%= home.parking %>
+                                    </p>
+                                    <p class="other_details">
+                                        <%= home.carpetArea %> sq.ft
+                                    </p>
+                                </div>
+                            </div>
+
+                        </a>
+                    </div>
+
+                    <% }) %>
+                    <div id="no_data" class="no_data hidden">
+                        <i class="far fa-sad-tear"></i>
+                        <p>Sorry! No Data Found.</p>
+                    </div>
+                        <script>
+                            var getHome_lengh =  "<%= getHome.length %>";
+                            if(getHome_lengh == 0){
+                                document.getElementById("no_data").classList.remove("hidden");
+                            }
+                            console.log(getHome_lengh)
+                        </script>
+
+                        <!-- <div class="home_div">
+                <a>
+                    <div class="img">
+                        <img src="images/fb-logo-maker.e3a68171.png" alt="">
+                    </div>
+                    <div class="home_data">
+                        <div class="home_details">
+                            <p class="home_header">Akshay's Home</p>
+                            <p class="amount">Sell Amount: <i class="fas fa-rupee-sign"></i>5000</p>
+                            <p class="home_add">Location: Padmanagar, Bhiwandi.</p>
+                        </div>
+                        <div class="home_other_details">
+                            <p class="other_details">1BHK</p>
+                            <p class="other_details">Parking: Not Available</p>
+                            <p class="other_details">2000 sq.ft</p>
+                        </div>
+                    </div>
+                    
+                </a>
+            </div> -->
+           <% if(typeof isNext != "undefined" && isNext == true ){ %>
+            <script>
+                console.log("<%= isNext %>")
+            </script>
+            <div class="button_section">
+                <div class="next_btn" onclick="next_url('<%= page %>')">Next</div>
+            </div>
+            <% } %>
+            </section>
+            
+        </section>
+
+
+        <%- include ("footer.ejs") %>
+
+            <script>
+                function filter() {
+                    var filter_elements = document.getElementById("filter_elements");
+                    filter_elements.classList.toggle("hidden");
+                    console.log("clicked");
+
+                }
+                function filter_url() {
+                    var sellOrRent = document.getElementById("sellOrRent");
+                    var homeType = document.getElementById("homeType");
+                    var maxAmmount = document.getElementById("maxAmmount");
+                    var carpetArea = document.getElementById("carpetArea");
+                    var age = document.getElementById("age");
+                    var floor = document.getElementById("floor");
+                    var isVeg = document.getElementById("isVeg");
+                    if(isVeg.checked){
+                        isVeg_value = "yes";
+                    }
+                    else{
+                        isVeg_value = "no";
+                    }
+                    console.log(`/properties?page=1&filter=1&sellOrRent=${sellOrRent.value}&homeType=${homeType.value}&maxAmmount=${maxAmmount.value}&carpetArea=${carpetArea.value}&age=${age.value}&floor=${floor.value}&isVeg=${isVeg_value}`)
+                    window.location.href = `/properties?page=1&filter=1&sellOrRent=${sellOrRent.value}&homeType=${homeType.value}&maxAmmount=${maxAmmount.value}&carpetArea=${carpetArea.value}&age=${age.value}&floor=${floor.value}&isVeg=${isVeg_value}`;
+                }
+                function next_url(cpage) {
+                    var sellOrRent = document.getElementById("sellOrRent");
+                    var homeType = document.getElementById("homeType");
+                    var maxAmmount = document.getElementById("maxAmmount");
+                    var carpetArea = document.getElementById("carpetArea");
+                    var age = document.getElementById("age");
+                    var floor = document.getElementById("floor");
+                    var isVeg = document.getElementById("isVeg");
+                    var isVeg_value;
+                    if(isVeg.checked){
+                        isVeg_value = "yes";
+                    }
+                    else{
+                        isVeg_value = "no";
+                    }
+                    console.log(cpage)
+                    var next_page = (cpage*1) + 1;
+                    console.log(`/properties?filter=<%= filter %>&page=${next_page}&sellOrRent=${sellOrRent.value}&homeType=${homeType.value}&maxAmmount=${maxAmmount.value}&carpetArea=${carpetArea.value}&age=${age.value}&floor=${floor.value}&isVeg=${isVeg_value}`)
+                    window.location.href = `/properties?filter=<%= filter %>&page=${next_page}&sellOrRent=${sellOrRent.value}&homeType=${homeType.value}&maxAmmount=${maxAmmount.value}&carpetArea=${carpetArea.value}&age=${age.value}&floor=${floor.value}&isVeg=${isVeg_value}`;
+                }
+            </script>
+            <% if( typeof homeType != "undefined" ){ %>
+                <script>
+                    document.getElementById("homeType").value = "<%= homeType %>"
+                </script>
+            <% } %>
+            <% if( typeof sellOrRent != "undefined" ){ %>
+                <script>
+                    document.getElementById("sellOrRent").value = "<%= sellOrRent %>"
+                </script>
+            <% } %>
+            <% if( typeof isVeg != "undefined" && isVeg == "yes" ){ %>
+                <script>
+                    document.getElementById("isVeg").setAttribute("checked", true);
+                </script>
+            <% } %>
+
+</body>
+
+</html>
