@@ -3223,16 +3223,9 @@ app.get("/properties", async (req, res) => {
   }
 })
 
-app.get("/signup", (req, res) => { 
-  try{
-  const userToken = req.cookies.jwt;
-  const verifyUser = jwt.verify(userToken, process.env.TOKEN_KEY);
-  err = "Logged in Successfully!";
-  res.render("signup", { err: err });
-
-}catch(e){
+app.get("/signup", (req, res) => {
   res.render("signup");
-}
+
 });
 app.post("/signup", async function (req, res) {
   var { fname, email, mnumb, pass, cpass } = req.body;
@@ -3298,15 +3291,8 @@ app.post("/signup", async function (req, res) {
   }
 });
 app.get("/login", (req, res) => {
-  try{
-    const userToken = req.cookies.jwt;
-    const verifyUser = jwt.verify(userToken, process.env.TOKEN_KEY);
-    err = "Logged in Successfully!";
-    res.render("login", { err: err });
-
-  }catch(e){
     res.render("login");
-  }
+  
 });
 
 app.post("/login", async (req, res) => {
