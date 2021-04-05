@@ -6,6 +6,7 @@ const user = require("../src/models/users");
 const home = require("../src/models/homes");
 const homeInterest = require("../src/models/homeInterest");
 const message = require("../src/models/message");
+const offers = require("../src/models/offers");
 const bodyparser = require("body-parser");
 const bcrypt = require("bcrypt");
 const { mongo } = require("mongoose");
@@ -2456,7 +2457,7 @@ app.get("/properties", async (req, res) => {
             console.log("im in 2 maxAmmount not null")
             const getHome = await home.find({
               $and: [
-                { ammount: { $lte: maxAmmount } }, {vegetarian:"no"}
+                { ammount: { $lte: maxAmmount } }, { vegetarian: "no" }
               ]
             }).sort({ _id: -1 }).limit(10).skip(skip_value);
 
@@ -3291,8 +3292,8 @@ app.post("/signup", async function (req, res) {
   }
 });
 app.get("/login", (req, res) => {
-    res.render("login");
-  
+  res.render("login");
+
 });
 
 app.post("/login", async (req, res) => {
@@ -3346,8 +3347,8 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/logout", async (req, res)=>{
-  try{
+app.get("/logout", async (req, res) => {
+  try {
     const userToken = req.cookies.jwt;
     const verifyUser = jwt.verify(userToken, process.env.TOKEN_KEY);
     console.log(verifyUser._id);
@@ -3355,16 +3356,16 @@ app.get("/logout", async (req, res)=>{
     res.render("logout", { user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone });
 
   }
-  catch(e){
+  catch (e) {
     res.redirect("/login")
   }
 })
 
-app.post("/logout", (req, res)=>{
-  try{
+app.post("/logout", (req, res) => {
+  try {
     res.clearCookie("jwt")
     res.redirect("/")
-  }catch(e){
+  } catch (e) {
     res.status(500).send("error! cant logout")
   }
 
@@ -3386,14 +3387,14 @@ app.post("/verifyOtp", async (req, res) => {
 
 
 app.get("/verifyOtp", async (req, res) => {
-  try{
+  try {
     console.log("im in verify otp")
     var phoneNo = req.query.mob_no;
     console.log(phoneNo)
-      res.render("verifyOtp", {phoneNo})
+    res.render("verifyOtp", { phoneNo })
 
-    
-  }catch(e){
+
+  } catch (e) {
     res.status(400).send("Got Error")
     console.log(e)
   }
@@ -3461,7 +3462,7 @@ app.post("/PostProperty", upload.fields([{ name: "firstImage", maxCount: 1 }, { 
 
 
   var { uploaderName, uploaderEmail, uploaderPhone, sameAsAbove, ownerName, ownerEmail, ownerPhone, add_houseNumber, add_bldgAreaName, add_areaName, add_city, add_landmark, homeType, parking, floor, totalFloor, carpetArea, age, vegetarian, firstImage, secondImage, thirdImage, fourthImage, sellOrRent, ammount } = req.body;
-
+  console.log(uploaderName, uploaderEmail, uploaderPhone, sameAsAbove, ownerName, ownerEmail, ownerPhone, add_houseNumber, add_bldgAreaName, add_areaName, add_city, add_landmark, homeType, parking, floor, totalFloor, carpetArea, age, vegetarian, firstImage, secondImage, thirdImage, fourthImage, sellOrRent, ammount)
 
 
   const userToken = req.cookies.jwt;
@@ -3643,33 +3644,33 @@ app.post("/ContactUs", async (req, res) => {
     console.log(e)
   }
 })
-app.get("/home", async (req, res) =>{
-  try{
+app.get("/home", async (req, res) => {
+  try {
     const userToken = req.cookies.jwt;
     const verifyUser = jwt.verify(userToken, process.env.TOKEN_KEY);
     console.log(verifyUser._id);
     const userDetails = await user.findOne({ _id: verifyUser._id })
 
     var id = req.query.h_id;
-    const getHome = await home.find({_id : id}).limit(1);
+    const getHome = await home.find({ _id: id }).limit(1);
     console.log(getHome.length)
-    if( getHome.length == 1 ){
-      res.render("home", { user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone, userEmail: userDetails.email, foundHome:true, getHome });
-    }else{
-      res.render("home", { user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone, userEmail: userDetails.email, foundHome:false });
+    if (getHome.length == 1) {
+      res.render("home", { user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone, userEmail: userDetails.email, foundHome: true, getHome });
+    } else {
+      res.render("home", { user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone, userEmail: userDetails.email, foundHome: false });
     }
 
-    
 
-  }catch(e){
-    res.render("login", {err:"Please Login First"})
+
+  } catch (e) {
+    res.render("login", { err: "Please Login First" })
   }
 })
 
 
 
-app.get("/homeInterest", async (req, res)=>{
-  
+app.get("/homeInterest", async (req, res) => {
+
 
   const home_id = req.query.home_id;
   const owner = req.query.owner;
@@ -3693,7 +3694,7 @@ app.get("/homeInterest", async (req, res)=>{
   const userName = req.query.userName;
   const userPhone = req.query.userPhone;
 
-  try{
+  try {
     const userToken = req.cookies.jwt;
     const verifyUser = jwt.verify(userToken, process.env.TOKEN_KEY);
     console.log(verifyUser._id);
@@ -3724,16 +3725,16 @@ app.get("/homeInterest", async (req, res)=>{
     });
 
     const insertHomeInterest = await addingHomeInterest.save();
-    res.render("home", { user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone, userEmail: userDetails.email, interestSubmitted:true });
+    res.render("home", { user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone, userEmail: userDetails.email, interestSubmitted: true });
 
-  }catch(e){
+  } catch (e) {
     res.send("Internal Error")
     console.log(e)
   }
 })
 
-app.get("/pageNotFound", async (req, res)=>{
-  try{
+app.get("/pageNotFound", async (req, res) => {
+  try {
     const userToken = req.cookies.jwt;
     const verifyUser = jwt.verify(userToken, process.env.TOKEN_KEY);
     console.log(verifyUser._id);
@@ -3741,29 +3742,441 @@ app.get("/pageNotFound", async (req, res)=>{
     res.render("404", { user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone });
 
   }
-  catch(e){
+  catch (e) {
     res.render("404")
   }
 
 })
 
-app.get("/aboutUs", async (req, res)=>{
-  try{
+app.get("/aboutUs", async (req, res) => {
+  try {
     const userToken = req.cookies.jwt;
     const verifyUser = jwt.verify(userToken, process.env.TOKEN_KEY);
     console.log(verifyUser._id);
     const userDetails = await user.findOne({ _id: verifyUser._id })
-    res.render("aboutUs", {user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone });
+    res.render("aboutUs", { user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone });
 
 
   }
-  catch(e){
+  catch (e) {
     res.render("aboutUs")
   }
 })
 
-app.get("*", async (req, res)=>{
+// api for mobile 
+
+app.post("/mob/login", async (req, res) => {
+  var err, errType;
+  var phoneno = /^\d{10}$/;
+  var mob_no = req.body.username;
+  var password = req.body.password;
+  if (!mob_no || !password) {
+    err = "Please enter mobile number and password";
+    res.send({ err: err, errType: "warning" });
+  }
+  else if (!mob_no.match(phoneno)) {
+    err = "Please enter mobile number properly";
+    res.send({ err, errType: "warning" });
+  } else {
+    try {
+      const foundUser = await user.findOne({ phone: mob_no });
+      const passwordMatch = await bcrypt.compare(password, foundUser.password);
+      if (passwordMatch) {
+        if (foundUser.isVerified != true) {
+          err = "Your account is not verified yet. Please contact support."
+          res.send({ err, errType: "warning" });
+        }
+        else {
+          const token = await foundUser.token;
+          const name = await foundUser.name;
+          const phone = await foundUser.phone;
+          const email = await foundUser.email;
+          const userId = await foundUser._id;
+          console.log(token);
+          res.send({ token, name, phone, email, userId });
+        }
+      } else {
+        err = "Wrong Password! Please Try Again.";
+        res.send({ err, errType: "danger" });
+      }
+    } catch (e) {
+      err = "Entered Mobile number is not registered. Please registered first!";
+      res.send({ err, errType: "warning" });
+      console.log(e)
+    }
+  }
+})
+
+app.post("/mob/signup", async (req, res) => {
+  var { fname, email, mnumb, pass, cpass } = req.body;
+  console.log(fname, email, mnumb, pass, cpass)
+  var err, errType, token;
+  var phoneno = /^\d{10}$/;
+  var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  if (!fname || !email || !mnumb || !pass || !cpass || fname == "" || email == "" || mnumb == "" || pass == "" || cpass == "") {
+    err = "Please fill full details";
+    res.send({ err, errType: "warning" });
+  } else if (!email.match(mailformat)) {
+    err = "Please enter Email Id properly";
+    res.send({ err, errType: "warning" });
+  } else if (!mnumb.match(phoneno)) {
+    err = "Please enter phone number properly";
+    res.send({ err, errType: "warning" });
+  } else if (pass != cpass) {
+    err = "Password and Confirm Password not Matched. Please try again.";
+    res.send({ err, errType: "warning" });
+  } else {
+    try {
+      const addingUser = new user({
+        name: req.body.fname,
+        email: req.body.email,
+        phone: req.body.mnumb,
+        password: req.body.pass,
+      });
+
+      const token = await addingUser.generateAuthToken();
+
+      const insertUser = await addingUser.save();
+      err = "Sign Up Successfully"
+      res.send({ token: "got token" });
+    } catch (e) {
+      if (e.code == 11000) {
+        err = "This mobile number is already registered with another account";
+        res.send({ err, errType: "danger" });
+      } else {
+        console.log(e);
+        // res.status(400).send(e);
+      }
+    }
+  }
+})
+
+app.post("/mob/verifyOtp", async (req, res) => {
+  try {
+    const updateUser = await user.updateOne({ phone: req.body.mobileNo }, { $set: { isVerified: true } })
+    // err = "Phone Number verified successfully. Please login now.";
+    // var errType = "";
+    // var errHead = "";
+    // res.render("login", { err: err, errType: "success", errHead: "Verified!" });
+    res.render("mobVerifyOtp", { verified: true })
+  } catch (e) {
+    console.log(e);
+    res.send(e)
+  }
+})
+
+
+app.get("/mob/verifyOtp", async (req, res) => {
+  try {
+    console.log("im in verify otp")
+    var phoneNo = req.query.mob_no;
+    console.log(phoneNo)
+    res.render("mobVerifyOtp", { phoneNo })
+
+
+  } catch (e) {
+    res.status(400).send("Got Error")
+    console.log(e)
+  }
+})
+
+app.post("/mob/offers", async (req, res) => {
+  var img = req.body.img;
+  var buildingName = req.body.buildingName;
+  const addingOffer = new offers({
+    img,
+    buildingName
+  })
+
+  const insertOffer = await addingOffer.save();
+  res.send(insertOffer);
+})
+
+app.get("/mob/offers", async (req, res) => {
+  try {
+    const getOffers = await offers.find({}).sort({ _id: -1 });
+    res.status(201).send(getOffers);
+  } catch (e) {
+    res.send(e);
+  }
+})
+
+app.get("/mob/latest", async (req, res) => {
+  try {
+    const getHome = await home.find({}).sort({ _id: -1 }).limit(10);
+    res.send(getHome);
+  } catch (e) {
+    res.send("error occured");
+    console.log(e)
+  }
+})
+
+
+app.get("/mob/properties", async (req, res) => {
+
+
+  var sellOrRent = req.query.sellOrRent;
+  var homeType = req.query.homeType;
+  var maxAmmount = req.query.maxAmmount;
+  var carpetArea = req.query.carpetArea;
+  var age = req.query.age;
+  var floor = req.query.floor;
+  var isVeg = req.query.isVeg;
+  var page = req.query.page;
+  var isNext = true;
+
+  if (typeof page == "undefined") {
+    page = 1;
+  }
+  var skip_value = (page - 1) * 10;
+  let query = {};
+
+  if (sellOrRent) {
+    query.sellOrRent = sellOrRent
+  }
+  if (homeType) {
+    query.homeType = homeType
+  }
+  if (maxAmmount) {
+    query.ammount = { $lt: maxAmmount }
+  }
+  if (carpetArea) {
+    query.carpetArea = { $gte: carpetArea }
+  }
+  if (age) {
+    query.age = { $lte: age }
+  }
+  if (floor) {
+    query.floor = { $lte: floor }
+  }
+  if (isVeg) {
+    query.vegetarian = isVeg
+  }
+
+
+  const getHome = await home.find(query).sort({ _id: -1 }).limit(10).skip(skip_value);
+  const nextValue = await home.find(query).sort({ _id: -1 }).limit(11).skip(skip_value).countDocuments();
+  if (nextValue != 11) {
+    isNext = false;
+  }
+  res.send({ isNext, page, getHome })
+
+
+
+})
+
+app.get("/mob/user", async (req, res) => {
   try{
+    var token = req.query.token;
+    const verifyUser = jwt.verify(token, process.env.TOKEN_KEY);
+    console.log(verifyUser._id);
+    const userDetails = await user.findOne({ _id: verifyUser._id })
+    res.send({userName:userDetails.name, userPhone:userDetails.phone, userEmail:userDetails.email})
+
+  }
+  catch(e){
+    res.send("token not found")
+
+  }
+})
+
+app.post("/mob/PostProperty",upload.fields([{ name: "firstImage", maxCount: 1 }, { name: "secondImage", maxCount: 1 }, { name: "thirdImage", maxCount: 1 }, { name: "fourthImage", maxCount: 1 }]), async (req, res) => {
+  
+
+  var { uploaderName, uploaderEmail, uploaderPhone, sameAsAbove, ownerName, ownerEmail, ownerPhone, add_houseNumber, add_bldgAreaName, add_areaName, add_city, add_landmark, homeType, parking, floor, totalFloor, carpetArea, age, vegetarian, firstImage, secondImage, thirdImage, fourthImage, sellOrRent, ammount } = req.body;
+  // console.log(uploaderName, uploaderEmail, uploaderPhone, sameAsAbove, ownerName, ownerEmail, ownerPhone, add_houseNumber, add_bldgAreaName, add_areaName, add_city, add_landmark, homeType, parking, floor, totalFloor, carpetArea, age, vegetarian, firstImage, secondImage, thirdImage, fourthImage, sellOrRent, ammount)
+
+
+ 
+
+
+  try {
+    console.log(req.files.firstImage[0].filename);
+    console.log(req.files.secondImage[0].filename);
+    console.log(req.files.thirdImage[0].filename);
+    console.log(req.files.fourthImage[0].filename);
+
+
+    const uploadsFolder = path.join(__dirname, "../public/TempUploads/");
+    var image1 = uploadsFolder + req.files.firstImage[0].filename;
+    var image2 = uploadsFolder + req.files.secondImage[0].filename;
+    var image3 = uploadsFolder + req.files.thirdImage[0].filename;
+    var image4 = uploadsFolder + req.files.fourthImage[0].filename;
+
+    var image1_name = req.files.firstImage[0].filename;
+    var image2_name = req.files.secondImage[0].filename;
+    var image3_name = req.files.thirdImage[0].filename;
+    var image4_name = req.files.fourthImage[0].filename;
+
+    sharp(image1)
+      .resize({ width: 500 })
+      .rotate()
+      .toFile('public/uploads/' + req.files.firstImage[0].filename, (err, info) => {
+        if (!err) {
+          console.log(image1);
+          fs.unlinkSync(image1);
+        }
+        else {
+          console.log(err)
+        }
+      });
+    sharp(image2)
+      .resize({ width: 500 })
+      .rotate()
+      .toFile('public/uploads/' + req.files.secondImage[0].filename, (err, info) => {
+        if (!err) {
+          console.log(image2);
+          fs.unlinkSync(image2);
+        }
+        else {
+          console.log(err)
+        }
+      });
+    sharp(image3)
+      .resize({ width: 500 })
+      .rotate()
+      .toFile('public/uploads/' + req.files.thirdImage[0].filename, (err, info) => {
+        if (!err) {
+          console.log(image3);
+          fs.unlinkSync(image3);
+        }
+        else {
+          console.log(err)
+        }
+      });
+    sharp(image4)
+      .resize({ width: 500 })
+      .rotate()
+      .toFile('public/uploads/' + req.files.fourthImage[0].filename, (err, info) => {
+        if (!err) {
+          console.log(image4);
+          fs.unlinkSync(image4);
+        }
+        else {
+          console.log(err)
+        }
+      });
+
+    const addingHome = new home({
+      uploaderName,
+      uploaderEmail,
+      uploaderPhone,
+      sameAsAbove,
+      ownerName,
+      ownerEmail,
+      ownerPhone,
+      add_houseNumber,
+      add_bldgAreaName,
+      add_areaName,
+      add_city,
+      add_landmark,
+      homeType,
+      parking,
+      floor,
+      totalFloor,
+      carpetArea,
+      age,
+      vegetarian,
+      firstImage: image1_name,
+      secondImage: image2_name,
+      thirdImage: image3_name,
+      fourthImage: image4_name,
+      sellOrRent,
+      ammount
+    });
+
+
+    const insertHome = await addingHome.save();
+    res.send({"success": true});
+
+
+    // res.status(200).render("PostProperty", { userName: uploaderName, userPhone: uploaderPhone, userEmail: uploaderEmail, isDone: "done", head: "Home Registered!", message: "Your home registered successfully on our website. We will soon contact you. Thank You! ", type: "success" })
+  }
+  catch (e) {
+    console.log(e)
+    res.send({"success":false})
+    // res.status(200).render("PostProperty", { userName: uploaderName, userPhone: uploaderPhone, userEmail: uploaderEmail, isDone: "done", head: "Cant Register Home!", message: "Due to some internel error we cant upload home details to server. Pleaase try again later. ", type: "error" })
+  }
+
+})
+
+app.get("/mob/home", async (req,res)=>{
+  try {
+    
+    var id = req.query.h_id;
+    const getHome = await home.find({ _id: id }).limit(1);
+    res.send(getHome);
+    
+
+
+
+  } catch (e) {
+    console.log(e);
+  }
+})
+
+app.get("/mob/homeInterest", async (req,res)=>{
+  
+  const home_id = req.query.home_id;
+  const owner = req.query.owner;
+  const sellOrRent = req.query.sellOrRent;
+  const ammount = req.query.ammount;
+  const firstImage = req.query.firstImage;
+  const secondImage = req.query.secondImage;
+  const thirdImage = req.query.thirdImage;
+  const fourthImage = req.query.fourthImage;
+  const homeType = req.query.homeType;
+  const add_areaName = req.query.add_areaName;
+  const add_city = req.query.add_city;
+  const add_landmark = req.query.add_landmark;
+  const carpetArea = req.query.carpetArea;
+  const parking = req.query.parking;
+  const floor = req.query.floor;
+  const totalFloor = req.query.totalFloor;
+  const age = req.query.age;
+  const vegetarian = req.query.vegetarian;
+  const user_id = req.query.user_id;
+  const userName = req.query.userName;
+  const userPhone = req.query.userPhone;
+
+  try {
+    // console.log(areaName);
+    const addingHomeInterest = new homeInterest({
+      home_id,
+      owner,
+      sellOrRent,
+      ammount,
+      firstImage,
+      secondImage,
+      thirdImage,
+      fourthImage,
+      homeType,
+      add_areaName,
+      add_city,
+      add_landmark,
+      carpetArea,
+      parking,
+      floor,
+      totalFloor,
+      age,
+      vegetarian,
+      user_id,
+      userName,
+      userPhone
+    });
+
+    const insertHomeInterest = await addingHomeInterest.save();
+    res.send({"success":true})
+
+  } catch (e) {
+    res.send({"success":false})
+    console.log(e)
+  }
+})
+
+app.get("*", async (req, res) => {
+  try {
     const userToken = req.cookies.jwt;
     const verifyUser = jwt.verify(userToken, process.env.TOKEN_KEY);
     console.log(verifyUser._id);
@@ -3771,7 +4184,7 @@ app.get("*", async (req, res)=>{
     res.render("404", { user: userDetails._id, userName: userDetails.name, userPhone: userDetails.phone });
 
   }
-  catch(e){
+  catch (e) {
     res.render("404")
   }
 
