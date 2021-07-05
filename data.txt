@@ -1,6 +1,6 @@
 
 # colors
-image gree colr = #2ECC71
+image green color = #2ECC71
 scrollbar color = #58D68D
 
 
