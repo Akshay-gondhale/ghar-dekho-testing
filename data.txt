@@ -1,0 +1,18 @@
+
+# colors
+image green color = #2ECC71
+scrollbar color = #58D68D
+
+
+
+
+
+
+
+
+
+
+# font 
+
+
+poppin font - font-family: 'Poppins', sans-serif;

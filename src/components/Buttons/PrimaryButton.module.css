@@ -1,0 +1,13 @@
+.mainDiv{
+    height: 100%;
+    display: inline-block;
+    padding: 10px 1.5rem;
+    font-size: .9rem;
+    border-radius: 1.5rem;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    background-color: #2ECC71;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
