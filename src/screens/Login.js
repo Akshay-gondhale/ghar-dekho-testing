@@ -1,5 +1,6 @@
 import PrimaryButton from "../components/Buttons/PrimaryButton"
 import style from "./Login.module.css"
+import styles from "./Login.module.css"
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
@@ -9,7 +10,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false)
 
-
+    console.log(style)
 
     const submitLogin = () => {
         if (phone.length === 0) {
@@ -36,7 +37,7 @@ const Login = () => {
     }
     return (
         <React.Fragment>
-            <div className={style.mainDiv}>
+            <div className={styles.mainDiv}>
                 <div className={style.leftDiv}>
                     <img className={style.bannerImg} src="/images/login.svg" alt="..." />
                 </div>
