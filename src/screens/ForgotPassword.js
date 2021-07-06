@@ -1,43 +1,33 @@
 import style from "./Registration.module.css"
-// import { useState } from "react";
 import PrimaryButton from "../components/Buttons/PrimaryButton"
 import firebase from "../utils/firebase"
 import { useState } from "react"
-import validator from "validator"
-
 import { toast } from 'react-toastify';
-const Regisstration = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+const ForgotPassword = () => {
     const [otp, setOtp] = useState("")
+    const [phone, setPhone] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
 
     const [isOtpActive, setIsOtpActive] = useState(false);
+    const [isPhoneActive, setIsPhoneActive] = useState(true);
+    const [isPasswordActive, setIsPasswordActive] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
 
-    const[confirmationResult, setConfirmationResult] = useState();
+    const [confirmationResult, setConfirmationResult] = useState();
 
     const submitData = () => {
 
-        if (name === "" || phone === "" || email === "" || password === "" || confirmPassword === "") {
-            toast.error("Please fill all details.! 😔", {
-            });
-        }
-        else if (!validator.isEmail(email)) {
-            toast.error("Please enter a valid email.! 😔", {
+        if (phone === "") {
+            toast.error("Please provide a phone number.! 😔", {
             });
         }
         else if (phone.length > 10 || phone.length < 10) {
             toast.error("Please provide a valid phone number.! 😔", {
             });
         }
-        else if (password !== confirmPassword) {
-            toast.error("Password and confirm password not matched.! 😔", {
-            });
-        }
         else {
+
             setIsLoading(true)
             window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
                 'size': 'invisible',
@@ -53,58 +43,55 @@ const Regisstration = () => {
                 .then((confirmationResult) => {
                     setIsLoading(false)
                     setIsOtpActive(true)
+                    setIsPhoneActive(false)
+                    setIsPasswordActive(false)
                     setConfirmationResult(confirmationResult);
                 }).catch((error) => {
+                    setIsLoading(false)
                     console.log(error)
-                    toast.error("Unable to send OTP. Some internal server error occured.! 😔", {
+                    toast.error("Unable to send OTP due to no internet or Some internal server error occured.! 😔", {
                     });
                 });
-
-            
         }
     }
-    
+
     const VerifyOtp = () => {
+        setIsLoading(true)
         const code = otp;
         confirmationResult.confirm(code).then((result) => {
-            toast.success("Registration Succesfful.! 😃", {})
+            setIsLoading(false)
+            toast.success("OTP verification Succesfful.! 😃", {})
+
+            setIsOtpActive(false)
+            setIsPhoneActive(false)
+            setIsPasswordActive(true)
         }).catch((error) => {
+            setIsLoading(false)
             toast.error("Wrong otp.! 😔", {})
         });
+    }
+
+    const submitPassword = () => {
+        alert("bla bla")
     }
     return (
         <>
             <div className={style.mainDiv}>
                 <div className={style.leftDiv}>
-                    <img className={style.bannerImg} src="/images/registration.svg" alt="..." />
+                    <img className={style.bannerImg} src="/images/forgotPassword.svg" alt="..." />
                 </div>
                 <div className={style.rightDiv}>
-                    <h4 className={style.heading}>Register</h4>
+                    <h4 className={style.heading}>Forgot Password</h4>
                     <div className={style.inputDivWrapper}>
                         <div id="recaptcha-container"></div>
-                        <div className={!isOtpActive ? style.dataDiv : style.hidden}>
-                            <div className={style.inputWrapper}>
-                                <p className={style.inputLabel}>Name</p>
-                                <input className={style.inputTag} value={name} onChange={e => setName(e.target.value)} placeholder="Enter name" type="text" />
-                            </div>
-                            <div className={style.inputWrapper}>
-                                <p className={style.inputLabel}>Email</p>
-                                <input className={style.inputTag} value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter email" type="text" />
-                            </div>
+                        <div className={isPhoneActive ? style.dataDiv : style.hidden}>
                             <div className={style.inputWrapper}>
                                 <p className={style.inputLabel}>Phone</p>
-                                <input className={style.inputTag} value={phone} onChange={e => setPhone(e.target.value)} placeholder="Enter phone" type="number" />
+                                <input className={style.inputTag} value={phone} onChange={e => setPhone(e.target.value)} placeholder="Enter registered phone number" type="number" />
                             </div>
-                            <div className={style.inputWrapper}>
-                                <p className={style.inputLabel}>Password</p>
-                                <input className={style.inputTag} value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter password" type="password" />
-                            </div>
-                            <div className={style.inputWrapper}>
-                                <p className={style.inputLabel}>Confirm Password</p>
-                                <input className={style.inputTag} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Enter confirm password" type="password" />
-                            </div>
+
                             <div onClick={() => submitData()} className={style.buttonWrapper}>
-                                <PrimaryButton heading='Signup <i class="fas fa-arrow-circle-right"></i>' />
+                                <PrimaryButton heading='Submit <i class="fas fa-arrow-circle-right"></i>' />
                                 <div className={isLoading ? "spinner-border text-success" : style.hidden} role="status">
                                     <span className="visually-hidden">Loading...</span>
                                 </div>
@@ -119,12 +106,35 @@ const Regisstration = () => {
                             </div>
                             <div onClick={() => VerifyOtp()} className={style.buttonWrapper}>
                                 <PrimaryButton heading='Confirm OTP <i class="fas fa-arrow-circle-right"></i>' />
+                                <div className={isLoading ? "spinner-border text-success" : style.hidden} role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={isPasswordActive ? style.verifyOtp : style.hidden}>
+
+                            <div className={style.inputWrapper}>
+                                <p className={style.inputLabel}>Enter Password</p>
+                                <input className={style.inputTag} value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter password" type="text" />
+                            </div>
+
+                            <div className={style.inputWrapper}>
+                                <p className={style.inputLabel}>Enter confirm Password</p>
+                                <input className={style.inputTag} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Enter confirm password" type="text" />
+                            </div>
+                            <div onClick={() => submitPassword()} className={style.buttonWrapper}>
+                                <PrimaryButton heading='Confirm OTP <i class="fas fa-arrow-circle-right"></i>' />
+                                <div className={isLoading ? "spinner-border text-success" : style.hidden} role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </>
+
     )
 }
-export default Regisstration;
+
+export default ForgotPassword;
