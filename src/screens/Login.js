@@ -3,6 +3,7 @@ import style from "./Login.module.css"
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
+import React  from 'react';
 const Login = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
@@ -34,7 +35,7 @@ const Login = () => {
         }
     }
     return (
-        <>
+        <React.Fragment>
             <div className={style.mainDiv}>
                 <div className={style.leftDiv}>
                     <img className={style.bannerImg} src="/images/login.svg" alt="..." />
@@ -67,7 +68,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

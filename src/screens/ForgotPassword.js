@@ -3,6 +3,7 @@ import PrimaryButton from "../components/Buttons/PrimaryButton"
 import firebase from "../utils/firebase"
 import { useState } from "react"
 import { toast } from 'react-toastify';
+import React  from 'react';
 const ForgotPassword = () => {
     const [otp, setOtp] = useState("")
     const [phone, setPhone] = useState("")
@@ -75,7 +76,7 @@ const ForgotPassword = () => {
         alert("bla bla")
     }
     return (
-        <>
+        <React.Fragment>
             <div className={style.mainDiv}>
                 <div className={style.leftDiv}>
                     <img className={style.bannerImg} src="/images/forgotPassword.svg" alt="..." />
@@ -132,7 +133,7 @@ const ForgotPassword = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </React.Fragment>
 
     )
 }

@@ -4,6 +4,7 @@ import PrimaryButton from "../components/Buttons/PrimaryButton"
 import firebase from "../utils/firebase"
 import { useState } from "react"
 import validator from "validator"
+import React  from 'react';
 
 import { toast } from 'react-toastify';
 const Regisstration = () => {
@@ -73,7 +74,7 @@ const Regisstration = () => {
         });
     }
     return (
-        <>
+        <React.Fragment>
             <div className={style.mainDiv}>
                 <div className={style.leftDiv}>
                     <img className={style.bannerImg} src="/images/registration.svg" alt="..." />
@@ -124,7 +125,7 @@ const Regisstration = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 export default Regisstration;
