@@ -4,9 +4,11 @@ import PrimaryButton from "../components/Buttons/PrimaryButton"
 import firebase from "../utils/firebase"
 import { useState } from "react"
 import validator from "validator"
-import React  from 'react';
+import React from 'react';
 
 import { toast } from 'react-toastify';
+import axios from "axios"
+const { BaseApi } = require("../utils/BaseApi")
 const Regisstration = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -18,7 +20,7 @@ const Regisstration = () => {
     const [isOtpActive, setIsOtpActive] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
 
-    const[confirmationResult, setConfirmationResult] = useState();
+    const [confirmationResult, setConfirmationResult] = useState();
 
     const submitData = () => {
 
@@ -40,37 +42,73 @@ const Regisstration = () => {
         }
         else {
             setIsLoading(true)
-            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-                'size': 'invisible',
-                'callback': (response) => {
-                    // reCAPTCHA solved, allow signInWithPhoneNumber.
-                    console.log("rechapta solved")
-                }
-            });
-
-            const phoneNumber = `+91${phone}`;
-            const appVerifier = window.recaptchaVerifier;
-            firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
-                .then((confirmationResult) => {
+            axios.get(`${BaseApi}/user/exists/${phone}`)
+                .then(res => {
+                    toast.error("This mobile number is linked with another account use different")
                     setIsLoading(false)
-                    setIsOtpActive(true)
-                    setConfirmationResult(confirmationResult);
-                }).catch((error) => {
-                    console.log(error)
-                    toast.error("Unable to send OTP. Some internal server error occured.! 😔", {
-                    });
-                });
+                })
+                .catch(err => {
+                    console.log(err.response)
 
-            
+                    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+                        'size': 'invisible',
+                        'callback': (response) => {
+                            // reCAPTCHA solved, allow signInWithPhoneNumber.
+                            console.log("rechapta solved")
+                        }
+                    });
+
+                    const phoneNumber = `+91${phone}`;
+                    const appVerifier = window.recaptchaVerifier;
+                    firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+                        .then((confirmationResult) => {
+                            setIsLoading(false)
+                            setIsOtpActive(true)
+                            toast.success("OTP is sent to your mobile number")
+                            setConfirmationResult(confirmationResult);
+                        }).catch((error) => {
+                            console.log(error)
+                            setIsLoading(false)
+                            toast.error("Unable to send OTP. Some internal server error occured.! 😔", {
+                            });
+                        });
+
+
+                })
+
         }
     }
-    
+
     const VerifyOtp = () => {
+        setIsLoading(true)
         const code = otp;
         confirmationResult.confirm(code).then((result) => {
-            toast.success("Registration Succesfful.! 😃", {})
+            axios.post(`${BaseApi}/user/register`, {
+                name: name,
+                phone,
+                email,
+                password
+            })
+                .then(res => {
+                    console.log(res)
+                    toast.success("Registration Succesfful.! 😃", {})
+                    setIsLoading(false)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                    if (err.response.data.message) {
+                        toast.error(err.response.data.message, {})
+                    }
+                    else{
+                        toast.error("Something Went Wrong", {})
+                    }
+
+                    setIsLoading(false)
+
+                })
         }).catch((error) => {
             toast.error("Wrong otp.! 😔", {})
+            setIsLoading(false)
         });
     }
     return (
@@ -120,6 +158,9 @@ const Regisstration = () => {
                             </div>
                             <div onClick={() => VerifyOtp()} className={style.buttonWrapper}>
                                 <PrimaryButton heading='Confirm OTP <i class="fas fa-arrow-circle-right"></i>' />
+                                <div className={isLoading ? "spinner-border text-success" : style.hidden} role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
                             </div>
                         </div>
                     </div>

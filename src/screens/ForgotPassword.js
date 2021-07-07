@@ -1,10 +1,14 @@
 import style from "./Registration.module.css"
 import PrimaryButton from "../components/Buttons/PrimaryButton"
 import firebase from "../utils/firebase"
+import { useHistory } from 'react-router-dom';
 import { useState } from "react"
 import { toast } from 'react-toastify';
-import React  from 'react';
+import React from 'react';
+import axios from "axios";
+const { BaseApi } = require("../utils/BaseApi")
 const ForgotPassword = () => {
+    const history = useHistory();
     const [otp, setOtp] = useState("")
     const [phone, setPhone] = useState("")
     const [password, setPassword] = useState("")
@@ -30,29 +34,46 @@ const ForgotPassword = () => {
         else {
 
             setIsLoading(true)
-            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-                'size': 'invisible',
-                'callback': (response) => {
-                    // reCAPTCHA solved, allow signInWithPhoneNumber.
-                    console.log("rechapta solved")
-                }
-            });
-
-            const phoneNumber = `+91${phone}`;
-            const appVerifier = window.recaptchaVerifier;
-            firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
-                .then((confirmationResult) => {
-                    setIsLoading(false)
-                    setIsOtpActive(true)
-                    setIsPhoneActive(false)
-                    setIsPasswordActive(false)
-                    setConfirmationResult(confirmationResult);
-                }).catch((error) => {
-                    setIsLoading(false)
-                    console.log(error)
-                    toast.error("Unable to send OTP due to no internet or Some internal server error occured.! 😔", {
+            axios.get(`${BaseApi}/user/exists/${phone}`)
+                .then(res => {
+                    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+                        'size': 'invisible',
+                        'callback': (response) => {
+                            // reCAPTCHA solved, allow signInWithPhoneNumber.
+                            console.log("rechapta solved")
+                        }
                     });
-                });
+
+                    const phoneNumber = `+91${phone}`;
+                    const appVerifier = window.recaptchaVerifier;
+                    firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+                        .then((confirmationResult) => {
+                            setIsLoading(false)
+                            setIsOtpActive(true)
+                            setIsPhoneActive(false)
+                            setIsPasswordActive(false)
+                            setConfirmationResult(confirmationResult);
+                            toast.success("OTP is sent to your mobile number")
+                        }).catch((error) => {
+                            setIsLoading(false)
+                            console.log(error)
+                            toast.error("Unable to send OTP due to no internet or Some internal server error occured.! 😔", {
+                            });
+                        });
+                })
+                .catch(err => {
+
+                    console.log(err.response)
+                    if (err.response.data.message) {
+                        toast.error("This mobile is not linked with any account! Please register first.", {})
+                    }
+                    else {
+                        toast.error("Something Went Wrong", {})
+                    }
+
+                    setIsLoading(false)
+                })
+
         }
     }
 
@@ -73,7 +94,35 @@ const ForgotPassword = () => {
     }
 
     const submitPassword = () => {
-        alert("bla bla")
+        if (password === "" || confirmPassword === "") {
+            toast.error("Please fill password.! 😔")
+        }
+        else if (password !== confirmPassword) {
+            toast.error("Password and confirm password not matched.! 😔")
+        }
+        else {
+            setIsLoading(true)
+            axios.put(`${BaseApi}/user/resetPassword`, {
+                phone,
+                password
+            })
+                .then(res => {
+                    setIsLoading(false)
+                    toast.success(res.data.message)
+                    history.push("/");
+                })
+                .catch(err => {
+                    console.log(err.response)
+                    if (err.response.data.message) {
+                        toast.error(err.response.data.message, {})
+                    }
+                    else {
+                        toast.error("Something Went Wrong", {})
+                    }
+
+                    setIsLoading(false)
+                })
+        }
     }
     return (
         <React.Fragment>

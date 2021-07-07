@@ -1,15 +1,16 @@
 import PrimaryButton from "../components/Buttons/PrimaryButton"
 import style from "./Login.module.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import React  from 'react';
+import axios from "axios";
+const {BaseApi} = require("../utils/BaseApi")
 const Login = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false)
 
-    console.log(style)
 
     const submitLogin = () => {
         if (phone.length === 0) {
@@ -26,14 +27,24 @@ const Login = () => {
         }
         else {
             setIsLoading(true)
-            toast.success("All Good.!", {})
+            axios.post(`${BaseApi}/user/login`,{
+                phone:phone,
+                password:password
+            })
+            .then(res=>{
+                console.log(res.data.message)
+                toast.success(res.data.message)
+                setIsLoading(false)
+            })
+            .catch(err => {
+                console.log(err.response)
+                toast.error(err.response.data.message)
+                setIsLoading(false)
+            })
             
-            setIsLoading(false)
-            // setGlobalErr("")
-            // console.log("all good")
-            // alert("All good");
         }
     }
+
     return (
         <React.Fragment>
             <div className={style.mainDiv}>

@@ -125,6 +125,13 @@ input[type=number] {
     margin-left: 5px;
     opacity: .8;
 }
+.buttonWithLoading{
+    display: inline-flex;
+    align-items: center;
+}
+.spinnerStyle{
+    margin-left: 5px;
+}
 
 @media only screen and (max-width: 850px) {
     .mainDiv {
