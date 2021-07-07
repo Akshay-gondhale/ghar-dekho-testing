@@ -12,5 +12,6 @@ app.use(express.json()); // JSON Body Parser
 
 // routes
 app.get("/", (req, res) => res.send("Hey, API is working!!"));
+app.use("/user", require("./routes/UserRoutes"));
 
 app.listen(PORT, () => console.log("APP is running"));
