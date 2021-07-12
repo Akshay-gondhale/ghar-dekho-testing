@@ -30,15 +30,19 @@ const Login = () => {
             axios.post(`/user/login`,{
                 phone:phone,
                 password:password
-            })
+            },
+            {withCredentials:true})
             .then(res=>{
                 console.log(res.data.message)
                 toast.success(res.data.message)
                 setIsLoading(false)
             })
             .catch(err => {
-                console.log(err.response)
-                toast.error(err.response.data.message)
+                console.log(err)
+                if(err.response){
+                    toast.error(err.response.data.message)
+                }
+
                 setIsLoading(false)
             })
             

@@ -12,14 +12,15 @@ import axios from "axios"
 
 
 axios.defaults.baseURL = 'https://ghar-dekho-backend.herokuapp.com';
-axios.interceptors.request.use(function (config) {
-  console.log("request ja rahi hai bhai")
-  console.log(config)
-  return config;
-}, function (error) {
-  // Do something with request error
-  return Promise.reject(error);
-});
+// axios.defaults.baseURL = 'http://localhost:4000';
+// axios.interceptors.request.use(function (config) {
+//   console.log("request ja rahi hai bhai")
+//   console.log(config)
+//   return config;
+// }, function (error) {
+//   // Do something with request error
+//   return Promise.reject(error);
+// });
 function App() {
 
   return (
