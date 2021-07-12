@@ -1,12 +1,12 @@
 import PrimaryButton from "../components/Buttons/PrimaryButton"
 import style from "./Login.module.css"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import React  from 'react';
 import axios from "axios";
-const {BaseApi} = require("../utils/BaseApi")
 const Login = () => {
+   
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false)
@@ -27,7 +27,7 @@ const Login = () => {
         }
         else {
             setIsLoading(true)
-            axios.post(`${BaseApi}/user/login`,{
+            axios.post(`/user/login`,{
                 phone:phone,
                 password:password
             })

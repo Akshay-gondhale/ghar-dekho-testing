@@ -8,7 +8,6 @@ import React from 'react';
 
 import { toast } from 'react-toastify';
 import axios from "axios"
-const { BaseApi } = require("../utils/BaseApi")
 const Regisstration = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -42,7 +41,7 @@ const Regisstration = () => {
         }
         else {
             setIsLoading(true)
-            axios.get(`${BaseApi}/user/exists/${phone}`)
+            axios.get(`/user/exists/${phone}`)
                 .then(res => {
                     toast.error("This mobile number is linked with another account use different")
                     setIsLoading(false)
@@ -83,7 +82,7 @@ const Regisstration = () => {
         setIsLoading(true)
         const code = otp;
         confirmationResult.confirm(code).then((result) => {
-            axios.post(`${BaseApi}/user/register`, {
+            axios.post(`/user/register`, {
                 name: name,
                 phone,
                 email,

@@ -6,7 +6,6 @@ import { useState } from "react"
 import { toast } from 'react-toastify';
 import React from 'react';
 import axios from "axios";
-const { BaseApi } = require("../utils/BaseApi")
 const ForgotPassword = () => {
     const history = useHistory();
     const [otp, setOtp] = useState("")
@@ -34,7 +33,7 @@ const ForgotPassword = () => {
         else {
 
             setIsLoading(true)
-            axios.get(`${BaseApi}/user/exists/${phone}`)
+            axios.get(`/user/exists/${phone}`)
                 .then(res => {
                     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
                         'size': 'invisible',
@@ -102,7 +101,7 @@ const ForgotPassword = () => {
         }
         else {
             setIsLoading(true)
-            axios.put(`${BaseApi}/user/resetPassword`, {
+            axios.put(`/user/resetPassword`, {
                 phone,
                 password
             })
