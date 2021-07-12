@@ -92,6 +92,17 @@ const login = async (req, res) => {
                 }
             );
 
+            // let expiryDate = new Date();
+            // const date = expiryDate.getHours() + 2160;
+            // console.log(date)
+
+            // console.log(new Date(new Date().setHours(2160)))
+            // console.log(new Date(Date.now() + 7776000))
+            res.cookie("refresh_token", token, {
+                expires:new Date(new Date().setHours(2160)),
+                httpOnly:true
+            })
+
             res.status(200).json({
                 message: "Success",
                 data: [
@@ -122,25 +133,25 @@ const login = async (req, res) => {
 
 }
 
-const resetPassword = async (req,res) => {
-    try{
-        const {phone, password} = req.body;
-        const userExists = await User.findOne({phone});
-        if(!userExists){
+const resetPassword = async (req, res) => {
+    try {
+        const { phone, password } = req.body;
+        const userExists = await User.findOne({ phone });
+        if (!userExists) {
             res.status(401).json({
-                message:"User does not exists",
-                data:[]
+                message: "User does not exists",
+                data: []
             })
             return;
         }
         userExists.password = await bcrypt.hash(password, 10)
         const savedUser = await userExists.save();
         res.status(200).json({
-            message:"Password reset successfully",
-            data:[savedUser]
+            message: "Password reset successfully",
+            data: [savedUser]
         })
     }
-     catch (e) {
+    catch (e) {
         console.log(e)
         res.status(500).json({
             message: "Something went wrong",

@@ -1,10 +1,18 @@
 const express = require("express");
 const app = express();
+const PORT = process.env.PORT || 4000;
+
+const cookieParser = require("cookie-parser")
+app.use(cookieParser());
+
 require("dotenv").config();
+
+
 const db = require("./config/db");
 db();
+
+
 var cors = require('cors');
-const PORT = process.env.PORT || 4000;
 app.use(cors())
 //middlewares
 app.use(express.static("public"));
