@@ -10,6 +10,7 @@
     display: flex;
     padding: 0 3rem;
     z-index: 1000;
+    transition: .4s;
     /* background-color: red; */
 }
 
@@ -19,6 +20,7 @@
     left: 0;
     width: 100%;
     height: 5rem;
+    transition: .4s;
     align-items: center;
     display: flex;
     padding: 0 3rem;
@@ -246,6 +248,12 @@ a {
         padding: 0 1rem;
         justify-content: space-between;
     }
+    .navbar_on_scroll {
+        height: 4rem;
+        align-items: center;
+        padding: 0 1rem;
+        justify-content: space-between;
+    }
     .userMobileName{
         font-size: 1 !important;
         display: inline-block;
@@ -264,9 +272,6 @@ a {
     .userMobileName::-webkit-scrollbar{
         display: none;
     }
-    .navbar_on_scroll {
-        padding: 0 1rem;
-    }
     .logo {
         width: 40%;
         margin-top: 10px;
@@ -284,7 +289,6 @@ a {
         right: 0;
         height: 100vh;
         display: flex;
-        justify-content: start;
         flex-direction: column;
         padding: 2rem;
         border-top-left-radius: 3rem;
@@ -322,7 +326,6 @@ a {
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: start;
     }
     .rightBtn{
         margin-left: 2.2rem !important;

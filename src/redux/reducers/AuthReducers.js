@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import { AuthAction } from "../constants/AuthActionsTypes";
 
 const authState = {
@@ -50,7 +50,8 @@ export const AuthReducer = (state = authState, { type, payload }) => {
             return state;
 
         case AuthAction.GET_USER_SUCCESS:
-            
+            axios.defaults.headers.common['Authorization'] = `Bearer ${payload.jwt}`;
+            console.log(axios)
             return  {
                 isLoggedIn: true,
                 user: {

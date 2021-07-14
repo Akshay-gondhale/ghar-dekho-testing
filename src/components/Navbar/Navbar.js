@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useHistory, NavLink, Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import style from "./Navbar.module.css"
 const Navbar = () => {
+    //redux data
     const isLoggedIn = useSelector(state => state.AuthReducer.isLoggedIn);
     const user = useSelector(state => state.AuthReducer.user);
 
-
+    // component useStates
     const [isUserDetailOpen, setIsUserDetailOpen] = useState(false)
     const [mobMenuOpen, setMobMenuOpen] = useState(false)
+
+    const [scroll, setScroll] = useState(100);
+
+    useEffect(() => {
+        document.addEventListener("scroll", () => {
+          const scrollCheck = window.scrollY < 100;
+          if (scrollCheck !== scroll) {
+            setScroll(scrollCheck);
+          }
+        });
+      }, [scroll]);
 
     const openUserDetail = () => {
         setIsUserDetailOpen(isUserDetailOpen => !isUserDetailOpen)
@@ -19,7 +31,7 @@ const Navbar = () => {
     }
     return (
         <>
-            <div className={style.navbar}>
+            <div className={scroll > 0 ? style.navbar : style.navbar_on_scroll}>
                 <Link to="/" className={style.logo}>
                     <p className={style.logo_txt}><span className={style.logo_span}>Ghar</span>Dekho</p>
                 </Link>
@@ -41,13 +53,13 @@ const Navbar = () => {
                     <div className={style.userDetails}>
                         <div className={style.userProfile}>
                             {/* <i className="fas fa-user-circle"></i> */}
-                            <img className={style.profileImage} src="/images/modiji.jpg" alt="Couldn't load profile image..." />
+                            <img className={style.profileImage} src="/images/modiji.jpg" alt="..." />
                             <p className={style.profileName}>{user.name}</p>
                             <p className={style.profilePhone}>+91 {user.phone}</p>
                         </div>
                         <div className={style.userOptions}>
-                            <li className={style.userOption}><i class="fas fa-id-badge"></i>Profile</li>
-                            <li onClick={() => openUserDetail()} className={style.userOption}><i class="fas fa-times-circle"></i>Close</li>
+                            <li className={style.userOption}><i className="fas fa-id-badge"></i>Profile</li>
+                            <li onClick={() => openUserDetail()} className={style.userOption}><i className="fas fa-times-circle"></i>Close</li>
                         </div>
                     </div>}
             </div>

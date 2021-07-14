@@ -5,13 +5,15 @@ import Registration from './screens/Registration';
 import ForgotPassword from "./screens/ForgotPassword"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from "axios"
 import { useDispatch } from "react-redux";
 import { getUser } from './redux/actions/AuthActions';
 import { useEffect } from 'react';
 import AuthRoutes from "./components/AuthRoutes"
 import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
+import Home from './screens/Home';
 // import { useEffect } from 'react';
 // import "./utils/Axios"
 
@@ -42,6 +44,9 @@ function App() {
           <AuthRoutes exact path='/forgot-password' component={ForgotPassword} />
           <>
             <Navbar />
+            
+          <Route exact path='/' component={Home} />
+            <Footer />
           </>
         </Switch>
       </Router>

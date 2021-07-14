@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 const AuthRoutes = ({ path, component: Component, ...rest }) => {

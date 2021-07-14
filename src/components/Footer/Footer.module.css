@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap');
+.footer {
+    background-color: #EAFAF1;
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+}
+
+.main_footer_div {
+    display: flex;
+    justify-content: space-between;
+    padding: 60px 120px;
+}
+
+.footer_heading {
+    font-size: 2em;
+    font-family: 'Poppins', sans-serif;
+    color: #2C3E50;
+    font-weight: 900;
+}
+
+.logo_slogan {
+    width: 400px;
+}
+
+.logo3 {
+    font-size: 2em;
+    width: 100%;
+    margin-left: 5px;
+    font-family: 'Potta One', cursive;
+}
+
+.logo3>p {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.logo3>p>span {
+    color: #2ECC71;
+}
+
+.slogan1 {
+    margin-bottom: 15px;
+    margin-left: 5px;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+}
+
+.quick_links>li {
+    list-style: none;
+    margin-left: 5px;
+    padding: 2px 0px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.quick_links>li>a:hover {
+    opacity: 1;
+}
+
+.quick_links>li>a {
+    text-decoration: none;
+    color: black;
+    opacity: .6;
+}
+
+.about>li>i {
+    width: 35px;
+}
+
+.about>li {
+    list-style: none;
+    margin-left: 5px;
+    padding: 2px 0px;
+    font-family: 'Poppins', sans-serif;
+    color: #2C3E50;
+}
+
+.copyright {
+    width: 100%;
+    background-color: #273746;
+    color: #ABB2B9;
+}
+
+.social_links {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.social_links>i {
+    font-size: 2em;
+    padding: 0px 5px;
+    color: #fff;
+    cursor: pointer;
+    opacity: .6;
+}
+
+.social_links>i:hover {
+    opacity: 1;
+}
+
+.end_div {
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 30px;
+    padding-bottom: 20px !important;
+    font-family: 'Poppins', sans-serif;
+}
+
+.madeBy {
+    font-family: 'Hachi Maru Pop', cursive;
+    margin: 3px 0px;
+}
+
+@media only screen and (max-width: 850px) {
+    .main_footer_div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 60px 10px;
+    }
+    .logo_slogan {
+        width: auto;
+        margin: 30px 0px;
+    }
+    .about {
+        margin: 60px 0px;
+    }
+    .end_div {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .madeBy {
+        margin: 20px 0px;
+    }
+}

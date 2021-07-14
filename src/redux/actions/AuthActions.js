@@ -29,20 +29,25 @@ const getUser = () => {
     return async (dispatch) => {
         const auth = JSON.parse(localStorage.getItem("auth"));
         if(auth){
-            axios.get(`/user/getUser/${auth.jwt}`)
+            axios.get(`/user`,{
+                headers:{
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + auth.jwt
+                }
+            })
             .then(res=>{
-                console.log("got user from db", res.data)
+                console.log("got user from db", res.data.data[0])
                 dispatch({type:AuthAction.GET_USER_SUCCESS, payload:{
-                    name:res.data.name,
-                    phone:res.data.phone,
-                    email:res.data.email,
-                    image:res.data.image,
+                    name:res.data.data[0].name,
+                    phone:res.data.data[0].phone,
+                    email:res.data.data[0].email,
+                    image:res.data.data[0].image,
                     jwt:auth.jwt,
                     expires:auth.expires
                 }})
             })
             .catch(err=>{
-                dispatch({type:AuthAction.GET_USER_SUCCESS, payload:{}})
+                dispatch({type:AuthAction.GET_USER_FAIL, payload:{}})
             })
             
             console.log("logged in")
