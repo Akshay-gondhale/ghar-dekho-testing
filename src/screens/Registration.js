@@ -8,7 +8,10 @@ import React from 'react';
 
 import { toast } from 'react-toastify';
 import axios from "axios"
+import { useDispatch } from "react-redux";
+import { RegisterAuthAction } from "../redux/actions/AuthActions"
 const Regisstration = () => {
+    const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -90,11 +93,12 @@ const Regisstration = () => {
             })
                 .then(res => {
                     console.log(res)
+                    dispatch(RegisterAuthAction(res.data.data[0]))
                     toast.success("Registration Succesfful.! 😃", {})
                     setIsLoading(false)
                 })
                 .catch(err => {
-                    console.log(err.response)
+                    console.log(err)
                     if (err.response.data.message) {
                         toast.error(err.response.data.message, {})
                     }

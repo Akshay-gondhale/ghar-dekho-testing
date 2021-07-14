@@ -2,6 +2,8 @@
 # colors
 image green color = #2ECC71
 scrollbar color = #58D68D
+navbar scroll color = #52BE80
+navbar profile font color = #D5F5E3
 
 
 

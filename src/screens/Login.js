@@ -3,10 +3,14 @@ import style from "./Login.module.css"
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
-import React  from 'react';
-import axios from "axios";
+import React from 'react';
+import { useDispatch } from "react-redux";
+import { LoginAuthAction } from "../redux/actions/AuthActions"
 const Login = () => {
-   
+
+    const dispatch = useDispatch();
+
+
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false)
@@ -15,37 +19,16 @@ const Login = () => {
     const submitLogin = () => {
         if (phone.length === 0) {
             toast.error("Please provide a phone number.! 😔", {})
-            // setGlobalErr("Please provide a phone number.!")
         }
         else if (password.length === 0) {
             toast.error("Please provide a password.! 😔", {})
-            // setGlobalErr("Please provide a password.!")
         }
         else if (phone.length > 10 || phone.length < 10) {
             toast.error("Please provide a valid phone number.! 😔", {})
-            // setGlobalErr("Please provide a valid phone number.!")
         }
         else {
-            setIsLoading(true)
-            axios.post(`/user/login`,{
-                phone:phone,
-                password:password
-            },
-            {withCredentials:true})
-            .then(res=>{
-                console.log(res.data.message)
-                toast.success(res.data.message)
-                setIsLoading(false)
-            })
-            .catch(err => {
-                console.log(err)
-                if(err.response){
-                    toast.error(err.response.data.message)
-                }
+            dispatch(LoginAuthAction({ phone, password }, toast, setIsLoading))
 
-                setIsLoading(false)
-            })
-            
         }
     }
 
@@ -79,7 +62,7 @@ const Login = () => {
                             </div>
                         </div>
                         <p className={style.signupTag}>Already a User? <Link to="/sign-up"><span className={style.linkStyle}>Sign In</span></Link> </p>
-                        
+
                     </div>
                 </div>
             </div>

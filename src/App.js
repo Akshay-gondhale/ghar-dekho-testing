@@ -7,6 +7,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from "axios"
+import { useDispatch } from "react-redux";
+import { getUser } from './redux/actions/AuthActions';
+import { useEffect } from 'react';
+import AuthRoutes from "./components/AuthRoutes"
+import Navbar from './components/Navbar/Navbar';
 // import { useEffect } from 'react';
 // import "./utils/Axios"
 
@@ -23,16 +28,21 @@ axios.defaults.baseURL = 'https://ghar-dekho-backend.herokuapp.com';
 // });
 function App() {
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser())
+  })
   return (
     <div className="App">
 
       <Router>
         <Switch>
-          <Route exact path='/' component={Login} />
-          <Route exact path='/sign-up' component={Registration} />
-          <Route exact path='/forgot-password' component={ForgotPassword} />
-          {/* <Registration />
-          <Login /> */}
+          <AuthRoutes path='/login' component={Login} />
+          <AuthRoutes exact path='/sign-up' component={Registration} />
+          <AuthRoutes exact path='/forgot-password' component={ForgotPassword} />
+          <>
+            <Navbar />
+          </>
         </Switch>
       </Router>
       <ToastContainer
