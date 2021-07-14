@@ -18,7 +18,8 @@ router.post("/register", register);
 router.post("/login", login);
 router.put("/resetPassword", resetPassword);
 
+router.use(require("../middlewares/AuthUser"));
 
-router.get("/getUser/:token", getUser);
+router.get("/", getUser);
 
 module.exports = router;

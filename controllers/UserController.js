@@ -169,12 +169,24 @@ const resetPassword = async (req, res) => {
 }
 
 const getUser = async (req, res)=>{
-    const {token} = req.params;
-    const userData = await jwt.verify(token,process.env.JWT_SECRET )
-    
-    const userDetails = await User.findOne({_id:userData._id});
+    try{
 
-    res.send(userDetails)
+        const _id = req.user;
+        const userDetails = await User.findOne({_id}).select("-password");
+        
+        res.status(200).json({
+            message:"Found User Details",
+            data:[userDetails]
+        })
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something went wrong",
+            data: []
+        })
+
+    }
 }
 
 module.exports = {
