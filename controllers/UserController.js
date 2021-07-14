@@ -2,6 +2,19 @@ const User = require("../models/UserModel");
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 
+// const pipeline = [
+//     {
+//         '$match':{
+//             "fullDocument.name":"Akshay"
+//         }
+//     }
+// ]
+
+// User.watch(pipeline,{"fullDocument": "updateLookup"}).on("change", (change)=>{
+//     console.log("something changed in user")
+//     console.log(change)
+// })
+
 const userExists = async (req, res) => {
     try {
         const { phone } = req.params;
@@ -60,8 +73,10 @@ const register = async (req, res) => {
                         _id: savedUser._id,
                         name: savedUser.name,
                         email: savedUser.email,
-                        phome: savedUser.phone,
+                        phone: savedUser.phone,
+                        image:savedUser.image,
                         token,
+                        expires:new Date(new Date().setHours(2160)),
                     },
                 ],
             });
@@ -92,16 +107,6 @@ const login = async (req, res) => {
                 }
             );
 
-            // let expiryDate = new Date();
-            // const date = expiryDate.getHours() + 2160;
-            // console.log(date)
-
-            // console.log(new Date(new Date().setHours(2160)))
-            // console.log(new Date(Date.now() + 7776000))
-            res.cookie("refresh_token", token, {
-                expires:new Date(new Date().setHours(2160)),
-                httpOnly:true
-            })
 
             res.status(200).json({
                 message: "Success",
@@ -111,7 +116,9 @@ const login = async (req, res) => {
                         name: userExists.name,
                         email: userExists.email,
                         phone: userExists.phone,
+                        image:userExists.image,
                         token,
+                        expires:new Date(new Date().setHours(2160)),
                     },
                 ],
             });
@@ -161,9 +168,19 @@ const resetPassword = async (req, res) => {
     }
 }
 
+const getUser = async (req, res)=>{
+    const {token} = req.params;
+    const userData = await jwt.verify(token,process.env.JWT_SECRET )
+    
+    const userDetails = await User.findOne({_id:userData._id});
+
+    res.send(userDetails)
+}
+
 module.exports = {
     userExists,
     register,
     login,
-    resetPassword
+    resetPassword,
+    getUser
 }
