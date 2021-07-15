@@ -51,7 +51,6 @@ export const AuthReducer = (state = authState, { type, payload }) => {
 
         case AuthAction.GET_USER_SUCCESS:
             axios.defaults.headers.common['Authorization'] = `Bearer ${payload.jwt}`;
-            console.log(axios)
             return  {
                 isLoggedIn: true,
                 user: {

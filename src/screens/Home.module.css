@@ -11,6 +11,7 @@
     display: flex;
     padding-top: 10vh;
     border-bottom-right-radius: 50%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .leftDiv {
@@ -52,6 +53,168 @@
     animation: bannerAnimation 2s infinite;
 }
 
+/* right info div  */
+
+.infoDivRight {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 3rem 0rem;
+}
+
+.infoDataRight {
+    width: 80%;
+    padding: 0 10%;
+    padding-right: 20%;
+    height: 100%;
+    display: flex;
+    background-color: #F2F4F4;
+    flex-direction: column;
+    justify-content: center;
+    border-top-right-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.infoImgRight {
+    width: 35%;
+    position: absolute;
+    right: 4%;
+}
+
+.infoImgRight>img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.infoHeadingRight {
+    font-size: 3rem;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    max-width: 70%;
+    margin: 1rem 0rem;
+}
+
+.infoTxtRight {
+    font-family: 'Poppins', sans-serif;
+    max-width: 80%;
+    margin: 0;
+}
+
+/* left info div  */
+
+.infoDivLeft {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin: 3rem 0rem;
+}
+
+.infoDataLeft {
+    width: 80%;
+    padding: 0 10%;
+    padding-left: 20%;
+    height: 100%;
+    display: flex;
+    background-color: #F2F4F4;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    border-top-left-radius: 3rem;
+    border-bottom-left-radius: 3rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.infoImgLeft {
+    width: 35%;
+    position: absolute;
+    left: 4%;
+}
+
+.infoImgLeft>img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.infoHeadingLeft {
+    font-size: 3rem;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    width: 80%;
+    margin: 1rem 0rem;
+}
+
+.infoTxtLeft {
+    font-family: 'Poppins', sans-serif;
+    width: 80%;
+    margin: 0;
+}
+
+/* center info  div */
+
+.infoDivCenter {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin: 3rem 0rem;
+    background-color: #F2F4F4;
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+    margin-top: 20rem;
+}
+
+.infoDataCenter {
+    width: 100%;
+    padding: 3% 10%;
+    /* padding-left: 20%; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border-bottom-left-radius: 3rem; */
+}
+
+.infoImgCenter {
+    width: 40%;
+    margin-top: -17rem;
+}
+
+.infoImgCenter>img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.infoHeadingCenter {
+    font-size: 3rem;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    margin: 0rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.infoTxtCenter {
+    font-family: 'Poppins', sans-serif;
+    width: 90%;
+    text-align: center;
+    margin: 0;
+}
+
+.browseBtn {
+    margin: 2rem 0rem;
+    border-radius: 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 @keyframes bannerAnimation {
     0% {
         transform: translateY(0);
@@ -76,9 +239,117 @@
         width: 100%;
         padding: 0rem 1rem;
     }
-    .rightDiv{
+    .rightDiv {
         width: 100%;
         padding: 0rem .5rem;
         padding-top: 4rem;
+    }
+    /* right info div  */
+    .infoDivRight {
+        width: 100%;
+        height: auto;
+        padding: 4rem 0rem;
+        margin: 1rem 0rem;
+    }
+    .infoDataRight {
+        width: 90%;
+        padding: 2rem 5%;
+        padding-top: 10%;
+    }
+    .infoImgRight {
+        width: 45%;
+        right: 1%;
+        top: 0;
+    }
+    .infoImgRight>img {
+        width: 90%;
+        object-fit: contain;
+    }
+    .infoHeadingRight {
+        font-size: 2rem;
+        font-weight: 900;
+        font-family: 'Poppins', sans-serif;
+        max-width: 90%;
+        margin: 1rem 0rem;
+    }
+    .infoTxtRight {
+        font-family: 'Poppins', sans-serif;
+        max-width: 100%;
+        margin: 0;
+    }
+    /* left info div  */
+    .infoDivLeft {
+        width: 100%;
+        height: auto;
+        padding: 4rem 0rem;
+        margin: 0rem;
+    }
+    .infoDataLeft {
+        width: 90%;
+        padding: 2rem 10%;
+        padding-top: 10%;
+    }
+    .infoImgLeft {
+        width: 45%;
+        position: absolute;
+        left: 1%;
+        top: 0;
+    }
+    .infoImgLeft>img {
+        width: 90%;
+        object-fit: contain;
+    }
+    .infoHeadingLeft {
+        font-size: 2rem;
+        font-weight: 900;
+        font-family: 'Poppins', sans-serif;
+        width: 100%;
+        margin: 1rem 0rem;
+    }
+    .infoTxtLeft {
+        font-family: 'Poppins', sans-serif;
+        width: 100%;
+        margin: 0;
+    }
+    /* center info  div */
+    .infoDivCenter {
+        margin: 3rem 0rem;
+        background-color: #F2F4F4;
+        border-top-left-radius: 3rem;
+        border-top-right-radius: 3rem;
+        margin-top: 16rem;
+    }
+    .infoDataCenter {
+        width: 100%;
+        padding: 3% 10%;
+        height: max-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* border-bottom-left-radius: 3rem; */
+    }
+    .infoImgCenter {
+        width: 60%;
+        margin-top: -7rem;
+    }
+    .infoImgCenter>img {
+        width: 100%;
+        object-fit: contain;
+    }
+    .infoHeadingCenter {
+        font-size: 2rem;
+        font-weight: 900;
+        font-family: 'Poppins', sans-serif;
+        width: 100%;
+        margin: 0rem;
+        margin-top: 1rem;
+        text-align: center;
+    }
+    .infoTxtCenter {
+        font-family: 'Poppins', sans-serif;
+        width: 90%;
+        text-align: center;
+        margin: 0;
     }
 }
