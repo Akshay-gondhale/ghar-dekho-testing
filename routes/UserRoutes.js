@@ -1,15 +1,14 @@
 const express = require("express");
-
-
+const { upload } = require("../utils/Multer");
 const {
     register, 
     userExists,
     login,
     resetPassword,
-    getUser
+    getUser,
+    updateProfile
 } = require("../controllers/UserController");
 const router = express.Router();
-
 
 // unprotected routes
 
@@ -21,5 +20,6 @@ router.put("/resetPassword", resetPassword);
 router.use(require("../middlewares/AuthUser"));
 
 router.get("/", getUser);
+router.put("/update", upload.fields([{ name: "profile", maxCount: 1 }]), updateProfile)
 
 module.exports = router;

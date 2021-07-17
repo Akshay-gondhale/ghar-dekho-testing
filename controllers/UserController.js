@@ -1,6 +1,8 @@
 const User = require("../models/UserModel");
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
+const path = require("path");
+const { uploadFile, deleteFile } = require("../utils/RemoteFileUpload");
 
 // const pipeline = [
 //     {
@@ -74,9 +76,10 @@ const register = async (req, res) => {
                         name: savedUser.name,
                         email: savedUser.email,
                         phone: savedUser.phone,
-                        image:savedUser.image,
+                        image: savedUser.image,
                         token,
-                        expires:new Date(new Date().setHours(2160)),
+                        createdAt: savedUser.createdAt,
+                        expires: new Date(new Date().setHours(2160)),
                     },
                 ],
             });
@@ -116,9 +119,10 @@ const login = async (req, res) => {
                         name: userExists.name,
                         email: userExists.email,
                         phone: userExists.phone,
-                        image:userExists.image,
+                        image: userExists.image,
                         token,
-                        expires:new Date(new Date().setHours(2160)),
+                        createdAt: userExists.createdAt,
+                        expires: new Date(new Date().setHours(2160)),
                     },
                 ],
             });
@@ -168,16 +172,68 @@ const resetPassword = async (req, res) => {
     }
 }
 
-const getUser = async (req, res)=>{
-    try{
+const getUser = async (req, res) => {
+    try {
 
         const _id = req.user;
-        const userDetails = await User.findOne({_id}).select("-password");
-        
+        const userDetails = await User.findOne({ _id }).select("-password");
+
         res.status(200).json({
-            message:"Found User Details",
-            data:[userDetails]
+            message: "Found User Details",
+            data: [userDetails]
         })
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something went wrong",
+            data: []
+        })
+
+    }
+}
+
+const updateProfile = async (req, res) => {
+    try {
+        const { _id } = req.user;
+        const { name, email } = req.body;
+        const foundUser = await User.findOne({ _id });
+        if (foundUser) {
+
+            if (name) {
+                foundUser.name = name;
+            }
+            if (email) {
+                foundUser.email = email;
+            }
+            if (req.files.profile) {
+                if (foundUser.image != null) {
+                    deleteFile(foundUser.image)
+                }
+                var FilePath = path.join(
+                    __dirname,
+                    `../LocalStorage/${req.files.profile[0].filename}`
+                );
+                var Destination = `User_Profile/${req.files.profile[0].filename}`
+                uploadFile(FilePath, Destination, req.files.profile[0].filename)
+                foundUser.image = Destination;
+            }
+
+            const updateUser = await foundUser.save();
+            res.status(200).json({
+                message: "Profile Updated",
+                data: [updateUser]
+            })
+
+
+        }
+        else {
+            res.status(404).json({
+                message: "No User Found",
+                data: []
+            })
+        }
+
     }
     catch (e) {
         console.log(e)
@@ -194,5 +250,6 @@ module.exports = {
     register,
     login,
     resetPassword,
-    getUser
+    getUser,
+    updateProfile
 }
