@@ -46,7 +46,7 @@ const getUser = () => {
                             name: res.data.data[0].name,
                             phone: res.data.data[0].phone,
                             email: res.data.data[0].email,
-                            image: res.data.data[0].image !== null ? `https://storage.googleapis.com/ghardekho-c3029.appspot.com/${res.data.data[0].image}` : res.data.data[0].image,
+                            image: res.data.data[0].image,
                             jwt: auth.jwt,
                             expires: auth.expires,
                             createdAt: res.data.data[0].createdAt
@@ -69,7 +69,7 @@ const getUser = () => {
 };
 
 
-const updateProfile = (formData, toast, setIsLoading) => {
+const updateProfile = (formData, toast, history, setIsLoading) => {
     return async (dispatch) => {
         setIsLoading(true)
         const auth = JSON.parse(localStorage.getItem("auth"));
@@ -85,14 +85,18 @@ const updateProfile = (formData, toast, setIsLoading) => {
                         name: res.data.data[0].name,
                         phone: res.data.data[0].phone,
                         email: res.data.data[0].email,
-                        image: res.data.data[0].image !== null ? `https://storage.googleapis.com/ghardekho-c3029.appspot.com/${res.data.data[0].image}` : res.data.data[0].image,
+                        image: res.data.data[0].image,
                         jwt: auth.jwt,
                         expires: auth.expires,
                         createdAt: res.data.data[0].createdAt
                     }
                 })
-                setIsLoading(false)
-                toast.success("Profile Updated! 😃")
+                setTimeout(()=>{
+                    setIsLoading(false)
+                    toast.success("Profile Updated! 😃")
+                    history.push("/")
+
+                }, 2000)
             })
             .catch(err => {
                 console.log(err)

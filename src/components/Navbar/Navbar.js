@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import style from "./Navbar.module.css"
+const ImagUrl = "https://storage.googleapis.com/ghardekho-c3029.appspot.com/";
 const Navbar = () => {
     //redux data
     const isLoggedIn = useSelector(state => state.AuthReducer.isLoggedIn);
@@ -52,7 +53,7 @@ const Navbar = () => {
                 {isUserDetailOpen &&
                     <div className={style.userDetails}>
                         <div className={style.userProfile}>
-                            {user.image ? <img className={style.profileImage} src={user.image} alt="..." /> : <i className="fas fa-user-circle"></i>} 
+                            {user.image ? <img className={style.profileImage} src={`${ImagUrl}${user.image}`} alt="..." /> : <i className="fas fa-user-circle"></i>} 
                             
                             <p className={style.profileName}>{user.name}</p>
                             <p className={style.profilePhone}>+91 {user.phone}</p>

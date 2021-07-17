@@ -6,6 +6,7 @@ import style from "./Profile.module.css"
 import validator from "validator";
 import { updateProfile } from "../redux/actions/AuthActions";
 import { useHistory } from "react-router-dom";
+const ImagUrl = "https://storage.googleapis.com/ghardekho-c3029.appspot.com/";
 const Profile = () => {
     const dispatch = useDispatch()
     const history = useHistory()
@@ -39,8 +40,7 @@ const Profile = () => {
                 data.append("profile", image)
             }
             setIsEditProfile(false)
-            dispatch(updateProfile(data, toast, setIsLoading))
-            history.push("/")
+            dispatch(updateProfile(data, toast, history, setIsLoading))
             
         }
     }
@@ -59,7 +59,7 @@ const Profile = () => {
                         <div className={style.dataDiv}>
                             <div className={style.imgDiv}>
 
-                                {user.image ? <img src={user.image} alt="..." /> : <i className={"fas fa-user-circle " + style.profilePicIcon}></i>}
+                                {user.image ? <img src={`${ImagUrl}${user.image}`} alt="..." /> : <i className={"fas fa-user-circle " + style.profilePicIcon}></i>}
                                 <i onClick={() => setIsEditProfile(true)} className={"fas fa-pen " + style.imgEdit}></i>
                             </div>
                             <div className={style.infoDiv}>
@@ -74,7 +74,7 @@ const Profile = () => {
                             <i onClick={() => setIsEditProfile(false)} className={"far fa-times-circle " + style.editDivCloseBtn}></i>
 
                             <div className={style.editImgDiv}>
-                                {image === null ? user.image ? <img src={user.image} alt="..." /> : <i className={"fas fa-user-circle " + style.profilePicIcon}></i> : <img src={URL.createObjectURL(image)} alt="..." />}
+                                {image === null ? user.image ? <img src={`${ImagUrl}${user.image}`} alt="..." /> : <i className={"fas fa-user-circle " + style.profilePicIcon}></i> : <img src={URL.createObjectURL(image)} alt="..." />}
                                 <i className={"fas fa-pen " + style.imgEdit}><input onChange={(e) => imageSelector(e)} className={style.imgSelect} type="file" accept=".jpeg, .jpg, .png" /></i>
                             </div>
                             <div className={style.editFields}>
