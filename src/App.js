@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from "axios"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUser } from './redux/actions/AuthActions';
 import { useEffect } from 'react';
 import AuthRoutes from "./components/AuthRoutes"
@@ -16,6 +16,7 @@ import Footer from './components/Footer/Footer';
 import Home from './screens/Home';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import Profile from './screens/Profile';
+import GlobalLoader from './components/GlobalLoader/GlobalLoader';
 // import { useEffect } from 'react';
 // import "./utils/Axios"
 
@@ -31,11 +32,12 @@ axios.defaults.baseURL = 'https://ghar-dekho-backend.herokuapp.com';
 //   return Promise.reject(error);
 // });
 function App() {
-
+  const isLoggedIn = useSelector(state => state.AuthReducer.isLoggedIn)
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUser())
-  })
+  },[dispatch])
   return (
     <div className="App">
 
@@ -44,13 +46,14 @@ function App() {
           <AuthRoutes path='/login' component={Login} />
           <AuthRoutes exact path='/sign-up' component={Registration} />
           <AuthRoutes exact path='/forgot-password' component={ForgotPassword} />
+          {isLoggedIn === null ? <GlobalLoader /> :
           <>
             <Navbar />
-
             <Route exact path='/' component={Home} />
             <ProtectedRoutes exact path='/profile' component={Profile}/>
             <Footer />
           </>
+          }
         </Switch>
       </Router>
       <ToastContainer

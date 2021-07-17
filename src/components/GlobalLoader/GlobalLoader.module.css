@@ -1,0 +1,30 @@
+.mainDiv{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: 1001;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerDiv{
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.logo {
+    font-family: 'Potta One', cursive;
+    font-weight: 900;
+    font-size: 3.8rem;
+    /* background-color: red; */
+}
+
+.logo_span {
+    color: #2ECC71;
+}

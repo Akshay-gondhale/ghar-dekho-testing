@@ -104,7 +104,21 @@ export const AuthReducer = (state = authState, { type, payload }) => {
                     createdAt:""
                 }
             };
-        default:
+        case AuthAction.PROFILE_UPDATE_SUCCESS:
+            return  {
+                isLoggedIn: true,
+                user: {
+                    name: payload.name,
+                    phone: payload.phone,
+                    email: payload.email,
+                    image:payload.image,
+                    jwt: payload.jwt,
+                    expires: payload.expires,
+                    createdAt:payload.createdAt
+                }
+            };
+            
+            default:
             return state;
     }
 };

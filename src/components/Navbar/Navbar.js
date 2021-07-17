@@ -52,7 +52,7 @@ const Navbar = () => {
                 {isUserDetailOpen &&
                     <div className={style.userDetails}>
                         <div className={style.userProfile}>
-                            {user.image ? <img className={style.profileImage} src="/images/modiji.jpg" alt="..." /> : <i className="fas fa-user-circle"></i>} 
+                            {user.image ? <img className={style.profileImage} src={user.image} alt="..." /> : <i className="fas fa-user-circle"></i>} 
                             
                             <p className={style.profileName}>{user.name}</p>
                             <p className={style.profilePhone}>+91 {user.phone}</p>
