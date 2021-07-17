@@ -31,10 +31,10 @@ const Footer = () => {
                 </div>
                 <div className={style.copyright}>
                     <div className={style.social_links}>
-                        <i className="fab fa-facebook-square"></i>
-                        <i className="fab fa-instagram-square"></i>
-                        <i className="fas fa-envelope"></i>
-                        <i className="fab fa-twitter-square"></i>
+                        <a rel="noreferrer" href="https://www.facebook.com" target="_blank"><i className={"fab fa-facebook " + style.social_icon}></i></a>
+                        <a rel="noreferrer" href="https://www.instagram.com" target="_blank"><i className={"fab fa-instagram " + style.social_icon}></i></a>
+                        <a rel="noreferrer" href="https://www.twitter.com" target="_blank"><i className={"fab fa-twitter " + style.social_icon}></i></a>
+                        <a rel="noreferrer" href="https://www.gmail.com" target="_blank"><i className={"fas fa-at " + style.social_icon}></i></a>
                     </div>
                     <div className={style.end_div}>
                         <p className={style.madeBy}>Made with <i className="fas fa-heart"></i> and <i className="fas fa-mug-hot"></i> by Akshay in Bhiwandi.</p>

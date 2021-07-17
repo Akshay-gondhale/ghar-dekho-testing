@@ -44,7 +44,7 @@ const Navbar = () => {
                         <NavLink onClick={()=>setMobMenuOpen(false)} to="/about" exact className={style.navElement} activeClassName={style.activeNavElement}>About</NavLink>
                         <NavLink onClick={()=>setMobMenuOpen(false)} to="/contact" exact className={style.navElement} activeClassName={style.activeNavElement}>Contact Us</NavLink>
                     </div>
-                    <div onClick={() => openUserDetail()} className={style.sectionTwo}>
+                    <div onClick={() => {openUserDetail(); setMobMenuOpen(false);}} className={style.sectionTwo}>
                         {isLoggedIn ? <li className={style.rightBtn} ><i className={"fas fa-user-circle " + style.rightBtnIconStyle}></i></li> : <Link to="/login"><li className={style.rightBtn}><i className={"fas fa-sign-in-alt " + style.rightBtnIconStyle}></i></li></Link>}
                         <p className={style.userMobileName}>{user.name}</p>
                     </div>
@@ -52,13 +52,13 @@ const Navbar = () => {
                 {isUserDetailOpen &&
                     <div className={style.userDetails}>
                         <div className={style.userProfile}>
-                            {/* <i className="fas fa-user-circle"></i> */}
-                            <img className={style.profileImage} src="/images/modiji.jpg" alt="..." />
+                            {user.image ? <img className={style.profileImage} src="/images/modiji.jpg" alt="..." /> : <i className="fas fa-user-circle"></i>} 
+                            
                             <p className={style.profileName}>{user.name}</p>
                             <p className={style.profilePhone}>+91 {user.phone}</p>
                         </div>
                         <div className={style.userOptions}>
-                            <li className={style.userOption}><i className="fas fa-id-badge"></i>Profile</li>
+                            <Link onClick={() => openUserDetail()} to="/profile" className={style.userOption}><i className="fas fa-id-badge"></i>Profile</Link>
                             <li onClick={() => openUserDetail()} className={style.userOption}><i className="fas fa-times-circle"></i>Close</li>
                         </div>
                     </div>}

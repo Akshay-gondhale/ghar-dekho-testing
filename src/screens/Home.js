@@ -1,3 +1,4 @@
+
 import PrimaryButton from "../components/Buttons/PrimaryButton"
 import style from "./Home.module.css"
 const Home = () => {

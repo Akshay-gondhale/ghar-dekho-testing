@@ -89,7 +89,7 @@
     height: 50px;
 }
 
-.social_links>i {
+.social_icon {
     font-size: 2em;
     padding: 0px 5px;
     color: #fff;
@@ -97,7 +97,7 @@
     opacity: .6;
 }
 
-.social_links>i:hover {
+.social_icon:hover {
     opacity: 1;
 }
 

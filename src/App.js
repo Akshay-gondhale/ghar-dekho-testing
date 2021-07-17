@@ -14,6 +14,8 @@ import AuthRoutes from "./components/AuthRoutes"
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Home from './screens/Home';
+import ProtectedRoutes from './components/ProtectedRoutes';
+import Profile from './screens/Profile';
 // import { useEffect } from 'react';
 // import "./utils/Axios"
 
@@ -44,8 +46,9 @@ function App() {
           <AuthRoutes exact path='/forgot-password' component={ForgotPassword} />
           <>
             <Navbar />
-            
-          <Route exact path='/' component={Home} />
+
+            <Route exact path='/' component={Home} />
+            <ProtectedRoutes exact path='/profile' component={Profile}/>
             <Footer />
           </>
         </Switch>

@@ -17,7 +17,11 @@ const LoginAuthAction = (loginState, toast, setIsLoading) => {
         .catch(err => {
             console.log(err)
             if(err.response){
+                console.log(err.response.data)
                 toast.error(err.response.data.message)
+            }
+            else{
+                toast.error("Unable to connect server please try later!")
             }
 
             setIsLoading(false)
@@ -43,7 +47,8 @@ const getUser = () => {
                     email:res.data.data[0].email,
                     image:res.data.data[0].image,
                     jwt:auth.jwt,
-                    expires:auth.expires
+                    expires:auth.expires,
+                    createdAt:res.data.data[0].createdAt
                 }})
             })
             .catch(err=>{
