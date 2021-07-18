@@ -7,7 +7,12 @@ const RegisterAuthAction = (userData) => {
 const LoginAuthAction = (loginState, toast, setIsLoading) => {
     return async (dispatch) => {
         setIsLoading(true)
-        axios.post(`/user/login`, loginState)
+        axios({
+            method: "post",
+            url: "/user/login",
+            data: loginState,
+            headers: { "Content-Type": "application/json" },
+        })
             .then(res => {
                 console.log(res.data.data[0])
                 toast.success(`Welcome Back ${res.data.data[0].name}`)
@@ -21,6 +26,7 @@ const LoginAuthAction = (loginState, toast, setIsLoading) => {
                     toast.error(err.response.data.message)
                 }
                 else {
+                    alert(err)
                     toast.error("Unable to connect server please try later!")
                 }
 
