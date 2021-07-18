@@ -13,7 +13,7 @@ db();
 
 
 var cors = require('cors');
-app.use(cors({credentials:true, origin:["http://localhost:3000", "https://ghar-dekho-react.herokuapp.com"]}))
+app.use(cors())
 //middlewares
 app.use(express.static("public"));
 app.use(express.json()); // JSON Body Parser
