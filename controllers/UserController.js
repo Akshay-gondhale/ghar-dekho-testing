@@ -215,8 +215,9 @@ const updateProfile = async (req, res) => {
                     `../LocalStorage/${req.files.profile[0].filename}`
                 );
                 var Destination = `User_Profile/${req.files.profile[0].filename}`
-                uploadFile(FilePath, Destination, req.files.profile[0].filename)
+                await uploadFile(FilePath, Destination, req.files.profile[0].filename)
                 foundUser.image = Destination;
+                
             }
 
             const updateUser = await foundUser.save();
