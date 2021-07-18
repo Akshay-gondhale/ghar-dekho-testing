@@ -1,11 +1,11 @@
-import PrimaryButton from "../components/Buttons/PrimaryButton"
+import PrimaryButton from "../../components/Buttons/PrimaryButton"
 import style from "./Login.module.css"
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import React from 'react';
 import { useDispatch } from "react-redux";
-import { LoginAuthAction } from "../redux/actions/AuthActions"
+import { LoginAuthAction } from "../../redux/actions/AuthActions"
 const Login = () => {
 
     const dispatch = useDispatch();

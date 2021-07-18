@@ -1,5 +1,5 @@
 
-import PrimaryButton from "../components/Buttons/PrimaryButton"
+import PrimaryButton from "../../components/Buttons/PrimaryButton"
 import style from "./Home.module.css"
 const Home = () => {
     return (

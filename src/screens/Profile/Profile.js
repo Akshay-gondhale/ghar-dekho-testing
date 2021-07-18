@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import PrimaryButton from "../components/Buttons/PrimaryButton";
+import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import style from "./Profile.module.css"
 import validator from "validator";
-import { updateProfile } from "../redux/actions/AuthActions";
+import { updateProfile } from "../../redux/actions/AuthActions";
 import { useHistory } from "react-router-dom";
 const ImagUrl = "https://storage.googleapis.com/ghardekho-c3029.appspot.com/";
 const Profile = () => {
@@ -18,7 +18,7 @@ const Profile = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const imageSelector = (e) => {
-        if(e.target.files[0].type === "image/jpeg"){
+        if(e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png"){
             setImage(e.target.files[0])
         }
         else{

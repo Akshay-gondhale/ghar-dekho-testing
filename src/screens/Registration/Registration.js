@@ -1,7 +1,7 @@
 import style from "./Registration.module.css"
 // import { useState } from "react";
-import PrimaryButton from "../components/Buttons/PrimaryButton"
-import firebase from "../utils/firebase"
+import PrimaryButton from "../../components/Buttons/PrimaryButton"
+import firebase from "../../utils/firebase"
 import { useState } from "react"
 import validator from "validator"
 import React from 'react';
@@ -9,7 +9,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import axios from "axios"
 import { useDispatch } from "react-redux";
-import { RegisterAuthAction } from "../redux/actions/AuthActions"
+import { RegisterAuthAction } from "../../redux/actions/AuthActions"
 const Regisstration = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState("");

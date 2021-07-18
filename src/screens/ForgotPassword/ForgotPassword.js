@@ -1,6 +1,6 @@
-import style from "./Registration.module.css"
-import PrimaryButton from "../components/Buttons/PrimaryButton"
-import firebase from "../utils/firebase"
+import style from "./ForgotPassword.module.css"
+import PrimaryButton from "../../components/Buttons/PrimaryButton"
+import firebase from "../../utils/firebase"
 import { useHistory } from 'react-router-dom';
 import { useState } from "react"
 import { toast } from 'react-toastify';
@@ -164,15 +164,15 @@ const ForgotPassword = () => {
 
                             <div className={style.inputWrapper}>
                                 <p className={style.inputLabel}>Enter Password</p>
-                                <input className={style.inputTag} value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter password" type="text" />
+                                <input className={style.inputTag} value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter password" type="password" />
                             </div>
 
                             <div className={style.inputWrapper}>
                                 <p className={style.inputLabel}>Enter confirm Password</p>
-                                <input className={style.inputTag} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Enter confirm password" type="text" />
+                                <input className={style.inputTag} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Enter confirm password" type="password" />
                             </div>
                             <div onClick={() => submitPassword()} className={style.buttonWrapper}>
-                                <PrimaryButton heading='Confirm OTP <i class="fas fa-arrow-circle-right"></i>' />
+                                <PrimaryButton heading='Reset Password <i class="fas fa-arrow-circle-right"></i>' />
                                 <div className={isLoading ? "spinner-border text-success" : style.hidden} role="status">
                                     <span className="visually-hidden">Loading...</span>
                                 </div>

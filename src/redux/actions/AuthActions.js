@@ -91,12 +91,9 @@ const updateProfile = (formData, toast, history, setIsLoading) => {
                         createdAt: res.data.data[0].createdAt
                     }
                 })
-                setTimeout(()=>{
-                    setIsLoading(false)
-                    toast.success("Profile Updated! 😃")
-                    history.push("/")
-
-                }, 2000)
+                setIsLoading(false)
+                toast.success("Profile Updated! 😃")
+                history.push("/")
             })
             .catch(err => {
                 console.log(err)
