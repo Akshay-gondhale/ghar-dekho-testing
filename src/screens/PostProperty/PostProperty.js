@@ -5,8 +5,12 @@ import { useSelector } from "react-redux";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { toast } from "react-toastify";
+import validator from "validator";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 const PostProperty = () => {
     const user = useSelector(state => state.AuthReducer.user);
+    const history = useHistory()
     //section one
     const [uploaderName, setUploaderName] = useState(user.name)
     const [uploaderEmail, setUploaderEmail] = useState(user.email)
@@ -42,6 +46,8 @@ const PostProperty = () => {
     const [description, setDescription] = useState("")
     const [title, setTitle] = useState("")
 
+    const [submitLoading, setSubmitLoading] = useState(false)
+
 
     useEffect(() => {
         if (sameAsUploader) {
@@ -57,7 +63,7 @@ const PostProperty = () => {
     }, [sameAsUploader, uploaderName, uploaderPhone, uploaderEmail])
 
     useEffect(() => {
-        if (imagesObj !== "") {
+        if (imagesObj !== "" && typeof(imagesObj) !== undefined && imagesObj!==null){
             var imagesArray = Object.keys(imagesObj).map(key => {
                 return imagesObj[key];
             })
@@ -85,13 +91,13 @@ const PostProperty = () => {
 
 
     const submitHome = () => {
-        if(
-            ownerName.trim()==="" ||
-            ownerPhone.trim()===""||
+        if (
+            ownerName.trim() === "" ||
+            ownerPhone.trim() === "" ||
             ownerEmail.trim() === "" ||
 
-            houseNumber.trim() === ""||
-            locality.trim()===""||
+            houseNumber.trim() === "" ||
+            locality.trim() === "" ||
             area.trim() === "" ||
             city.trim() === "" ||
             landmark.trim() === "" ||
@@ -107,37 +113,97 @@ const PostProperty = () => {
             description.trim() === "" ||
             title.trim() === ""
 
-        ){
+        ) {
             toast.error("All details are required! 😔")
         }
-        else if(images.length === 0){
+        else if (!validator.isEmail(ownerEmail)) {
+            toast.error("Please enter a valid email of owner.! 😔", {
+            });
+        }
+        else if (ownerPhone.length > 10 || ownerPhone.length < 10) {
+            toast.error("Please provide a valid phone number of owner.! 😔", {
+            });
+        }
+        else if (images.length === 0) {
             toast.error("Please Upload Home Images! 😔")
 
         }
-        else{
-            console.log({
-                ownerName,
-                ownerPhone,
-                ownerEmail,
-                houseNumber,
-                locality,
-                area,
-                city,
-                landmark,
-                homeType,
-                parking,
-                floor,
-                totalFloor,
-                carpetArea,
-                age,
-                isVeg,
-                images,
-                sellOrRent,
-                ammount,
-                title,
-                description
+        else {
+            setSubmitLoading(true)
+            const propertyData = new FormData();
+            propertyData.append("ownerName", ownerName);
+            propertyData.append("ownerPhone", ownerPhone);
+            propertyData.append("ownerEmail", ownerEmail);
+            propertyData.append("houseNumber", houseNumber);
+            propertyData.append("locality", locality)
+            propertyData.append("area", area)
+            propertyData.append("city", city)
+            propertyData.append("landmark", landmark)
+            propertyData.append("homeType", homeType)
+            propertyData.append("parking", parking)
+            propertyData.append("floor", floor)
+            propertyData.append("totalFloor", totalFloor)
+            propertyData.append("carpetArea", carpetArea)
+            propertyData.append("age", age)
+            propertyData.append("isVeg", isVeg)
+            propertyData.append("sellOrRent", sellOrRent)
+            propertyData.append("ammount", ammount)
+            propertyData.append("title", title)
+            propertyData.append("description", description)
+
+            for (let i = 0; i < imagesObj.length; i++) {
+                const element = imagesObj[i];
+                propertyData.append("images", element)
+            }
+
+            axios({
+                method: "POST",
+                url: "/user/postProperty",
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                data: propertyData
             })
-            toast.success("All good!")
+                .then(res => {
+                    console.log(res)
+                    toast.success(res.data.message)
+                    setSubmitLoading(false)
+                    history.push("/")
+                })
+                .catch(err => {
+                    console.log(err)
+                    toast.error("Got error")
+                    setSubmitLoading(false)
+                })
+        }
+    }
+
+    const imageValidation = (e) => {
+        setImagesObj(null)
+        console.log("in image  validation")
+        var isValid = true;
+        if(e.target.files.length > 10){
+            toast.error("Image upload limit is 10! 😔")
+            return;
+        }
+        for (let i = 0; i < e.target.files.length; i++) {
+            const element = e.target.files[i];
+            console.log("checking file = " + i);
+            if(element.type === "image/jpeg" || element.type === "image/png"){
+                isValid=true
+            }
+            else{
+                isValid=false
+                console.log("got unsupported file " + element.type)
+                break;
+            }
+            
+        }
+        if(isValid){
+            setImagesObj(e.target.files)
+        }
+        else{
+            toast.error("Please select valid images! 😔")
         }
     }
     return (
@@ -261,7 +327,7 @@ const PostProperty = () => {
                         <div className={style.uploadImgWrapper}>
                             <div className={style.uploadDiv}>
                                 <PrimaryButton heading='Upload Images <i class="fas fa-upload"></i>' />
-                                <input onChange={e => setImagesObj(e.target.files)} multiple={true} type="file" />
+                                <input accept=".jpeg, .jpg, .png" onChange={e => imageValidation(e)} multiple={true} type="file" />
                             </div>
                         </div>
                         {images.length > 0 &&
@@ -321,21 +387,32 @@ const PostProperty = () => {
 
                             <div className={style.inputWrapper}>
                                 <p className={style.inputLabel}>Ammount Of {sellOrRent}</p>
-                                <input value={ammount} onChange={e=>setAmmount(e.target.value)} className={style.inputTag} min="0" placeholder={`Enter ammount of ${sellOrRent}`} type="number" />
+                                <input value={ammount} onChange={e => setAmmount(e.target.value)} className={style.inputTag} min="0" placeholder={`Enter ammount of ${sellOrRent}`} type="number" />
                             </div>
                         }
                         <div className={style.inputWrapper}>
                             <p className={style.inputLabel}>Title For Your Property</p>
-                            <input className={style.inputTag} value={title} onChange={e=>setTitle(e.target.value)} placeholder="Enter title eg: khurana's house, etc" type="text" />
+                            <input className={style.inputTag} value={title} onChange={e => setTitle(e.target.value)} placeholder="Enter title eg: khurana's house, etc" type="text" />
                         </div>
                         <div className={style.textareaWrapper}>
                             <p className={style.inputLabel}>Description</p>
-                            <textarea value={description} onChange={e=>setDescription(e.target.value)} className={style.inputTag} placeholder="Enter sweet description of your home in few lines like water facility, building architecture, neighbours behaviour, etc to attract users!" />
+                            <textarea value={description} onChange={e => setDescription(e.target.value)} className={style.inputTag} placeholder="Enter sweet description of your home in few lines like water facility, building architecture, neighbours behaviour, etc to attract users!" />
 
                         </div>
-                        <div onClick={()=>submitHome()} className={style.submitBtnWrapper}>
-                            <PrimaryButton heading='Submit <i class="fas fa-paper-plane"></i>' />
+                        <div className={style.submitBtnWrapper}>
+                            {submitLoading
+                                ?
+                                <div className="spinner-border text-success" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
+                                :
+
+                                <div onClick={() => submitHome()} className={style.submitBtn}>
+                                    <PrimaryButton heading='Submit <i class="fas fa-paper-plane"></i>' />
+                                </div>
+                            }
                         </div>
+
                     </div>
 
                 </div>

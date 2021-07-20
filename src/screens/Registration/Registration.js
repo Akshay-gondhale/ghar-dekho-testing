@@ -26,7 +26,7 @@ const Regisstration = () => {
 
     const submitData = () => {
 
-        if (name === "" || phone === "" || email === "" || password === "" || confirmPassword === "") {
+        if (name.trim() === "" || phone.trim() === "" || email.trim() === "" || password === "" || confirmPassword === "") {
             toast.error("Please fill all details.! 😔", {
             });
         }
