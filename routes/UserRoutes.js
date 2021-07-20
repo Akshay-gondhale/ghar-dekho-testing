@@ -6,7 +6,8 @@ const {
     login,
     resetPassword,
     getUser,
-    updateProfile
+    updateProfile,
+    postProperty
 } = require("../controllers/UserController");
 const router = express.Router();
 
@@ -21,5 +22,6 @@ router.use(require("../middlewares/AuthUser"));
 
 router.get("/", getUser);
 router.put("/update", upload.fields([{ name: "profile", maxCount: 1 }]), updateProfile)
+router.post("/postProperty",upload.fields([{ name: "images" }]), postProperty)
 
 module.exports = router;

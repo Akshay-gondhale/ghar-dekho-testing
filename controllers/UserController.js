@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const path = require("path");
 const { uploadFile, deleteFile } = require("../utils/RemoteFileUpload");
+const Property = require("../models/PropertyModel");
 
 // const pipeline = [
 //     {
@@ -99,6 +100,11 @@ const login = async (req, res) => {
     try {
         const { phone, password } = req.body;
         const userExists = await User.findOne({ phone });
+        if (!userExists) {
+            res.status(403).json({
+                message: "No user account found with this number! Please register first."
+            })
+        }
         if (userExists && (await userExists.matchPassword(password))) {
             const token = jwt.sign(
                 {
@@ -217,7 +223,7 @@ const updateProfile = async (req, res) => {
                 var Destination = `User_Profile/${req.files.profile[0].filename}`
                 await uploadFile(FilePath, Destination, req.files.profile[0].filename)
                 foundUser.image = Destination;
-                
+
             }
 
             const updateUser = await foundUser.save();
@@ -246,11 +252,106 @@ const updateProfile = async (req, res) => {
     }
 }
 
+const postProperty = async (req, res) => {
+    try {
+        const { _id } = req.user;
+        const {
+            ownerName,
+            ownerEmail,
+            ownerPhone,
+            houseNumber,
+            locality,
+            area,
+            city,
+            landmark,
+            homeType,
+            parking,
+            floor,
+            totalFloor,
+            carpetArea,
+            age,
+            isVeg,
+            sellOrRent,
+            ammount,
+            description,
+            title,
+            brokerId
+        } = req.body;
+
+        if(typeof(req.files.images) == "undefined"){
+            res.status(403).json({
+                message:"Please upload images!.",
+                data:[]
+            })
+            return;
+        }
+
+        const createProperty = new Property({
+            userId: _id,
+            ownerName,
+            ownerEmail,
+            ownerPhone,
+            houseNumber,
+            locality,
+            area,
+            city,
+            landmark,
+            homeType,
+            parking,
+            floor,
+            totalFloor,
+            carpetArea,
+            age,
+            isVeg,
+            sellOrRent,
+            ammount,
+            description,
+            title,
+            brokerId,
+            status:"registerd"
+        })
+        var images = [];
+        console.log(req.files);
+        for (let i = 0; i < req.files.images.length; i++) {
+            const element = req.files.images[i];
+
+            var FilePath = path.join(__dirname, `../LocalStorage/${element.filename}`);
+            var DestinationFilePath = `Home_images/${element.filename}`;
+            uploadFile(FilePath, DestinationFilePath, element.filename);
+            images.push({ path: DestinationFilePath });
+        }
+        createProperty.images = images;
+        console.log(createProperty)
+        const insertProperty = await createProperty.save();
+        res.status(200).json({
+            message:"Property registered",
+            data:[insertProperty]
+        })
+    }
+    catch (e) {
+        console.log(e)
+        for (let i = 0; i < req.files.images.length; i++) {
+            const element = req.files.images[i];
+
+            // var FilePath = path.join(__dirname, `../LocalStorage/${element.filename}`);
+            var DestinationFilePath = `Home_images/${element.filename}`;
+            // uploadFile(FilePath, DestinationFilePath, element.filename);
+            deleteFile(DestinationFilePath)
+        }
+        res.status(500).json({
+            message: "Something Went Wrong!",
+            data: []
+        })
+
+    }
+}
+
 module.exports = {
     userExists,
     register,
     login,
     resetPassword,
     getUser,
-    updateProfile
+    updateProfile,
+    postProperty
 }
