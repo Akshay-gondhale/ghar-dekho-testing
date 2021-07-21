@@ -128,11 +128,14 @@ select {
 .uploadImgWrapper {
     width: 100%;
 }
+.imageLoadingSpinnerWrapper{
+    margin-top: 1rem;
+}
 
 .uploadDiv {
     display: inline-block;
-    margin-top: 1rem;
     position: relative;
+    margin-top: 1rem;
     cursor: pointer !important;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

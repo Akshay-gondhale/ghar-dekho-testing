@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import validator from "validator";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import imageCompression from 'browser-image-compression';
 const PostProperty = () => {
     const user = useSelector(state => state.AuthReducer.user);
     const history = useHistory()
@@ -47,6 +48,7 @@ const PostProperty = () => {
     const [title, setTitle] = useState("")
 
     const [submitLoading, setSubmitLoading] = useState(false)
+    const [imageLoading, setImageLoading] = useState(false)
 
 
     useEffect(() => {
@@ -63,11 +65,32 @@ const PostProperty = () => {
     }, [sameAsUploader, uploaderName, uploaderPhone, uploaderEmail])
 
     useEffect(() => {
-        if (imagesObj !== "" && typeof(imagesObj) !== undefined && imagesObj!==null){
+        if (imagesObj !== "" && typeof (imagesObj) !== undefined && imagesObj !== null) {
+            setImageLoading(true)
             var imagesArray = Object.keys(imagesObj).map(key => {
                 return imagesObj[key];
             })
-            setImages(imagesArray)
+
+            //compressing files
+            const options = {
+                maxWidthOrHeight: 500,
+            }
+            const imageBlobs = imagesArray.map(async (data, index) => {
+                const blobdata = await imageCompression(data, options)
+                return blobdata;
+            })
+
+            Promise.all(imageBlobs)
+                .then(image => {
+                    setImages(image)
+                    setImageLoading(false)
+                })
+                .catch(err => {
+                    toast.error("Something went wrong while image uploading")
+                    console.log(err)
+                    setImageLoading(false)
+                })
+
         }
     }, [imagesObj])
 
@@ -151,9 +174,9 @@ const PostProperty = () => {
             propertyData.append("title", title)
             propertyData.append("description", description)
 
-            for (let i = 0; i < imagesObj.length; i++) {
-                const element = imagesObj[i];
-                propertyData.append("images", element)
+            for (let i = 0; i < images.length; i++) {
+                const element = images[i];
+                propertyData.append("images", element, element.name)
             }
 
             axios({
@@ -182,27 +205,28 @@ const PostProperty = () => {
         setImagesObj(null)
         console.log("in image  validation")
         var isValid = true;
-        if(e.target.files.length > 10){
+        if (e.target.files.length > 10) {
             toast.error("Image upload limit is 10! 😔")
             return;
         }
         for (let i = 0; i < e.target.files.length; i++) {
             const element = e.target.files[i];
             console.log("checking file = " + i);
-            if(element.type === "image/jpeg" || element.type === "image/png"){
-                isValid=true
+            if (element.type === "image/jpeg" || element.type === "image/png") {
+                isValid = true
             }
-            else{
-                isValid=false
+            else {
+                isValid = false
                 console.log("got unsupported file " + element.type)
                 break;
             }
-            
+
         }
-        if(isValid){
+        if (isValid) {
+
             setImagesObj(e.target.files)
         }
-        else{
+        else {
             toast.error("Please select valid images! 😔")
         }
     }
@@ -325,10 +349,19 @@ const PostProperty = () => {
                         <span style={{ width: "100%" }} className={style.headingNote}>(Note:These images will be viewable to all users on website who are browsing homes.)</span>
 
                         <div className={style.uploadImgWrapper}>
-                            <div className={style.uploadDiv}>
-                                <PrimaryButton heading='Upload Images <i class="fas fa-upload"></i>' />
-                                <input accept=".jpeg, .jpg, .png" onChange={e => imageValidation(e)} multiple={true} type="file" />
-                            </div>
+                            {imageLoading
+                                ?
+                                <div className={"spinner-border text-success " + style.imageLoadingSpinnerWrapper} role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
+                                :
+
+                                <div className={style.uploadDiv}>
+                                    <PrimaryButton heading='Upload Images <i class="fas fa-upload"></i>' />
+                                    <input accept=".jpeg, .jpg, .png" onChange={e => imageValidation(e)} multiple={true} type="file" />
+                                </div>
+                            }
+
                         </div>
                         {images.length > 0 &&
                             <div className={style.imagesWrapperDiv}>
