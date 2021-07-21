@@ -253,6 +253,7 @@ const updateProfile = async (req, res) => {
 }
 
 const postProperty = async (req, res) => {
+    console.log("property api hitted")
     try {
         const { _id } = req.user;
         const {
