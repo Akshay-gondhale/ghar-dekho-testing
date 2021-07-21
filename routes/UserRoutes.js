@@ -7,7 +7,7 @@ const {
     resetPassword,
     getUser,
     updateProfile,
-    postProperty
+    postProperty,
 } = require("../controllers/UserController");
 const router = express.Router();
 

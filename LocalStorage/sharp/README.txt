@@ -1,1 +1,0 @@
-This folder contains temproray files which are uploaded to server

@@ -1,5 +1,4 @@
 const { Storage } = require("@google-cloud/storage");
-const sharp = require("sharp")
 require("dotenv").config();
 const fs = require("fs");
 
@@ -27,34 +26,11 @@ async function deleteFile(filePath) {
 }
 
 // function to upload files to cloud
-async function uploadFile(localFilePath, DestinationFilePath, filename) {
+async function uploadFile(localFilePath, DestinationFilePath) {
     try {
-        sharp(localFilePath)
-            .resize({ width: 500 })
-            .rotate()
-            .toFile('LocalStorage/sharp/' + filename, async (err, info) => {
-                if (!err) {
-                    const ModifiedLocalPath = path.join(__dirname, `../LocalStorage/sharp/${filename}`)
-
-                    try {
-
-                        await bucket.upload(ModifiedLocalPath, { destination: DestinationFilePath })
-                        await fs.unlinkSync(localFilePath);
-                        await fs.unlinkSync(ModifiedLocalPath);
-                        console.log("file uploaded")
-                    }
-                    catch (e) {
-                        console.log("got error")
-                        console.log(e)
-                        await fs.unlinkSync(localFilePath);
-                        await fs.unlinkSync(ModifiedLocalPath);
-
-                    }
-                }
-                else {
-                    console.log(err)
-                }
-            });
+        await bucket.upload(localFilePath, { destination: DestinationFilePath })
+        await fs.unlinkSync(localFilePath);
+        console.log("file uploaded")
 
     }
     catch (e) {
@@ -63,7 +39,6 @@ async function uploadFile(localFilePath, DestinationFilePath, filename) {
 
     }
 }
-
 
 // function to delete local files
 async function deleteLocalFile(filePath) {

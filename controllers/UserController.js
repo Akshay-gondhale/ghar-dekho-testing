@@ -352,6 +352,7 @@ const postProperty = async (req, res) => {
     }
 }
 
+
 module.exports = {
     userExists,
     register,
@@ -359,5 +360,5 @@ module.exports = {
     resetPassword,
     getUser,
     updateProfile,
-    postProperty
+    postProperty,
 }
