@@ -2,7 +2,7 @@ const User = require("../models/UserModel");
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const path = require("path");
-const { uploadFile, deleteFile, uploadFileWithoutCompress } = require("../utils/RemoteFileUpload");
+const { uploadFile, deleteFile } = require("../utils/RemoteFileUpload");
 const Property = require("../models/PropertyModel");
 
 // const pipeline = [
@@ -321,7 +321,7 @@ const postProperty = async (req, res) => {
 
             var FilePath = path.join(__dirname, `../LocalStorage/${element.filename}`);
             var DestinationFilePath = `Home_images/${element.filename}`;
-            uploadFileWithoutCompress(FilePath, DestinationFilePath, element.filename);
+            uploadFile(FilePath, DestinationFilePath, element.filename);
             images.push({ path: DestinationFilePath });
         }
         console.log("image uploaded property")

@@ -64,25 +64,6 @@ async function uploadFile(localFilePath, DestinationFilePath, filename) {
     }
 }
 
-// function with out sharp
-async function uploadFileWithoutCompress(localFilePath, DestinationFilePath) {
-
-    try {
-
-        await bucket.upload(localFilePath, { destination: DestinationFilePath })
-        await fs.unlinkSync(localFilePath);
-        console.log("file uploaded")
-    }
-    catch (e) {
-        console.log("got error")
-        console.log(e)
-        await fs.unlinkSync(localFilePath);
-
-    }
-
-
-
-}
 
 // function to delete local files
 async function deleteLocalFile(filePath) {
@@ -94,4 +75,4 @@ async function deleteLocalFile(filePath) {
     }
 }
 
-module.exports = { deleteFile, uploadFile, deleteLocalFile, uploadFileWithoutCompress };
+module.exports = { deleteFile, uploadFile, deleteLocalFile };
