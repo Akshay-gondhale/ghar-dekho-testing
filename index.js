@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 4000;
 const cookieParser = require("cookie-parser")
 app.use(cookieParser());
 
+var cors = require('cors');
+app.use(cors())
 require("dotenv").config();
 
 
@@ -12,8 +14,6 @@ const db = require("./config/db");
 db();
 
 
-var cors = require('cors');
-app.use(cors())
 //middlewares
 app.use(express.static("public"));
 app.use(express.json()); // JSON Body Parser
