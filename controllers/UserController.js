@@ -255,7 +255,9 @@ const updateProfile = async (req, res) => {
 const postProperty = async (req, res) => {
     console.log("property api hitted")
     try {
+        console.log()
         const { _id } = req.user;
+        console.log("got user id")
         const {
             ownerName,
             ownerEmail,
@@ -279,6 +281,7 @@ const postProperty = async (req, res) => {
             brokerId
         } = req.body;
 
+        console.log("got user body")
         if(typeof(req.files.images) == "undefined"){
             res.status(403).json({
                 message:"Please upload images!.",
@@ -311,8 +314,8 @@ const postProperty = async (req, res) => {
             brokerId,
             status:"registerd"
         })
+        console.log("created property")
         var images = [];
-        console.log(req.files);
         for (let i = 0; i < req.files.images.length; i++) {
             const element = req.files.images[i];
 
@@ -321,9 +324,10 @@ const postProperty = async (req, res) => {
             uploadFile(FilePath, DestinationFilePath, element.filename);
             images.push({ path: DestinationFilePath });
         }
+        console.log("image uploaded property")
         createProperty.images = images;
-        console.log(createProperty)
         const insertProperty = await createProperty.save();
+        console.log("property saved")
         res.status(200).json({
             message:"Property registered",
             data:[insertProperty]
@@ -332,6 +336,7 @@ const postProperty = async (req, res) => {
     catch (e) {
         console.log(e)
         for (let i = 0; i < req.files.images.length; i++) {
+            console.log("deleting files")
             const element = req.files.images[i];
 
             // var FilePath = path.join(__dirname, `../LocalStorage/${element.filename}`);

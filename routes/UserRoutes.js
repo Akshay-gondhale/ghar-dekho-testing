@@ -21,7 +21,7 @@ router.put("/resetPassword", resetPassword);
 router.use(require("../middlewares/AuthUser"));
 
 router.get("/", getUser);
+router.post("/postProperty",upload.fields([{ name: "images" , maxCount: 10}]), postProperty)
 router.put("/update", upload.fields([{ name: "profile", maxCount: 1 }]), updateProfile)
-router.post("/postProperty",upload.fields([{ name: "images" }]), postProperty)
 
 module.exports = router;
