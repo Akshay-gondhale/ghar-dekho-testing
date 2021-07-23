@@ -282,10 +282,10 @@ const postProperty = async (req, res) => {
         } = req.body;
 
         console.log("got user body")
-        if(typeof(req.files.images) == "undefined"){
+        if (typeof (req.files.images) == "undefined") {
             res.status(403).json({
-                message:"Please upload images!.",
-                data:[]
+                message: "Please upload images!.",
+                data: []
             })
             return;
         }
@@ -312,7 +312,7 @@ const postProperty = async (req, res) => {
             description,
             title,
             brokerId,
-            status:"registerd"
+            status: "registered"
         })
         console.log("created property")
         var images = [];
@@ -329,8 +329,8 @@ const postProperty = async (req, res) => {
         const insertProperty = await createProperty.save();
         console.log("property saved")
         res.status(200).json({
-            message:"Property registered",
-            data:[insertProperty]
+            message: "Property registered",
+            data: [insertProperty]
         })
     }
     catch (e) {
@@ -352,6 +352,61 @@ const postProperty = async (req, res) => {
     }
 }
 
+const getUserPropertiesByStatus = async (req, res) => {
+    try {
+        const { _id } = req.user;
+        const { status } = req.params;
+        var { id, recordsPerPage } = req.query;
+        // console.log({ id, recordsPerPage })
+
+        if (typeof recordsPerPage == "undefined") {
+            // if no recordsPerPage is not passed in request then records will set to default value 5
+            recordsPerPage = 5;
+        }
+
+        var query = {userId:_id, status};
+        if (id) {
+            query._id = { $lt: id };
+        }
+
+        console.log(query)
+        var foundProperties = await Property.find(query)
+            .sort({ _id: -1 })
+            .limit(recordsPerPage);
+        var isNext = await Property.find(query)
+            .sort({ _id: -1 })
+            .limit(recordsPerPage + 1)
+            .countDocuments();
+
+            var isNextAvailable;
+        if (isNext > recordsPerPage) {
+            // if next page is available
+            isNextAvailable = true;
+            lastId = foundProperties[recordsPerPage - 1]._id;
+        } else {
+            // if next is not available
+            isNextAvailable = false;
+            lastId = null;
+        }
+        res.status(200).json({
+            message: "Found Properties",
+            data: [
+                {
+                    lastId,
+                    isNextAvailable,
+                    foundProperties,
+                },
+            ],
+        });
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something Went Wrong!",
+            data: []
+        })
+    }
+}
 
 module.exports = {
     userExists,
@@ -361,4 +416,5 @@ module.exports = {
     getUser,
     updateProfile,
     postProperty,
+    getUserPropertiesByStatus
 }
