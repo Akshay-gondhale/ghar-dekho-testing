@@ -1,0 +1,266 @@
+.mainSubNavigation {
+    width: 100%;
+    display: flex;
+    list-style: none;
+    margin: .5rem 0;
+    border-top: 2px solid #2C3E50;
+    border-bottom: 2px solid #2C3E50;
+}
+
+.navElement {
+    flex: 1;
+    text-align: center;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.navElement>i {
+    width: 2rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2px;
+}
+
+.activeNavElement {
+    flex: 1;
+    text-align: center;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    color: #28B463;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.activeNavElement>i {
+    width: 2rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2px;
+}
+.subSectionDataSpinnerWrapper {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.subSectionDataDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.loadMoreWrapper{
+    padding: 2rem 0;
+}
+
+.homeDiv {
+    height: 12rem;
+    border-radius: .8rem;
+    /* background-color: red; */
+    width: 100%;
+    padding: .5rem;
+    display: flex;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: .5rem 0;
+}
+
+.homeThumbnail {
+    width: 30%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.homeThumbnail>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: .8rem;
+    background-color: #c4c4c4;
+}
+
+.homeData {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 2rem;
+    position: relative;
+}
+
+.homeTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.homeAddress {
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1.5;
+    max-height: 3;
+    margin: 0;
+}
+
+.homeAmmount {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.homeAmmount>i {
+    font-size: .8rem;
+    margin-left: 1rem;
+    margin-right: .3rem;
+}
+
+/* .homeStatus{
+    margin: 0;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+} */
+
+.homeRegisteredStyle {
+    color: #A569BD;
+    margin: 0;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+}
+
+.homeInProgressStyle {
+    color: #E67E22;
+    margin: 0;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+}
+
+.homeVerifiedStyle {
+    color: #27AE60;
+    margin: 0;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+}
+
+.homeRejectedStyle {
+    color: #E74C3C;
+    margin: 0;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+}
+
+.homeRegisteredDate {
+    position: absolute;
+    right: 0;
+    bottom: -15px;
+    /* background-color: red; */
+    padding: .2rem .7rem;
+    border-radius: .5rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: .8rem;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.notFoundData {
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes nodata {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.notFoundData>i {
+    font-size: 6rem;
+    margin-bottom: 2rem;
+    color: #e3242b;
+    animation: nodata 3s infinite;
+}
+
+.noDataDescription {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+
+@media only screen and (max-width: 850px) {
+
+    .mainSubNavigation {
+        overflow-x: auto;
+    }
+    .mainSubNavigation::-webkit-scrollbar {
+        display: none;
+    }
+    .navElement {
+        white-space: nowrap;
+        padding: 0 .5rem;
+    }
+    .activeNavElement {
+        white-space: nowrap;
+        padding: 0 .5rem;
+    }
+    .homeDiv {
+        height: 100%;
+        flex-direction: column;
+    }
+    .homeThumbnail {
+        width: 100%;
+        height: 12rem;
+        overflow: hidden;
+    }
+    .homeData {
+        width: 100%;
+        height: 100%;
+        padding: 0 .5rem;
+        padding-bottom: 2.3rem;
+    }
+    .homeTitle {
+        font-size: 1.7rem;
+    }
+    .homeAddress {
+        font-size: 1rem;
+        margin: 0;
+    }
+}

@@ -1,0 +1,176 @@
+
+.mainDiv{
+    
+    font-family: 'Poppins', sans-serif;
+    color: #2c3e50;
+}
+.imagesWrapper{
+    padding: 1rem .5rem;
+    height: 70vh;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EAFAF1;
+    border-radius: 2rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    
+}
+
+.imageContainer{
+    max-width: 100%;
+    padding: 2rem;
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imageContainer > img{
+    height: 95%;
+    width: 95%;
+    text-align: center;
+    object-fit: contain;
+
+}
+
+.homeHeader{
+    margin-top: 2rem;
+    font-family: 'Poppins', sans-serif;
+    color: #2c3e50;
+}
+.homeTitle{
+    margin: 0;
+    font-size: 2rem;
+    text-transform: capitalize;
+    font-weight: 900;
+}
+.homeDescription{
+    margin: 10px 0;
+    font-size: .9rem;
+}
+.ammount{
+    font-size: 1.2rem;
+
+}
+.ammount > i{
+    margin-left: 1rem;
+}
+.sellOrRent{
+    font-weight: 900;
+    text-transform: capitalize;
+}
+
+.homeUserDetail{
+    display: flex;
+    margin: 2rem 0rem;
+    justify-content: space-between;
+}
+
+.homeDetailWrapper{
+    width: 48%;
+    padding: 1rem;
+}
+.homeDetailHeader{
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.homeDetailField{
+    margin: 0;
+}
+.homeDetailFieldHeading{
+    font-weight: 900;
+}
+.buttonWrapper{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.btnStyle{
+    margin: .2rem .5rem;
+    
+}
+.spinnerWrapper{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.mainOuterReason{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.mainReasonDiv{
+    width: 80%;
+    height: max-content;
+    padding: 3rem 1rem;
+    background-color: #fff;
+    position: relative;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: #2c3e50;
+}
+.closeReasonBtn{
+    position: absolute;
+    right: 1rem;
+    top: .8rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.inputWrapper {
+    width: 100%;
+    margin: 10px 0px
+}
+
+.inputLabel {
+    margin: 0px 10px;
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.inputTag {
+    width: 100%;
+    padding: .8rem 1rem;
+    border-radius: 2rem;
+    border: 2px solid #5D6D7E;
+    outline: none;
+    font-size: .9rem;
+    font-family: 'Poppins', sans-serif;
+    transition: .3s;
+}
+@media only screen and (max-width: 850px) {
+
+    .homeUserDetail{
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+    }
+    .homeDetailWrapper{
+        width: 100%;
+        padding: 0rem;
+    }
+    
+.mainReasonDiv{
+    width: 90%;}
+
+}

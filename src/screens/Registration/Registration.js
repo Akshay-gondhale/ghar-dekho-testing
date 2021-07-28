@@ -8,10 +8,8 @@ import React from 'react';
 
 import { toast } from 'react-toastify';
 import axios from "axios"
-import { useDispatch } from "react-redux";
-import { RegisterAuthAction } from "../../redux/actions/AuthActions"
+import { useHistory } from "react-router-dom"
 const Regisstration = () => {
-    const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -24,6 +22,7 @@ const Regisstration = () => {
 
     const [confirmationResult, setConfirmationResult] = useState();
 
+    const history = useHistory()
     const submitData = () => {
 
         if (name.trim() === "" || phone.trim() === "" || email.trim() === "" || password === "" || confirmPassword === "") {
@@ -93,7 +92,7 @@ const Regisstration = () => {
             })
                 .then(res => {
                     console.log(res)
-                    dispatch(RegisterAuthAction(res.data.data[0]))
+                    history.push("/login")
                     toast.success("Registration Succesfful.! Wait till admin verifies your details. after that you can able to login to your account.", {})
                     setIsLoading(false)
                 })

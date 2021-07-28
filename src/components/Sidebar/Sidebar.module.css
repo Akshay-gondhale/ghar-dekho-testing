@@ -1,0 +1,187 @@
+@import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+.mainDiv {
+  background-image: linear-gradient(40deg, #98fb98, #3cb371);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 96%;
+  width: 23%;
+  margin: 12px;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 7px 9px 0px;
+}
+.mobileMainDiv {
+  display: none;
+}
+.sidebarHeader {
+  width: 100%;
+  height: 30%;
+  color: #2c3e50;
+}
+
+.logoDiv {
+  height: 50%;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 0.5rem;
+  background-color: #fff;
+  border-radius: 0.7rem;
+  padding-top: 0.6rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo_span {
+  color: #2ecc71;
+}
+
+.logo_txt {
+  font-family: "Potta One", cursive;
+  font-weight: 900;
+  font-size: 2.3rem;
+  /* background-color: red; */
+}
+
+.brokerName {
+  margin: 0;
+  text-align: center;
+  max-width: 100%;
+  font-weight: 900;
+  font-family: "Poppins", sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+}
+.brokerContact {
+  margin: 0;
+  text-align: center;
+  font-weight: 900;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+}
+
+.sidebarSections {
+  height: 68%;
+  overflow-y: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sideElement {
+  margin: 0.2rem 0.5rem;
+  padding: 10px 1rem;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.1s ease-in;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+.sideElement > i {
+  width: 15%;
+  text-align: center;
+}
+
+.sideElement:hover {
+  margin: 0.2rem 0.5rem;
+  padding: 10px 1rem;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: #2ecc71;
+  border-radius: 5rem;
+  color: #fff;
+  transition: 0.1s ease-in;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 3px;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.activeSideElement {
+  margin: 0.2rem 0.5rem;
+  padding: 10px 1rem;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: #2ecc71;
+  border-radius: 5rem;
+  color: #fff;
+  transition: 0.1s ease-in;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 3px;
+}
+.hideMobSidebar {
+    background-image: linear-gradient(40deg, #98fb98, #3cb371);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 96%;
+    width: 23%;
+    margin: 12px;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 7px 9px 0px;
+}
+.closeMobSidebar{
+    display: none;
+}
+
+@media only screen and (max-width: 850px) {
+  .mainDiv {
+    display: block;
+    width: 80%;
+    z-index: 101;
+    margin: 0;
+    height: 100%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-top: 3rem;
+  }
+
+  .mobileMainDiv {
+    display: block;
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
+  .mobileMainDiv > i {
+    width: 15%;
+    text-align: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+  .mob_logo_txt {
+    font-family: "Potta One", cursive;
+    font-weight: 900;
+    font-size: 1.8rem;
+    padding-top: 1rem;
+  }
+  .hideMobSidebar {
+    display: none !important;
+  }
+  .closeMobSidebar{
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      display: block;
+      font-size: 2rem;
+      color: #2c3e50;
+      cursor: pointer;
+  }
+}
