@@ -117,6 +117,8 @@ const propertySchema = mongoose.Schema(
         shortId:{
             type:String,
             default:nanoid(12),
+            required:true,
+            unique:true
         }
     },
     {
