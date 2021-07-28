@@ -6,7 +6,12 @@ import style from "./Profile.module.css"
 import validator from "validator";
 import { updateProfile } from "../../redux/actions/AuthActions";
 import { useHistory } from "react-router-dom";
-import { GetUserPropertiesByStatus, LoadMorePropertiesByStatus } from "../../redux/actions/ProfileActions";
+import {
+    GetUserNotifications,
+    GetUserPropertiesByStatus,
+    LoadMorePropertiesByStatus,
+    LoadMoreNotifications,
+} from "../../redux/actions/ProfileActions";
 import { ImageUrl } from "../../utils/BaseApi"
 import imageCompression from 'browser-image-compression';
 const Profile = () => {
@@ -14,6 +19,7 @@ const Profile = () => {
     const history = useHistory()
     const user = useSelector(state => state.AuthReducer.user)
     var subSectionData = useSelector(state => state.ProfileDataReducer)
+    var notificationData = useSelector(state => state.NotificationDataReducer)
     // console.log(subSectionData)
     const [isEditProfile, setIsEditProfile] = useState(false)
     const [image, setImage] = useState(null)
@@ -21,6 +27,8 @@ const Profile = () => {
     const [email, setEmail] = useState(user.email)
     const [isLoading, setIsLoading] = useState(false);
     const [isSubSectionLoading, setIsSubSectionLoading] = useState(false);
+    const [isNotificationLoading, setIsNotificationLoading] = useState(false)
+    const [isNotificationLoadMoreLoading, setIsNotificationLoadMoreLoading] = useState(false)
     const [isLoadMoreLoading, setIsLoadMoreLoading] = useState(false)
 
     // data useStates
@@ -30,7 +38,8 @@ const Profile = () => {
     const imageSelector = async (e) => {
         if (e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png") {
             const options = {
-                maxWidthOrHeight: 500,
+                maxSizeMB: 1,
+                useWebWorker: true
             }
             var ImageBlob = await imageCompression(e.target.files[0], options)
             console.log(ImageBlob)
@@ -61,11 +70,19 @@ const Profile = () => {
     }
 
     const LoadMoreSubSectionData = () => {
-        dispatch(LoadMorePropertiesByStatus(activeSubNavElement, subSectionData, setIsLoadMoreLoading))
+        dispatch(LoadMorePropertiesByStatus(activeSubNavElement, subSectionData, setIsLoadMoreLoading, toast))
+    }
+    const LoadMoreNotificationsData = () => {
+        dispatch(LoadMoreNotifications(notificationData, setIsNotificationLoadMoreLoading, toast))
     }
     useEffect(() => {
-        dispatch(GetUserPropertiesByStatus(activeSubNavElement, setIsSubSectionLoading))
-    }, [dispatch, activeSubNavElement])
+        if (activeNavElement === "homes") {
+            dispatch(GetUserPropertiesByStatus(activeSubNavElement, setIsSubSectionLoading, toast))
+        }
+        else if (activeNavElement === "notifications") {
+            dispatch(GetUserNotifications(setIsNotificationLoading, toast))
+        }
+    }, [dispatch, activeSubNavElement, activeNavElement])
     return (
         <>
             {isLoading
@@ -116,6 +133,9 @@ const Profile = () => {
                                             subSectionData.data.length > 0 ?
                                                 <div className={style.subSectionDataDiv}>
                                                     {subSectionData.data.map((data, index) => {
+                                                        var registrationISO = new Date(data.createdAt)
+                                                        var registrationDate = `${registrationISO.getDate()}-${registrationISO.getMonth() + 1}-${registrationISO.getFullYear()}`;
+
                                                         return (
                                                             <div key={index} className={style.homeDiv}>
                                                                 <div className={style.homeThumbnail}>
@@ -136,7 +156,11 @@ const Profile = () => {
                                                                                     activeSubNavElement === "verified" ? <>Verified <i className="fas fa-check-circle"></i> (Your home verified!)</> :
                                                                                         <>Rejected <i className="fas fa-times-circle"></i> (Rejected by broker.)</>
                                                                         }</p>
-                                                                    <p className={style.homeRegisteredDate}>Registered On: 23-07-2021</p>
+                                                                    {data.rejectedReason !== null &&
+                                                                        <>
+                                                                            <p className={style.homeRejectedStyle}>Reason: {data.rejectedReason}</p>
+                                                                        </>}
+                                                                    <p className={style.homeRegisteredDate}>Registered On: {registrationDate}</p>
                                                                 </div>
                                                             </div>
 
@@ -170,23 +194,55 @@ const Profile = () => {
                             }
                             {
                                 activeNavElement === "notifications" &&
-                                <div className={style.mainNotificationDiv}>
-                                    <div className={style.notification}>
-                                        <p className={style.notificationHeading}>Hello world</p>
-                                        <p className={style.notificationTxt}>Artists producing art and engraving on United States banknotes began experimenting with copper plates as an alternative to wood engraving in the early 18th century. Applied to the production of paper currency, copper-plate engraving, and later steel engraving, enabled banknote design and printing to rapidly advance during the 19th century. This vignette, engraved by W. W. Rice, appeared on certain United States fifty-dollar bills issued in 1875. </p>
-                                        <p className={style.notificationDate}>23-07-2021 1:50</p>
+                                    isNotificationLoading ?
+
+                                    <div className={style.subSectionDataSpinnerWrapper}>
+                                        <div className="spinner-border text-success" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </div>
                                     </div>
-                                    <div className={style.notification}>
-                                        <p className={style.notificationHeading}>Hello world</p>
-                                        <p className={style.notificationTxt}>Artists producing art and engraving on United States banknotes began experimenting with copper plates as an alternative to wood engraving in the early 18th century. Applied to the production of paper currency, copper-plate engraving, and later steel engraving, enabled banknote design and printing to rapidly advance during the 19th century. This vignette, engraved by W. W. Rice, appeared on certain United States fifty-dollar bills issued in 1875. </p>
-                                        <p className={style.notificationDate}>23-07-2021 1:50</p>
-                                    </div>
-                                    <div className={style.notification}>
-                                        <p className={style.notificationHeading}>Hello world</p>
-                                        <p className={style.notificationTxt}>Artists producing art and engraving on United States banknotes began experimenting with copper plates as an alternative to wood engraving in the early 18th century. Applied to the production of paper currency, copper-plate engraving, and later steel engraving, enabled banknote design and printing to rapidly advance during the 19th century. This vignette, engraved by W. W. Rice, appeared on certain United States fifty-dollar bills issued in 1875. </p>
-                                        <p className={style.notificationDate}>23-07-2021 1:50</p>
-                                    </div>
-                                </div>
+                                    :
+
+                                    activeNavElement === "notifications" &&
+                                    notificationData.data.length > 0
+                                        ?
+                                        <div className={style.mainNotificationDiv}>
+                                            {notificationData.data.map((data, index) => {
+                                                var registrationISO = new Date(data.createdAt)
+                                                var registrationDate = `${registrationISO.getHours()}:${registrationISO.getMinutes()} ${registrationISO.getDate()}.${registrationISO.getMonth() + 1}.${registrationISO.getFullYear()}`;
+
+                                                return (
+
+                                                    <div key={index} className={style.notification}>
+                                                        <p className={style.notificationHeading}>{data.title}</p>
+                                                        <p className={style.notificationTxt}>{data.description}</p>
+                                                        <p className={style.notificationDate}>{registrationDate}</p>
+                                                    </div>
+                                                )
+                                            })}
+                                            {notificationData.isNextAvailable &&
+                                                <div className={style.loadMoreWrapper}>
+                                                    {
+                                                        isNotificationLoadMoreLoading
+                                                            ?
+                                                            <div className="spinner-border text-success" role="status">
+                                                                <span className="visually-hidden">Loading...</span>
+                                                            </div>
+                                                            :
+                                                            <div onClick={() => LoadMoreNotificationsData()}>
+                                                                <PrimaryButton heading='Load More <i class="fas fa-chevron-circle-down"></i>' />
+                                                            </div>
+                                                    }
+
+                                                </div>
+                                            }
+                                        </div>
+                                        :
+                                        activeNavElement === "notifications" &&
+                                        <div className={style.notFoundData}>
+                                            <i className="fas fa-comment-alt"></i>
+                                            <p className={style.noDataDescription}>No Notifications Yet!</p>
+                                        </div>
                             }
                         </div>
                     </div>

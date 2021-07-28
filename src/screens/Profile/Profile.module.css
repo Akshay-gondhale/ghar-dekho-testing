@@ -301,6 +301,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    color: #2C3E50;
 }
 
 .notification {
@@ -312,6 +313,7 @@
     padding: .8rem 1.8rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     margin-bottom: .8rem;
+    padding-bottom: 1.9rem;
 }
 
 .notificationHeading {
@@ -343,6 +345,9 @@
 
 .loadMoreWrapper{
     padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .homeDiv {
@@ -471,6 +476,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
 .subSectionDataSpinnerWrapper {
@@ -497,7 +503,7 @@
 .notFoundData>i {
     font-size: 6rem;
     margin-bottom: 2rem;
-    color: #e3242b;
+    color: #FF8181;
     animation: nodata 3s infinite;
 }
 
@@ -506,6 +512,7 @@
     font-weight: 900;
     font-size: 1.3rem;
     text-align: center;
+    opacity: .7;
 }
 
 @media only screen and (max-width: 850px) {
@@ -567,7 +574,7 @@
         overflow-x: auto;
     }
     .mainSubNavigation::-webkit-scrollbar {
-        display: none;
+        height: 3px;
     }
     .navElement {
         white-space: nowrap;

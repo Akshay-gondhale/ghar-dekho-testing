@@ -26,7 +26,6 @@ const LoginAuthAction = (loginState, toast, setIsLoading) => {
                     toast.error(err.response.data.message)
                 }
                 else {
-                    alert(err)
                     toast.error("Unable to connect server please try later!")
                 }
 

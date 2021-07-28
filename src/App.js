@@ -36,32 +36,33 @@ axios.defaults.baseURL = 'https://ghar-dekho-backend.herokuapp.com';
 // });
 function App() {
   const isLoggedIn = useSelector(state => state.AuthReducer.isLoggedIn)
-  
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUser())
-  },[dispatch])
+  }, [dispatch])
   return (
     <div className="App">
 
       <Router>
-        <Switch>
-          <AuthRoutes path='/login' component={Login} />
-          <AuthRoutes exact path='/sign-up' component={Registration} />
-          <AuthRoutes exact path='/forgot-password' component={ForgotPassword} />
-          {isLoggedIn === null ? <GlobalLoader /> :
+
+      <Switch>
+        <AuthRoutes path='/login' component={Login} />
+        <AuthRoutes exact path='/sign-up' component={Registration} />
+        <AuthRoutes exact path='/forgot-password' component={ForgotPassword} />
+        {isLoggedIn === null ? <GlobalLoader /> :
           <>
-            <Navbar />
-            <Route exact path='/' component={Home} />
-            <ProtectedRoutes exact path='/profile' component={Profile}/>
-            <ProtectedRoutes exact path='/about' component={PendingScreen}/>
-            <ProtectedRoutes exact path='/properties' component={PendingScreen}/>
-            <ProtectedRoutes exact path='/contact' component={PendingScreen}/>
-            <ProtectedRoutes exact path='/post-property' component={PostProperty}/>
-            <Route exact path="/temp" component={Temp} />
-            <Footer />
+              <Navbar />
+              <Route exact path='/' component={Home} />
+              <ProtectedRoutes exact path='/profile' component={Profile} />
+              <ProtectedRoutes exact path='/about' component={PendingScreen} />
+              <ProtectedRoutes exact path='/properties' component={PendingScreen} />
+              <ProtectedRoutes exact path='/contact' component={PendingScreen} />
+              <ProtectedRoutes exact path='/post-property' component={PostProperty} />
+              <Route exact path="/temp" component={Temp} />
+              <Footer />
           </>
-          }
+        }
         </Switch>
       </Router>
       <ToastContainer

@@ -73,7 +73,8 @@ const PostProperty = () => {
 
             //compressing files
             const options = {
-                maxWidthOrHeight: 500,
+                maxSizeMB:1,
+                useWebWorker: true
             }
             const imageBlobs = imagesArray.map(async (data, index) => {
                 const blobdata = await imageCompression(data, options)
