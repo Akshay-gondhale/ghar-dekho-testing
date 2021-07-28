@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const path = require("path");
 const { uploadFile, deleteFile } = require("../utils/RemoteFileUpload");
 const Property = require("../models/PropertyModel");
+const Notification = require("../models/NotificationModel")
 
 // const pipeline = [
 //     {
@@ -372,17 +373,17 @@ const getUserPropertiesByStatus = async (req, res) => {
         console.log(query)
         var foundProperties = await Property.find(query)
             .sort({ _id: -1 })
-            .limit(recordsPerPage);
+            .limit(parseInt(recordsPerPage));
         var isNext = await Property.find(query)
             .sort({ _id: -1 })
-            .limit(recordsPerPage + 1)
+            .limit(parseInt(recordsPerPage) + 1)
             .countDocuments();
 
             var isNextAvailable;
-        if (isNext > recordsPerPage) {
+        if (isNext > parseInt(recordsPerPage)) {
             // if next page is available
             isNextAvailable = true;
-            lastId = foundProperties[recordsPerPage - 1]._id;
+            lastId = foundProperties[parseInt(recordsPerPage) - 1]._id;
         } else {
             // if next is not available
             isNextAvailable = false;
@@ -408,6 +409,61 @@ const getUserPropertiesByStatus = async (req, res) => {
     }
 }
 
+const getNotifications = async (req, res) => {
+try {
+        const { _id } = req.user;
+        var { id, recordsPerPage } = req.query;
+        // console.log({ id, recordsPerPage })
+
+        if (typeof recordsPerPage == "undefined") {
+            // if no recordsPerPage is not passed in request then records will set to default value 5
+            recordsPerPage = 5;
+        }
+
+        var query = {userId:_id};
+        if (id) {
+            query._id = { $lt: id };
+        }
+
+        console.log(query)
+        var foundNotifications = await Notification.find(query)
+            .sort({ _id: -1 })
+            .limit(parseInt(recordsPerPage));
+        var isNext = await Notification.find(query)
+            .sort({ _id: -1 })
+            .limit(parseInt(recordsPerPage) + 1)
+            .countDocuments();
+
+            var isNextAvailable;
+        if (isNext > parseInt(recordsPerPage)) {
+            // if next page is available
+            isNextAvailable = true;
+            lastId = foundNotifications[parseInt(recordsPerPage) - 1]._id;
+        } else {
+            // if next is not available
+            isNextAvailable = false;
+            lastId = null;
+        }
+        res.status(200).json({
+            message: "Found Properties",
+            data: [
+                {
+                    lastId,
+                    isNextAvailable,
+                    data:foundNotifications,
+                },
+            ],
+        });
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something Went Wrong!",
+            data: []
+        })
+    }
+}
+
 module.exports = {
     userExists,
     register,
@@ -416,5 +472,6 @@ module.exports = {
     getUser,
     updateProfile,
     postProperty,
-    getUserPropertiesByStatus
+    getUserPropertiesByStatus,
+    getNotifications
 }
