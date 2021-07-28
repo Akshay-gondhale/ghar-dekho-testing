@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { nanoid } = require('nanoid');
 
 const propertySchema = mongoose.Schema(
     {
@@ -116,7 +115,6 @@ const propertySchema = mongoose.Schema(
         },
         shortId:{
             type:String,
-            default:nanoid(12),
             required:true,
             unique:true
         }

@@ -5,6 +5,7 @@ const path = require("path");
 const { uploadFile, deleteFile } = require("../utils/RemoteFileUpload");
 const Property = require("../models/PropertyModel");
 const Notification = require("../models/NotificationModel")
+const { nanoid } = require('nanoid');
 
 // const pipeline = [
 //     {
@@ -313,6 +314,7 @@ const postProperty = async (req, res) => {
             description,
             title,
             brokerId,
+            shortId:nanoid(12),
             status: "registered"
         })
         console.log("created property")

@@ -34,8 +34,8 @@ async function uploadFile(localFilePath, DestinationFilePath) {
 
     }
     catch (e) {
-        console.log("got error")
         console.log(e)
+        console.log("got error")
 
     }
 }
