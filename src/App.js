@@ -21,7 +21,6 @@ import PendingScreeen from "./screens/PendingScreen"
 
 axios.defaults.baseURL = 'https://ghar-dekho-backend.herokuapp.com';
 // axios.defaults.baseURL = 'http://localhost:4000';
-
 function App() {
   const isLoggedIn = useSelector(state => state.AuthReducer.isLoggedIn)
 
