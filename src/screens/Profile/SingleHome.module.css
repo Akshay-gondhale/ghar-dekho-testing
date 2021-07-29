@@ -1,0 +1,130 @@
+.mainDiv {
+  width: 80vw;
+  margin: 0 auto;
+  margin-top: 100px;
+  font-family: "Poppins", sans-serif;
+  color: #2c3e50;
+}
+.imagesWrapper {
+  padding: 1rem 0.5rem;
+  height: 70vh;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eafaf1;
+  border-radius: 2rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.imageContainer {
+  max-width: 100%;
+  padding: 2rem;
+  height: 65vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imageContainer > img {
+  height: 95%;
+  width: 95%;
+  text-align: center;
+  object-fit: contain;
+}
+
+.homeHeader {
+  margin-top: 2rem;
+  font-family: "Poppins", sans-serif;
+  color: #2c3e50;
+}
+.homeTitle {
+  margin: 0;
+  font-size: 2rem;
+  text-transform: capitalize;
+  font-weight: 900;
+}
+.homeDescription {
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+.ammount {
+  font-size: 1.2rem;
+}
+.ammount > i {
+  margin-left: 1rem;
+}
+.sellOrRent {
+  font-weight: 900;
+  text-transform: capitalize;
+}
+
+.homeUserDetail {
+  display: flex;
+  margin: 2rem 0rem;
+  justify-content: space-between;
+}
+
+.homeDetailWrapper {
+  width: 48%;
+  padding: 1rem 0rem;
+}
+.homeDetailHeader {
+  font-size: 2rem;
+  font-weight: 900;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+}
+
+.homeDetailField {
+  margin: 0;
+}
+.homeDetailFieldHeading {
+  font-weight: 900;
+}
+.spinnerWrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.statusWrapper {
+  margin: 1rem 0;
+}
+.statusWrapper > P {
+  margin: 0;
+}
+.statusHeading {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.statusDescription {
+  font-size: 1rem;
+}
+.registeredStatus {
+  color: #a569bd;
+}
+.inProgressStatus {
+  color: #e67e22;
+}
+.verifiedStatus {
+  color: #27ae60;
+}
+.rejectedStatus {
+  color: #e74c3c;
+}
+@media only screen and (max-width: 850px) {
+  .mainDiv {
+    width: 100%;
+    padding: 0 1rem;
+  }
+  .homeUserDetail {
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+  }
+  .homeDetailWrapper {
+    width: 100%;
+    padding: 0rem;
+  }
+}

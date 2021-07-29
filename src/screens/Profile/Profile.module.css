@@ -546,7 +546,7 @@
         max-height: 15rem;
         max-width: 15rem;
         height: 70%;
-        width: 70%;
+        width: auto;
         /* margin-left: 18%; */
         margin: 0 auto;
     }

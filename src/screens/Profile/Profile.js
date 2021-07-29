@@ -5,7 +5,7 @@ import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import style from "./Profile.module.css"
 import validator from "validator";
 import { updateProfile } from "../../redux/actions/AuthActions";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import {
     GetUserNotifications,
     GetUserPropertiesByStatus,
@@ -137,7 +137,7 @@ const Profile = () => {
                                                         var registrationDate = `${registrationISO.getDate()}-${registrationISO.getMonth() + 1}-${registrationISO.getFullYear()}`;
 
                                                         return (
-                                                            <div key={index} className={style.homeDiv}>
+                                                            <Link to={`/profile/home/${data.shortId}`} key={index} className={style.homeDiv}>
                                                                 <div className={style.homeThumbnail}>
                                                                     <img src={`${ImageUrl}${data.images[0].path}`} alt="..." />
                                                                 </div>
@@ -162,7 +162,7 @@ const Profile = () => {
                                                                         </>}
                                                                     <p className={style.homeRegisteredDate}>Registered On: {registrationDate}</p>
                                                                 </div>
-                                                            </div>
+                                                            </Link>
 
                                                         )
                                                     })}

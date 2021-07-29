@@ -18,6 +18,7 @@ import Footer from './components/Footer/Footer';
 import Home from './screens/Home/Home';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import Profile from './screens/Profile/Profile';
+import SingleHome from './screens/Profile/SingleHome';
 import GlobalLoader from './components/GlobalLoader/GlobalLoader';
 import Temp from './screens/Temp';
 // import { useEffect } from 'react';
@@ -55,6 +56,7 @@ function App() {
               <Navbar />
               <Route exact path='/' component={Home} />
               <ProtectedRoutes exact path='/profile' component={Profile} />
+              <ProtectedRoutes exact path='/profile/home/:id' component={SingleHome} />
               <ProtectedRoutes exact path='/about' component={PendingScreen} />
               <ProtectedRoutes exact path='/properties' component={PendingScreen} />
               <ProtectedRoutes exact path='/contact' component={PendingScreen} />
