@@ -466,6 +466,32 @@ try {
     }
 }
 
+const getHomeById = async (req,res) => {
+    try{
+        const {id} = req.params;
+        const foundProperty = await  Property.findOne({shortId:id}).populate("userId", "name email phone image");
+        if(foundProperty){
+            res.status(200).json({
+                message:"Found Property Details",
+                data:[foundProperty]
+            })
+        }
+        else{
+            res.status(404).json({
+                message:"No property found",
+                data:[]
+            })
+        }
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something Went Wrong!",
+            data: []
+        })
+    }
+}
+
 module.exports = {
     userExists,
     register,
@@ -475,5 +501,6 @@ module.exports = {
     updateProfile,
     postProperty,
     getUserPropertiesByStatus,
-    getNotifications
+    getNotifications,
+    getHomeById
 }
