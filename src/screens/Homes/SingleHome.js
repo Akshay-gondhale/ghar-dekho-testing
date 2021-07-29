@@ -182,7 +182,16 @@ const SingleHome = () => {
                         <div className={style.homeData}>
                             <div className={style.homeHeader}>
                                 <p className={style.homeTitle}>{homeData.title}</p>
-                                <p className={style.homeDescription}>{homeData.description}</p>
+                                <p className={style.homeDescription}><span className={style.sellOrRent}>Description:</span> {homeData.description}</p>
+                                <p className={style.homeDescription}><span className={style.sellOrRent}>Home Id:</span> {homeData.shortId}</p>
+                                <p className={style.homeDescription}><span className={style.sellOrRent}>Status:</span> {homeData.status}</p>
+                                {homeData.rejectedReason 
+                                ?
+                                
+                                <p className={style.homeDescription}><span className={style.sellOrRent}>Reason:</span> {homeData.rejectedReason}</p>
+                                :
+                                ""
+                             }
                                 <p className={style.ammount}><span className={style.sellOrRent}>{homeData.sellOrRent}: </span><i className="fas fa-rupee-sign"></i> {homeData.ammount}</p>
 
                             </div>
@@ -230,6 +239,7 @@ const SingleHome = () => {
                                     </div>
                                     :
                                     <>
+                                    {console.log(homeData.status)}
                                         {homeData.status === "registered" &&
                                             <div onClick={() => setInProgress()} className={style.btnStyle}>
                                                 <PrimaryButton heading='Set as In Progress <i class="fas fa-bicycle"></i>' />

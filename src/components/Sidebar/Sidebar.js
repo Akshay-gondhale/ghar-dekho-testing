@@ -1,8 +1,10 @@
 import style from "./Sidebar.module.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const userData = useSelector(state=>state.AuthReducer.user)
     return (
         <>
             <div className={isSidebarOpen ? style.mainDiv : style.hideMobSidebar}>
@@ -13,8 +15,8 @@ const Sidebar = () => {
                             <span className={style.logo_span}>Ghar</span>Dekho
                         </p>
                     </div>
-                    <p className={style.brokerName}>Broker Name</p>
-                    <p className={style.brokerContact}>+91 7276115611</p>
+                    <p className={style.brokerName}>{userData.name}</p>
+                    <p className={style.brokerContact}>+91 {userData.phone}</p>
                 </div>
                 <div className={style.sidebarSections}>
                     <NavLink

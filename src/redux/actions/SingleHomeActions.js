@@ -15,7 +15,7 @@ const GetHomeDetails = (id, setIsLoading, history) => {
             setIsLoading(false)
         })
         .catch(err=>{
-            console.log(err)
+            console.log({res:err.response})
             dispatch({type:SingleHomeAction.GET_HOME_DATA_FAILS, payload:{}})
             if(err.response){
                 toast.error(err.response.data.message)
