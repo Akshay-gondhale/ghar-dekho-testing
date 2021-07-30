@@ -113,6 +113,18 @@
 .rejectedStatus {
   color: #e74c3c;
 }
+.setAsUnavailableWrapper{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  flex-direction: column;
+  text-align: center;
+}
+.setAsUnavailableBtnWrapper{
+  margin-top: 1rem;
+}
 @media only screen and (max-width: 850px) {
   .mainDiv {
     width: 100%;

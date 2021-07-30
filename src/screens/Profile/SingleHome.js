@@ -6,12 +6,17 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetHomeDetails, RemoveHomeDetails } from "../../redux/actions/SingleHomeActions";
 import { ImageUrl } from "../../utils/BaseApi"
+import PrimaryButton from "../../components/Buttons/PrimaryButton";
+import axios from "axios";
+import { toast } from "react-toastify";
 const SingleHome = () => {
     console.log("reached here")
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(false);
 
     const dispatch = useDispatch();
+
+    const [btnLoading, setBtnLoading] = useState(false)
     const homeDetails = useSelector(state => state.SingleHomeDataReducer)
     const homeData = homeDetails.details;
     const history = useHistory();
@@ -38,6 +43,27 @@ const SingleHome = () => {
         outline: "none"
     };
 
+    const setHomeUnavailable = () => {
+        setBtnLoading(true)
+        axios.put(`/user/setHomeUnavailable/${id}`)
+        .then(res=>{
+            console.log(res)
+            toast.success(res.data.message)
+            setBtnLoading(false)
+            history.goBack();
+        })
+        .catch(err=>{
+            console.log(err)
+            setBtnLoading(false)
+            if(err.response){
+                toast.error(err.response.data.message)
+            }
+            else{
+                toast.error("Something went wrong")
+            }
+        })
+
+    }
     return (
         <>
             {isLoading && homeDetails.foundData === null
@@ -84,8 +110,9 @@ const SingleHome = () => {
                         <div className={style.homeData}>
                             <div className={style.homeHeader}>
                                 <p className={style.homeTitle}>{homeData.title}</p>
-                                <p className={style.homeDescription}><span className={style.sellOrRent}>Description:</span> {homeData.description}</p>
-                                <p className={style.homeDescription}><span className={style.sellOrRent}>Home Id:</span> {homeData.shortId}</p>
+                                <p className={style.homeDescription}><span className={style.homeDetailFieldHeading}>Description:</span> {homeData.description}</p>
+                                <p className={style.homeDescription}><span className={style.homeDetailFieldHeading}>Home Id:</span> {homeData.shortId}</p>
+                                {homeData.status === "verified" && <p className={style.homeDescription}><span className={style.homeDetailFieldHeading}>Visibility:</span> {homeData.isAvailable ? "Visible to all" : "Not visible to other users"}</p>}
                                 <p className={style.ammount}><span className={style.sellOrRent}>{homeData.sellOrRent}: </span><i className="fas fa-rupee-sign"></i> {homeData.ammount}</p>
 
                             </div>
@@ -158,6 +185,29 @@ const SingleHome = () => {
                                     <p className={style.homeDetailField}><span className={style.homeDetailFieldHeading}>Only Vegeterians Required?: </span>{homeData.isVeg ? "Yes" : "No"}</p>
                                 </div>
                             </div>
+
+                            {
+                                homeData.status === "verified"
+                                &&
+                                homeData.isAvailable === true 
+                                &&
+                                <div className={style.setAsUnavailableWrapper}>
+                                    <p className={style.homeDetailField}>If this home is already sold or rented to other person you can set this home unavailble to other users by using below button.</p>
+                                    {
+                                        btnLoading
+                                            ?
+                                            <div className={style.setAsUnavailableBtnWrapper}>
+                                                <div className="spinner-border text-success" role="status">
+                                                    <span className="visually-hidden">Loading...</span>
+                                                </div>
+                                            </div>
+                                            :
+                                            <div onClick={() => setHomeUnavailable()} className={style.setAsUnavailableBtnWrapper}>
+                                                <PrimaryButton heading='Set this home unavilable <i class="fas fa-power-off"></i>' />
+                                            </div>
+                                    }
+                                </div>
+                            }
                         </div>
 
                     </div>
