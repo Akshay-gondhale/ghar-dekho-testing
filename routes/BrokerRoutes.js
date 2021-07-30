@@ -10,7 +10,8 @@ const {
     getHomeById,
     setHomeInProgress,
     setHomeRejected,
-    setHomeVerified
+    setHomeVerified,
+    setHomeUnAvailable
 } = require("../controllers/BrokerController");
 const router = express.Router();
 
@@ -30,5 +31,6 @@ router.get("/home/:id", getHomeById)
 router.put("/setHomeInProgress/:id", setHomeInProgress);
 router.put("/setHomeVerified/:id", setHomeVerified);
 router.put("/setHomeRejected/:id", setHomeRejected);
+router.put("/setHomeUnavailable/:id", setHomeUnAvailable);
 
 module.exports = router;

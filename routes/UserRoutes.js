@@ -10,7 +10,8 @@ const {
     postProperty,
     getUserPropertiesByStatus,
     getNotifications,
-    getHomeById
+    getHomeById,
+    setHomeUnAvailable
 } = require("../controllers/UserController");
 const router = express.Router();
 
@@ -29,5 +30,6 @@ router.put("/update", upload.fields([{ name: "profile", maxCount: 1 }]), updateP
 router.get("/properties/:status", getUserPropertiesByStatus)
 router.get("/notifications", getNotifications);
 router.get("/home/:id", getHomeById)
+router.put("/setHomeUnavailable/:id", setHomeUnAvailable);
 
 module.exports = router;

@@ -332,7 +332,7 @@ const setHomeInProgress = async (req,res) => {
         const savedNotification = await notification.save();
 
         res.status(200).json({
-            message:"Status set to in pregress!",
+            message:"Status set to In Progress!",
             data:[updatedHome]
         })
 
@@ -420,7 +420,7 @@ const setHomeRejected = async (req, res) => {
         const savedNotification = await notification.save();
 
         res.status(200).json({
-            message:"Status set to rejected!",
+            message:"Status set to Rejected!",
             data:[updatedHome]
         })
 
@@ -435,6 +435,41 @@ const setHomeRejected = async (req, res) => {
         })
     }
 }
+
+const setHomeUnAvailable = async (req, res) =>{
+    try{
+        const {id} = req.params;
+        const foundProperty = await Property.findOne({shortId:id});
+        if(!foundProperty){
+            res.status(403).json({
+                message:"No home found!",
+                data:[]
+            })
+            return;
+        }
+        foundProperty.isAvailable = false;
+        const updatedProperty = await foundProperty.save()
+        const notification = new Notification({
+            title:"Home Details Set Unavailable!",
+            description:`Your home with title ${foundProperty.title}'s details are set to unavailable to other users by broker.`,
+            userId:foundProperty.userId
+        })
+        const savedNotification = await notification.save();
+        res.status(200).json({
+            message:"Property set to unavailable!",
+            data:[updatedProperty]
+        })
+    }
+    catch(e){
+        console.log(e)
+        res.status(500).json({
+            message:"Something went wrong!",
+            data:[]
+        })
+
+    }
+}
+
 module.exports = {
     brokerExists,
     register,
@@ -446,4 +481,5 @@ module.exports = {
     setHomeInProgress,
     setHomeVerified,
     setHomeRejected,
+    setHomeUnAvailable
 }

@@ -492,6 +492,35 @@ const getHomeById = async (req,res) => {
     }
 }
 
+const setHomeUnAvailable = async (req, res) =>{
+    try{
+        const {id} = req.params;
+        const {_id} = req.user;
+        const foundProperty = await Property.findOne({shortId:id, userId:_id});
+        if(!foundProperty){
+            res.status(403).json({
+                message:"No home found!",
+                data:[]
+            })
+            return;
+        }
+        foundProperty.isAvailable = false;
+        const updatedProperty = await foundProperty.save()
+        res.status(200).json({
+            message:"Property set to unavailable!",
+            data:[updatedProperty]
+        })
+    }
+    catch(e){
+        console.log(e)
+        res.status(500).json({
+            message:"Something went wrong!",
+            data:[]
+        })
+
+    }
+}
+
 module.exports = {
     userExists,
     register,
@@ -502,5 +531,6 @@ module.exports = {
     postProperty,
     getUserPropertiesByStatus,
     getNotifications,
-    getHomeById
+    getHomeById,
+    setHomeUnAvailable
 }
