@@ -469,7 +469,7 @@ try {
 const getHomeById = async (req,res) => {
     try{
         const {id} = req.params;
-        const foundProperty = await  Property.findOne({shortId:id}).populate("userId", "name email phone image");
+        const foundProperty = await  Property.findOne({shortId:id}).populate("userId brokerId", "name email phone image");
         if(foundProperty){
             res.status(200).json({
                 message:"Found Property Details",
