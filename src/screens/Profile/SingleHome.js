@@ -46,22 +46,22 @@ const SingleHome = () => {
     const setHomeUnavailable = () => {
         setBtnLoading(true)
         axios.put(`/user/setHomeUnavailable/${id}`)
-        .then(res=>{
-            console.log(res)
-            toast.success(res.data.message)
-            setBtnLoading(false)
-            history.goBack();
-        })
-        .catch(err=>{
-            console.log(err)
-            setBtnLoading(false)
-            if(err.response){
-                toast.error(err.response.data.message)
-            }
-            else{
-                toast.error("Something went wrong")
-            }
-        })
+            .then(res => {
+                console.log(res)
+                toast.success(res.data.message)
+                setBtnLoading(false)
+                history.goBack();
+            })
+            .catch(err => {
+                console.log(err)
+                setBtnLoading(false)
+                if (err.response) {
+                    toast.error(err.response.data.message)
+                }
+                else {
+                    toast.error("Something went wrong")
+                }
+            })
 
     }
     return (
@@ -189,22 +189,28 @@ const SingleHome = () => {
                             {
                                 homeData.status === "verified"
                                 &&
-                                homeData.isAvailable === true 
-                                &&
                                 <div className={style.setAsUnavailableWrapper}>
-                                    <p className={style.homeDetailField}>If this home is already sold or rented to other person you can set this home unavailble to other users by using below button.</p>
-                                    {
-                                        btnLoading
-                                            ?
-                                            <div className={style.setAsUnavailableBtnWrapper}>
-                                                <div className="spinner-border text-success" role="status">
-                                                    <span className="visually-hidden">Loading...</span>
-                                                </div>
-                                            </div>
-                                            :
-                                            <div onClick={() => setHomeUnavailable()} className={style.setAsUnavailableBtnWrapper}>
-                                                <PrimaryButton heading='Set this home unavilable <i class="fas fa-power-off"></i>' />
-                                            </div>
+
+                                    {homeData.isAvailable === true
+                                        ?
+                                        <>
+                                            <p className={style.homeDetailField}>If this home is already sold or rented to other person you can set this home unavailble to other users by using below button.</p>
+                                            {
+                                                btnLoading
+                                                    ?
+                                                    <div className={style.setAsUnavailableBtnWrapper}>
+                                                        <div className="spinner-border text-success" role="status">
+                                                            <span className="visually-hidden">Loading...</span>
+                                                        </div>
+                                                    </div>
+                                                    :
+                                                    <div onClick={() => setHomeUnavailable()} className={style.setAsUnavailableBtnWrapper}>
+                                                        <PrimaryButton heading='Set this home unavilable <i class="fas fa-power-off"></i>' />
+                                                    </div>
+                                            }
+                                        </>
+                                        :
+                                        <p className={style.homeDetailFieldHeading + " " + style.rejectedStatus}>This home is set to not available which means this home is not visible to other users on website. If this was a mistake contact broker "{homeData.brokerId.name}" with contact details "{homeData.brokerId.email}" or "+91 {homeData.brokerId.phone}" to set status again back to available for all users.</p>
                                     }
                                 </div>
                             }
