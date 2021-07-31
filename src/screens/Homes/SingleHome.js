@@ -137,6 +137,28 @@ const SingleHome = () => {
         })
 
     }
+    
+    const setHomeAvailable = () => {
+        setIsBtnLoading(true)
+        axios.put(`/broker/setHomeAvailable/${id}`)
+        .then(res=>{
+            console.log(res)
+            toast.success(res.data.message)
+            setIsBtnLoading(false)
+            history.goBack();
+        })
+        .catch(err=>{
+            console.log(err)
+            setIsBtnLoading(false)
+            if(err.response){
+                toast.error(err.response.data.message)
+            }
+            else{
+                toast.error("Something went wrong")
+            }
+        })
+
+    }
 
     return (
         <>
@@ -278,11 +300,16 @@ const SingleHome = () => {
                                                 </div>
                                             </>
                                         }
-                                        {homeData.status === "verified" && homeData.isAvailable === true &&
+                                        {homeData.status === "verified" && homeData.isAvailable === true ?
                                             
                                             <div onClick={() => setHomeUnavailable()} className={style.btnStyle}>
                                                 <PrimaryButton heading='Set this home unavilable <i class="fas fa-power-off"></i>' />
                                             </div>
+                                            :
+                                            <div onClick={() => setHomeAvailable()} className={style.btnStyle}>
+                                                <PrimaryButton heading='Set this home avilable <i class="fas fa-plug"></i>' />
+                                            </div>
+
                                         }
                                     </>
                                 }
