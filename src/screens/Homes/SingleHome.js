@@ -80,19 +80,19 @@ const SingleHome = () => {
                     toast.error(err.response.message)
                     return;
                 }
-                    toast.error("Something Went Wrong!")
+                toast.error("Something Went Wrong!")
 
             })
     }
     const setRejected = () => {
-        if(rejectReason.trim() === ""){
+        if (rejectReason.trim() === "") {
             toast.error("Please provide reason of rejecting!")
         }
-        else{
+        else {
             setIsReasonOpen(false)
             setIsBtnLoading(true)
-            axios.put(`/broker/setHomeRejected/${id}`,{
-                rejectedReason:rejectReason
+            axios.put(`/broker/setHomeRejected/${id}`, {
+                rejectedReason: rejectReason
             })
                 .then(res => {
                     setIsBtnLoading(false)
@@ -110,7 +110,7 @@ const SingleHome = () => {
                         setRejectReason("")
                         toast.error("Something Went Wrong!")
                     }
-    
+
                 })
 
         }
@@ -119,44 +119,44 @@ const SingleHome = () => {
     const setHomeUnavailable = () => {
         setIsBtnLoading(true)
         axios.put(`/broker/setHomeUnavailable/${id}`)
-        .then(res=>{
-            console.log(res)
-            toast.success(res.data.message)
-            setIsBtnLoading(false)
-            history.goBack();
-        })
-        .catch(err=>{
-            console.log(err)
-            setIsBtnLoading(false)
-            if(err.response){
-                toast.error(err.response.data.message)
-            }
-            else{
-                toast.error("Something went wrong")
-            }
-        })
+            .then(res => {
+                console.log(res)
+                toast.success(res.data.message)
+                setIsBtnLoading(false)
+                history.goBack();
+            })
+            .catch(err => {
+                console.log(err)
+                setIsBtnLoading(false)
+                if (err.response) {
+                    toast.error(err.response.data.message)
+                }
+                else {
+                    toast.error("Something went wrong")
+                }
+            })
 
     }
-    
+
     const setHomeAvailable = () => {
         setIsBtnLoading(true)
         axios.put(`/broker/setHomeAvailable/${id}`)
-        .then(res=>{
-            console.log(res)
-            toast.success(res.data.message)
-            setIsBtnLoading(false)
-            history.goBack();
-        })
-        .catch(err=>{
-            console.log(err)
-            setIsBtnLoading(false)
-            if(err.response){
-                toast.error(err.response.data.message)
-            }
-            else{
-                toast.error("Something went wrong")
-            }
-        })
+            .then(res => {
+                console.log(res)
+                toast.success(res.data.message)
+                setIsBtnLoading(false)
+                history.goBack();
+            })
+            .catch(err => {
+                console.log(err)
+                setIsBtnLoading(false)
+                if (err.response) {
+                    toast.error(err.response.data.message)
+                }
+                else {
+                    toast.error("Something went wrong")
+                }
+            })
 
     }
 
@@ -170,10 +170,10 @@ const SingleHome = () => {
                             <i onClick={() => setIsReasonOpen(false)} className={"fas fa-times-circle " + style.closeReasonBtn}></i>
                             <div className={style.inputWrapper}>
                                 <p className={style.inputLabel}>Enter Reason Of Rejecting This Home</p>
-                                <input className={style.inputTag} value={rejectReason} onChange={(e)=>setRejectReason(e.target.value)} placeholder="Enter a valid reason for rejecting this home" type="text" />
+                                <input className={style.inputTag} value={rejectReason} onChange={(e) => setRejectReason(e.target.value)} placeholder="Enter a valid reason for rejecting this home" type="text" />
                             </div>
                             <div className={style.buttonWrapper}>
-                                <div onClick={()=>setRejected()} className={style.btnStyle}>
+                                <div onClick={() => setRejected()} className={style.btnStyle}>
                                     <PrimaryButton heading='Submit <i class="fas fa-times-circle"></i>' />
                                 </div>
                             </div>
@@ -230,13 +230,13 @@ const SingleHome = () => {
                                 <p className={style.homeDescription}><span className={style.sellOrRent}>Home Id:</span> {homeData.shortId}</p>
                                 <p className={style.homeDescription}><span className={style.sellOrRent}>Visibility:</span> {homeData.isAvailable ? "Visible to all" : "Not visible to other users"}</p>
                                 <p className={style.homeDescription}><span className={style.sellOrRent}>Status:</span> {homeData.status}</p>
-                                {homeData.rejectedReason 
-                                ?
-                                
-                                <p className={style.homeDescription}><span className={style.sellOrRent}>Reason:</span> {homeData.rejectedReason}</p>
-                                :
-                                ""
-                             }
+                                {homeData.rejectedReason
+                                    ?
+
+                                    <p className={style.homeDescription}><span className={style.sellOrRent}>Reason:</span> {homeData.rejectedReason}</p>
+                                    :
+                                    ""
+                                }
                                 <p className={style.ammount}><span className={style.sellOrRent}>{homeData.sellOrRent}: </span><i className="fas fa-rupee-sign"></i> {homeData.ammount}</p>
 
                             </div>
@@ -284,7 +284,7 @@ const SingleHome = () => {
                                     </div>
                                     :
                                     <>
-                                    {console.log(homeData.status)}
+                                        {console.log(homeData.status)}
                                         {homeData.status === "registered" &&
                                             <div onClick={() => setInProgress()} className={style.btnStyle}>
                                                 <PrimaryButton heading='Set as In Progress <i class="fas fa-bicycle"></i>' />
@@ -300,16 +300,20 @@ const SingleHome = () => {
                                                 </div>
                                             </>
                                         }
-                                        {homeData.status === "verified" && homeData.isAvailable === true ?
-                                            
-                                            <div onClick={() => setHomeUnavailable()} className={style.btnStyle}>
-                                                <PrimaryButton heading='Set this home unavilable <i class="fas fa-power-off"></i>' />
-                                            </div>
-                                            :
-                                            <div onClick={() => setHomeAvailable()} className={style.btnStyle}>
-                                                <PrimaryButton heading='Set this home avilable <i class="fas fa-plug"></i>' />
-                                            </div>
+                                        {homeData.status === "verified"
+                                            &&
+                                            <>
+                                                {homeData.isAvailable === true
+                                                ?
 
+                                                <div onClick={() => setHomeUnavailable()} className={style.btnStyle}>
+                                                    <PrimaryButton heading='Set this home unavilable <i class="fas fa-power-off"></i>' />
+                                                </div>
+                                                :
+                                                <div onClick={() => setHomeAvailable()} className={style.btnStyle}>
+                                                    <PrimaryButton heading='Set this home avilable <i class="fas fa-plug"></i>' />
+                                                </div>}
+                                            </>
                                         }
                                     </>
                                 }
