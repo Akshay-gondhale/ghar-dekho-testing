@@ -48,19 +48,19 @@ const propertySchema = mongoose.Schema(
             required:true
         },
         floor: {
-            type: String,
+            type: Number,
             required:true
         },
         totalFloor: {
-            type: String,
+            type: Number,
             required:true
         },
         carpetArea: {
-            type: String,
+            type: Number,
             required:true
         },
         age: {
-            type: String,
+            type: Number,
             required:true
         },
         isVeg: {
@@ -72,7 +72,7 @@ const propertySchema = mongoose.Schema(
             required:true
         },
         ammount: {
-            type: String,
+            type: Number,
             required:true
         },
         description: {

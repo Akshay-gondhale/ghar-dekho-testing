@@ -11,7 +11,9 @@ const {
     getUserPropertiesByStatus,
     getNotifications,
     getHomeById,
-    setHomeUnAvailable
+    setHomeUnAvailable,
+    getProperties,
+    saveHome
 } = require("../controllers/UserController");
 const router = express.Router();
 
@@ -21,6 +23,7 @@ router.get("/exists/:phone", userExists)
 router.post("/register", register);
 router.post("/login", login);
 router.put("/resetPassword", resetPassword);
+router.get("/getProperties", getProperties);
 
 router.use(require("../middlewares/AuthUser"));
 
@@ -31,5 +34,7 @@ router.get("/properties/:status", getUserPropertiesByStatus)
 router.get("/notifications", getNotifications);
 router.get("/home/:id", getHomeById)
 router.put("/setHomeUnavailable/:id", setHomeUnAvailable);
+router.get("/getProperties", getProperties);
+router.post("/saveProperty", saveHome)
 
 module.exports = router;

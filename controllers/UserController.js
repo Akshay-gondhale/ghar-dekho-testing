@@ -5,7 +5,11 @@ const path = require("path");
 const { uploadFile, deleteFile } = require("../utils/RemoteFileUpload");
 const Property = require("../models/PropertyModel");
 const Notification = require("../models/NotificationModel")
+const SavedHome = require("../models/SavedHomesModel")
 const { nanoid } = require('nanoid');
+// const mongoose = require("mongoose")
+// const ObjectId = mongoose.Types.ObjectId;
+var ObjectId = require('mongodb').ObjectID;
 
 // const pipeline = [
 //     {
@@ -314,7 +318,7 @@ const postProperty = async (req, res) => {
             description,
             title,
             brokerId,
-            shortId:nanoid(12),
+            shortId: nanoid(12),
             status: "registered"
         })
         console.log("created property")
@@ -367,7 +371,7 @@ const getUserPropertiesByStatus = async (req, res) => {
             recordsPerPage = 5;
         }
 
-        var query = {userId:_id, status};
+        var query = { userId: _id, status };
         if (id) {
             query._id = { $lt: id };
         }
@@ -381,7 +385,7 @@ const getUserPropertiesByStatus = async (req, res) => {
             .limit(parseInt(recordsPerPage) + 1)
             .countDocuments();
 
-            var isNextAvailable;
+        var isNextAvailable;
         if (isNext > parseInt(recordsPerPage)) {
             // if next page is available
             isNextAvailable = true;
@@ -412,7 +416,7 @@ const getUserPropertiesByStatus = async (req, res) => {
 }
 
 const getNotifications = async (req, res) => {
-try {
+    try {
         const { _id } = req.user;
         var { id, recordsPerPage } = req.query;
         // console.log({ id, recordsPerPage })
@@ -422,7 +426,7 @@ try {
             recordsPerPage = 5;
         }
 
-        var query = {userId:_id};
+        var query = { userId: _id };
         if (id) {
             query._id = { $lt: id };
         }
@@ -436,7 +440,7 @@ try {
             .limit(parseInt(recordsPerPage) + 1)
             .countDocuments();
 
-            var isNextAvailable;
+        var isNextAvailable;
         if (isNext > parseInt(recordsPerPage)) {
             // if next page is available
             isNextAvailable = true;
@@ -447,12 +451,12 @@ try {
             lastId = null;
         }
         res.status(200).json({
-            message: "Found Properties",
+            message: "Found Notifications",
             data: [
                 {
                     lastId,
                     isNextAvailable,
-                    data:foundNotifications,
+                    data: foundNotifications,
                 },
             ],
         });
@@ -466,20 +470,20 @@ try {
     }
 }
 
-const getHomeById = async (req,res) => {
-    try{
-        const {id} = req.params;
-        const foundProperty = await  Property.findOne({shortId:id}).populate("userId brokerId", "name email phone image");
-        if(foundProperty){
+const getHomeById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const foundProperty = await Property.findOne({ shortId: id }).populate("userId brokerId", "name email phone image");
+        if (foundProperty) {
             res.status(200).json({
-                message:"Found Property Details",
-                data:[foundProperty]
+                message: "Found Property Details",
+                data: [foundProperty]
             })
         }
-        else{
+        else {
             res.status(404).json({
-                message:"No property found",
-                data:[]
+                message: "No property found",
+                data: []
             })
         }
     }
@@ -492,30 +496,136 @@ const getHomeById = async (req,res) => {
     }
 }
 
-const setHomeUnAvailable = async (req, res) =>{
-    try{
-        const {id} = req.params;
-        const {_id} = req.user;
-        const foundProperty = await Property.findOne({shortId:id, userId:_id});
-        if(!foundProperty){
+const setHomeUnAvailable = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { _id } = req.user;
+        const foundProperty = await Property.findOne({ shortId: id, userId: _id });
+        if (!foundProperty) {
             res.status(403).json({
-                message:"No home found!",
-                data:[]
+                message: "No home found!",
+                data: []
             })
             return;
         }
         foundProperty.isAvailable = false;
         const updatedProperty = await foundProperty.save()
         res.status(200).json({
-            message:"Property set to unavailable!",
-            data:[updatedProperty]
+            message: "Property set to unavailable!",
+            data: [updatedProperty]
         })
     }
-    catch(e){
+    catch (e) {
         console.log(e)
         res.status(500).json({
-            message:"Something went wrong!",
-            data:[]
+            message: "Something went wrong!",
+            data: []
+        })
+
+    }
+}
+
+const getProperties = async (req, res) => {
+    try {
+        var { id, recordsPerPage, searchArea, homeType, sellOrRent, ammount, carpetArea, age, floor, isVeg } = req.query;
+        // console.log({ id, recordsPerPage })
+
+        if (typeof recordsPerPage == "undefined") {
+            // if no recordsPerPage is not passed in request then records will set to default value 5
+            recordsPerPage = 5;
+        }
+
+        var query = { isAvailable: true, status: "verified" };
+        if (searchArea) {
+            query.area = { $regex: searchArea, $options: "i" }
+        }
+        if (homeType && homeType !== "null") {
+            query.homeType = homeType
+        }
+        if (sellOrRent && sellOrRent !== "null") {
+            query.sellOrRent = sellOrRent
+        }
+        if (ammount) {
+            query.ammount = { $lte: ammount }
+        }
+        if (carpetArea) {
+            query.carpetArea = { $gte: carpetArea }
+        }
+        if (age) {
+            query.age = { $lte: age }
+        }
+        if (floor) {
+            query.floor = { $lte: floor }
+        }
+        if (isVeg) {
+            query.isVeg = isVeg
+        }
+        if (id) {
+            query._id = { $lt: id };
+        }
+        console.log(query)
+        var foundProperties = await Property.find(query)
+            .sort({ _id: -1 })
+            .limit(parseInt(recordsPerPage));
+        var isNext = await Property.find(query)
+            .sort({ _id: -1 })
+            .limit(parseInt(recordsPerPage) + 1)
+            .countDocuments();
+
+        var isNextAvailable;
+        if (isNext > parseInt(recordsPerPage)) {
+            // if next page is available
+            isNextAvailable = true;
+            lastId = foundProperties[parseInt(recordsPerPage) - 1]._id;
+        } else {
+            // if next is not available
+            isNextAvailable = false;
+            lastId = null;
+        }
+        res.status(200).json({
+            message: "Found Properties",
+            data: [
+                {
+                    lastId,
+                    isNextAvailable,
+                    data: foundProperties,
+                },
+            ],
+        });
+
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something went wrong!",
+            data: []
+        })
+    }
+
+}
+
+const saveHome = async (req, res) => {
+    try {
+        const { _id } = req.user;
+        const { propertyId } = req.body;
+
+        const addSavedHome = new SavedHome({
+            userId: _id,
+            propertyId
+        })
+
+        const insertSavedHome = await addSavedHome.save()
+        res.status(200).json({
+            message: "property saved",
+            data: [insertSavedHome]
+        })
+
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something went wrong",
+            data: []
         })
 
     }
@@ -532,5 +642,7 @@ module.exports = {
     getUserPropertiesByStatus,
     getNotifications,
     getHomeById,
-    setHomeUnAvailable
+    setHomeUnAvailable,
+    getProperties,
+    saveHome
 }
