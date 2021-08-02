@@ -4,6 +4,7 @@ import { AuthAction } from "../constants/AuthActionsTypes";
 const authState = {
     isLoggedIn: null,
     user: {
+        _id:"",
         name: "",
         email: "",
         phone: "",
@@ -24,6 +25,7 @@ export const AuthReducer = (state = authState, { type, payload }) => {
             return{
                 isLoggedIn: true,
                 user: {
+                    _id:payload._id,
                     name: payload.name,
                     phone: payload.phone,
                     email: payload.email,
@@ -38,6 +40,7 @@ export const AuthReducer = (state = authState, { type, payload }) => {
             return {
                 isLoggedIn: false,
                 user: {
+                    _id:"",
                     name: "",
                     phone: "",
                     email: "",
@@ -52,6 +55,7 @@ export const AuthReducer = (state = authState, { type, payload }) => {
             const newAuthState = {
                 isLoggedIn: true,
                 user: {
+                    _id:payload._id,
                     name: payload.name,
                     phone: payload.phone,
                     email: payload.email,
@@ -67,6 +71,7 @@ export const AuthReducer = (state = authState, { type, payload }) => {
             return {
                 isLoggedIn: false,
                 user: {
+                    _id:"",
                     name: "",
                     phone: "",
                     email: "",
@@ -82,6 +87,7 @@ export const AuthReducer = (state = authState, { type, payload }) => {
             return  {
                 isLoggedIn: true,
                 user: {
+                    _id:payload._id,
                     name: payload.name,
                     phone: payload.phone,
                     email: payload.email,
@@ -95,6 +101,7 @@ export const AuthReducer = (state = authState, { type, payload }) => {
             return {
                 isLoggedIn: false,
                 user: {
+                    _id:"",
                     name: "",
                     phone: "",
                     email: "",
@@ -108,6 +115,7 @@ export const AuthReducer = (state = authState, { type, payload }) => {
             return  {
                 isLoggedIn: true,
                 user: {
+                    _id:payload._id,
                     name: payload.name,
                     phone: payload.phone,
                     email: payload.email,

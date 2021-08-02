@@ -21,6 +21,7 @@ import Profile from './screens/Profile/Profile';
 import SingleHome from './screens/Profile/SingleHome';
 import GlobalLoader from './components/GlobalLoader/GlobalLoader';
 import Temp from './screens/Temp';
+import Properties from './screens/Properties/Properties';
 // import { useEffect } from 'react';
 // import "./utils/Axios"
 
@@ -55,10 +56,11 @@ function App() {
           <>
               <Navbar />
               <Route exact path='/' component={Home} />
+              <Route exact path='/properties' component={Properties} />
+              <ProtectedRoutes exact path='/properties/:id' component={PendingScreen} />
               <ProtectedRoutes exact path='/profile' component={Profile} />
               <ProtectedRoutes exact path='/profile/home/:id' component={SingleHome} />
               <ProtectedRoutes exact path='/about' component={PendingScreen} />
-              <ProtectedRoutes exact path='/properties' component={PendingScreen} />
               <ProtectedRoutes exact path='/contact' component={PendingScreen} />
               <ProtectedRoutes exact path='/post-property' component={PostProperty} />
               <Route exact path="/temp" component={Temp} />

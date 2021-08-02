@@ -179,6 +179,7 @@
     width: max-content;
     display: flex;
     justify-content: center;
+    align-items:center;
     flex-direction: column;
     width: 60%;
     height: 100%;
@@ -372,6 +373,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: .8rem;
+    background-color: #c4c4c4;
 }
 
 .homeData {
@@ -545,13 +547,15 @@
     .editImgDiv {
         max-height: 15rem;
         max-width: 15rem;
-        height: 70%;
+        height: 100%;
         width: auto;
         /* margin-left: 18%; */
         margin: 0 auto;
     }
     .editFields {
         width: 100%;
+        height: fit-content;
+        justify-content: flex-start;
     }
     .infoDiv {
         padding: 2rem;

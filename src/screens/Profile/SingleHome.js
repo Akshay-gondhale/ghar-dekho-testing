@@ -138,7 +138,7 @@ const SingleHome = () => {
 
                                             <div className={style.statusWrapper + " " + style.verifiedStatus}>
                                                 <p className={style.statusHeading}>Verified <i className="fas fa-check-circle"></i></p>
-                                                <p className={style.statusDescription}>Your home has verified successfully by our broker! Now your home will visible to all the visitors on our website and visitors can show there interest on your home now.</p>
+                                                <p className={style.statusDescription}>Your home has verified successfully by our broker! {homeData.isAvailable ? "Now your home will visible to all the visitors on our website and visitors can show there interest on your home now.":""}</p>
                                             </div>
 
                                             :

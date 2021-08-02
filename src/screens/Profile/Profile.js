@@ -36,7 +36,7 @@ const Profile = () => {
     const [activeSubNavElement, setActiveSubNavElement] = useState("registered")
 
     const imageSelector = async (e) => {
-        if (e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png") {
+        if (e.target.files.length > 0 && (e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png")) {
             const options = {
                 maxSizeMB: 1,
                 useWebWorker: true
@@ -45,7 +45,10 @@ const Profile = () => {
             console.log(ImageBlob)
             setImage(ImageBlob)
         }
-        else {
+        else if(image === null && e.target.files.length === 0) {
+            toast.error("Please select a profile image!😔")
+        }
+        else if(e.target.files.length > 0 && (e.target.files[0].type !== "image/jpeg" || e.target.files[0].type !== "image/png")){
             toast.error("Please select a profile image!😔")
         }
     }

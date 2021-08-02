@@ -48,6 +48,7 @@ const getUser = () => {
                     console.log("got user from db", res.data.data[0])
                     dispatch({
                         type: AuthAction.GET_USER_SUCCESS, payload: {
+                            _id:res.data.data[0]._id,
                             name: res.data.data[0].name,
                             phone: res.data.data[0].phone,
                             email: res.data.data[0].email,
@@ -87,6 +88,7 @@ const updateProfile = (formData, toast, history, setIsLoading) => {
             .then(res => {
                 dispatch({
                     type: AuthAction.PROFILE_UPDATE_SUCCESS, payload: {
+                        _id:res.data.data[0]._id,
                         name: res.data.data[0].name,
                         phone: res.data.data[0].phone,
                         email: res.data.data[0].email,
