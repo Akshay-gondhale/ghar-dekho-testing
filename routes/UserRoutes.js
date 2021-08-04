@@ -13,7 +13,9 @@ const {
     getHomeById,
     setHomeUnAvailable,
     getProperties,
-    saveHome
+    saveHome,
+    getOthersPropertyById,
+    removeSavedHome
 } = require("../controllers/UserController");
 const router = express.Router();
 
@@ -35,6 +37,9 @@ router.get("/notifications", getNotifications);
 router.get("/home/:id", getHomeById)
 router.put("/setHomeUnavailable/:id", setHomeUnAvailable);
 router.get("/getProperties", getProperties);
-router.post("/saveProperty", saveHome)
+router.post("/saveProperty/:propertyId", saveHome)
+router.delete("/removeSaveProperty/:propertyId", removeSavedHome)
+router.get("/property/:id", getOthersPropertyById)
+
 
 module.exports = router;

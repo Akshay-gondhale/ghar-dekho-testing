@@ -607,18 +607,28 @@ const getProperties = async (req, res) => {
 const saveHome = async (req, res) => {
     try {
         const { _id } = req.user;
-        const { propertyId } = req.body;
+        const { propertyId } = req.params;
 
-        const addSavedHome = new SavedHome({
-            userId: _id,
-            propertyId
-        })
+        const isAlreadySaved = await SavedHome.findOne({ userId: _id, propertyId });
+        if (!isAlreadySaved) {
+            const addSavedHome = new SavedHome({
+                userId: _id,
+                propertyId
+            })
+            const insertSavedHome = await addSavedHome.save()
+            res.status(200).json({
+                message: "property saved",
+                data: [insertSavedHome]
+            })
+        }
+        else {
 
-        const insertSavedHome = await addSavedHome.save()
-        res.status(200).json({
-            message: "property saved",
-            data: [insertSavedHome]
-        })
+            res.status(200).json({
+                message: "property already saved",
+                data: [isAlreadySaved]
+            })
+        }
+
 
     }
     catch (e) {
@@ -629,6 +639,62 @@ const saveHome = async (req, res) => {
         })
 
     }
+}
+
+const removeSavedHome = async (req, res) => {
+    try {
+
+        const { _id } = req.user;
+        const { propertyId } = req.params;
+        const isSavedHome = await SavedHome.findOne({ userId: _id, propertyId });
+
+        if (isSavedHome) {
+            await isSavedHome.remove();
+            res.status(200).json({
+                message: "Home Removed From Saved Homes",
+                data: []
+            })
+        }
+        else {
+            res.status(401).json({
+                message: "No Home Found",
+                data: []
+            })
+        }
+
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something went wrong",
+            data: []
+        })
+
+    }
+}
+
+
+const getOthersPropertyById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { _id } = req.user;
+        var foundProperty = await Property.findOne({ shortId: id })
+
+        var isSavedHome = await SavedHome.findOne({ propertyId: foundProperty._id, userId: _id });
+
+        res.status(200).json({
+            message: "Found property",
+            data: [{ foundProperty, isSavedHome }]
+        })
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something went wrong!",
+            data: []
+        })
+    }
+
 }
 
 module.exports = {
@@ -644,5 +710,7 @@ module.exports = {
     getHomeById,
     setHomeUnAvailable,
     getProperties,
-    saveHome
+    saveHome,
+    removeSavedHome,
+    getOthersPropertyById
 }
