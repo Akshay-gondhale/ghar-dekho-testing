@@ -10,7 +10,6 @@ import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import axios from "axios";
 import { toast } from "react-toastify";
 const SingleHome = () => {
-    console.log("reached here")
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(false);
 
