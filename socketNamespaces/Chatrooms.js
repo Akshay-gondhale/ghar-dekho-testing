@@ -5,8 +5,8 @@ const Chatrooms = async (socket) => {
     socket.on("disconnect", () => {
         console.log("user disconnected")
     })
+    console.log(socket.handshake.query)
     const userId = socket.handshake.query.userId;
-    const roomType = socket.handshake.query.type;
     console.log("someone connected to chatroom " + socket.id + " with user id - " + userId)
 
     // console.log(roomType + " on line 8")
