@@ -55,6 +55,10 @@ const ChatScreen = () => {
                 console.log(res)
             })
         })
+
+        return () => {
+            socket.disconnect();
+        }
     }, [history, id, userId, dispatch])
 
     const sendMsg = () => {
@@ -190,9 +194,9 @@ const ChatScreen = () => {
                                 {imageProcessLoading
                                     ?
                                     <div className={style.imagePreviewMainDiv}>
-                                    <div className="spinner-border text-success" role="status">
-                                        <span className="visually-hidden">Loading...</span>
-                                    </div>
+                                        <div className="spinner-border text-success" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </div>
 
                                     </div>
                                     :

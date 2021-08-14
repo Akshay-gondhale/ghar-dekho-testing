@@ -19,8 +19,8 @@ const Conversation = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         setIsChatLoading(true)
-        const socket = io.connect(`${SocketUrl}/chat-rooms?userId=${userId}`);
-        socket.emit("get-chatrooms", {},(res) => {
+        const socket = io.connect(`${SocketUrl}/chat-rooms`);
+        socket.emit("get-chatrooms", { userId }, (res) => {
             console.log(res)
             dispatch(setChatRooms(res, setIsChatLoading))
         })
@@ -34,6 +34,9 @@ const Conversation = () => {
                 message: "Latest chat rooms updates received to client side..!"
             })
         })
+        return () => {
+            socket.disconnect();
+        }
 
     }, [userId, dispatch])
 
@@ -63,15 +66,16 @@ const Conversation = () => {
                                     {conversationStateData.newMessage.data.map((data, index) => {
                                         return (
 
-                                            <div key={index} className={style.chatRoom}>
+                                            <Link to={`/conversation/chat/${data.propertyId.shortId}`} key={index} className={style.chatRoom}>
+
                                                 <div className={style.userIconWrapper}>
                                                     <i className="fas fa-user-circle"></i>
                                                 </div>
                                                 <div className={style.dataDiv}>
                                                     <p className={style.heading}>{data.propertyId.title} - Broker</p>
-                                                    <p className={style.lastMsg}>{data.lastMsg.userId === data.lastMsg.senderId ? "You: " : "Broker: "}{data.lastMsg.msgType !== "text" ? "Photo":""}{  data.lastMsg.msgType !== "text" && data.lastMsg.message !== "" ? "(" + data.lastMsg.message + ")" : data.lastMsg.message}</p>
+                                                    <p className={style.lastMsg}>{data.lastMsg.userId === data.lastMsg.senderId ? "You: " : "Broker: "}{data.lastMsg.msgType !== "text" ? "Photo" : ""}{data.lastMsg.msgType !== "text" && data.lastMsg.message !== "" ? "(" + data.lastMsg.message + ")" : data.lastMsg.message}</p>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         )
 
                                     })}
@@ -107,8 +111,8 @@ const Conversation = () => {
                                                 </div>
                                                 <div className={style.dataDiv}>
                                                     <p className={style.heading}>{data.propertyId.title} - Broker</p>
-                                                    <p className={style.lastMsg}>{data.lastMsg.userId === data.lastMsg.senderId ? "You: " : "Broker: "}{data.lastMsg.msgType !== "text" ? "Photo":""}{  data.lastMsg.msgType !== "text" && data.lastMsg.message !== "" ? "(" + data.lastMsg.message + ")" : data.lastMsg.message}</p>
-                                                
+                                                    <p className={style.lastMsg}>{data.lastMsg.userId === data.lastMsg.senderId ? "You: " : "Broker: "}{data.lastMsg.msgType !== "text" ? "Photo" : ""}{data.lastMsg.msgType !== "text" && data.lastMsg.message !== "" ? "(" + data.lastMsg.message + ")" : data.lastMsg.message}</p>
+
                                                 </div>
                                             </Link>
                                         )
