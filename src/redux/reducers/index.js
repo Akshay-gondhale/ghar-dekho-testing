@@ -4,6 +4,8 @@ import {AuthReducer} from "./AuthReducers"
 import {ProfileDataReducer,NotificationDataReducer} from "./ProfileDataReducers"
 import { SingleHomeDataReducer, othersSingleHomeDataReducer } from "./SingleHomeDataReducers";
 import { PropertiesDataReducer } from "./PropertiesDataReducer";
+import { ConversationDataReducer } from "./ConversationDataReducer";
+import { ChatDataReducer } from "./ChatDataReducer";
 
 const reducers = combineReducers({
   AuthReducer,
@@ -11,7 +13,9 @@ const reducers = combineReducers({
   NotificationDataReducer,
   SingleHomeDataReducer,
   PropertiesDataReducer,
-  othersSingleHomeDataReducer
+  othersSingleHomeDataReducer,
+  ConversationDataReducer,
+  ChatDataReducer
 });
 
 export default reducers;

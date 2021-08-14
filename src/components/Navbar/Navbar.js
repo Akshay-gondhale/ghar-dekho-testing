@@ -61,6 +61,7 @@ const Navbar = () => {
                         <div className={style.userOptions}>
                             <Link onClick={() => openUserDetail()} to="/profile" className={style.userOption}><i className="fas fa-id-badge"></i>Profile</Link>
                             <Link onClick={() => openUserDetail()} to="/post-property" className={style.userOption}><i className="fas fa-map-marker-alt"></i>Sell/Rent Home</Link>
+                            <Link onClick={() => openUserDetail()} to="/conversation" className={style.userOption}><i className="fas fa-comment-alt"></i>Conversations</Link>
                             <li onClick={() => openUserDetail()} className={style.userOption}><i className="fas fa-times-circle"></i>Close</li>
                         </div>
                     </div>}

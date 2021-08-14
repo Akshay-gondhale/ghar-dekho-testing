@@ -60,6 +60,7 @@ const getUser = () => {
                     })
                 })
                 .catch(err => {
+                    console.log(err)
                     dispatch({ type: AuthAction.GET_USER_FAIL, payload: {} })
                 })
 

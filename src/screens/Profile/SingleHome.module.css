@@ -19,7 +19,7 @@
 
 .imageContainer {
   max-width: 100%;
-  padding: 2rem;
+  padding: 2rem .2rem;
   height: 65vh;
   display: flex;
   justify-content: center;

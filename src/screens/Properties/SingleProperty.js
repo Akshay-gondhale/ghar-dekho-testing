@@ -1,4 +1,4 @@
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import style from "./SingleProperty.module.css"
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -130,7 +130,7 @@ const SingleProperty = () => {
                             <div className={style.homeBasicInfo}>
                                 <p className={style.homeTitle}>{foundPropertyData.foundProperty.title}</p>
                                 <p className={style.homeDescription}>{foundPropertyData.foundProperty.description}</p>
-                                <p className={style.registeredOn}>Registered On: {`${new Date(foundPropertyData.foundProperty.createdAt).getDate()} - ${new Date(foundPropertyData.foundProperty.createdAt).getMonth() + 1} - ${new Date(foundPropertyData.foundProperty.createdAt).getFullYear()}`}</p>
+                                <p className={style.registeredOn}>Registered On: {`${new Date(foundPropertyData.foundProperty.createdAt).getDate()}.${new Date(foundPropertyData.foundProperty.createdAt).getMonth() + 1}.${new Date(foundPropertyData.foundProperty.createdAt).getFullYear()}`}</p>
                                 <p className={style.sellOrRent}><span className={style.sellOrRentHeading}>{foundPropertyData.foundProperty.sellOrRent}: </span> <i className="fas fa-rupee-sign"></i>{foundPropertyData.foundProperty.ammount}</p>
                             </div>
                             <div className={style.homeDetails}>
@@ -177,9 +177,9 @@ const SingleProperty = () => {
                                     ""
                                 }
                             </div>
-                            <div className={style.contactBrokerBtnWrapper}>
+                            <Link to={`/conversation/chat/${foundPropertyData.foundProperty.shortId}`} className={style.contactBrokerBtnWrapper}>
                                 <PrimaryButton heading='Contact Broker <i class="fas fa-user-tie"></i>' />
-                            </div>
+                            </Link>
                         </div>
 
                     </div>

@@ -20,12 +20,13 @@ import ProtectedRoutes from './components/ProtectedRoutes';
 import Profile from './screens/Profile/Profile';
 import SingleHome from './screens/Profile/SingleHome';
 import GlobalLoader from './components/GlobalLoader/GlobalLoader';
-import Temp from './screens/Temp';
+import Conversation from './screens/Conversation/Conversation';
 import Properties from './screens/Properties/Properties';
 import SingleProperty from './screens/Properties/SingleProperty';
+import ChatScreen from './screens/Conversation/ChatScreen';
+import Temp from './screens/Temp';
 // import { useEffect } from 'react';
 // import "./utils/Axios"
-
 
 axios.defaults.baseURL = 'https://ghar-dekho-backend.herokuapp.com';
 // axios.defaults.baseURL = 'http://localhost:4000';
@@ -58,13 +59,15 @@ function App() {
               <Navbar />
               <Route exact path='/' component={Home} />
               <Route exact path='/properties' component={Properties} />
+              <Route exact path='/temp' component={Temp} />
               <ProtectedRoutes exact path='/properties/:id' component={SingleProperty} />
               <ProtectedRoutes exact path='/profile' component={Profile} />
               <ProtectedRoutes exact path='/profile/home/:id' component={SingleHome} />
               <ProtectedRoutes exact path='/about' component={PendingScreen} />
               <ProtectedRoutes exact path='/contact' component={PendingScreen} />
               <ProtectedRoutes exact path='/post-property' component={PostProperty} />
-              <Route exact path="/temp" component={Temp} />
+              <ProtectedRoutes exact path="/conversation" component={Conversation} />
+              <ProtectedRoutes exact path='/conversation/chat/:id' component={ChatScreen} />
               <Footer />
           </>
         }
