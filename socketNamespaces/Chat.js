@@ -19,6 +19,9 @@ const bucket = GC_Storage.bucket("ghardekho-c3029.appspot.com");
 
 const Chats = async (socket) => {
 
+    socket.on("disconnect", () => {
+        console.log("user disconnected from chat")
+    })
     console.log("someone joined chat namespace - " + socket.id)
     socket.on("user-join-room", async (data, callback) => {
         try {
