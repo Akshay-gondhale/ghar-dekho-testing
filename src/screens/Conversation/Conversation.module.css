@@ -178,9 +178,14 @@
     }
     .userIconWrapper{
         width: 25%;
+        min-width: 25%;
+        max-width: 25%;
         font-size: 3rem;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .dataDiv{
+        width: 75%;
     }
 }

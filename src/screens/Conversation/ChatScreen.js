@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { io } from "socket.io-client";
 import { ImageUrl, SocketUrl } from "../../utils/BaseApi";
-import { initChatRoom, insertNewMsg } from "../../redux/actions/ChatDataAction"
+import { firstMsgInit, initChatRoom, insertNewMsg } from "../../redux/actions/ChatDataAction"
 import ScrollableFeed from 'react-scrollable-feed'
 import { toast } from "react-toastify"
 import imageCompression from "browser-image-compression"
@@ -72,7 +72,8 @@ const ChatScreen = () => {
                 }, (res) => {
                     if (res.status === "ok") {
                         setSendMsgLoading(false)
-                        dispatch(initChatRoom(res, setIsChatLoading))
+                        console.log(res)
+                        dispatch(firstMsgInit(res, setIsChatLoading))
                     }
                     else {
                         console.log(res)

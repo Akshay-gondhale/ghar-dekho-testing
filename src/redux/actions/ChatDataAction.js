@@ -16,6 +16,21 @@ const initChatRoom = (data, setIsLoading) => {
     }
 }
 
+const firstMsgInit = (data, setIsLoading) => {
+    
+    return async (dispatch) => {
+        setIsLoading(true)
+        dispatch({
+            type: ChatActionTypes.FIRST_MESSAGE_INIT_CHAT,
+            payload: {
+                data:data.data[0],
+                messages:data.messages
+            }
+        })
+        setIsLoading(false)
+    }
+}
+
 const insertNewMsg = (data) => {
     
     return async (dispatch) => {
@@ -30,5 +45,6 @@ const insertNewMsg = (data) => {
 
 export {
     initChatRoom,
-    insertNewMsg
+    insertNewMsg,
+    firstMsgInit
 }

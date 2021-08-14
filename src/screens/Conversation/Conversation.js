@@ -15,11 +15,11 @@ const Conversation = () => {
     const [chatRoomType, setChatRoomType] = useState("newMessage")
 
     const userId = useSelector(state => state.AuthReducer.user._id)
-
+    console.log(userId)
     const dispatch = useDispatch();
     useEffect(() => {
         setIsChatLoading(true)
-        const socket = io.connect(`${SocketUrl}/chat-rooms`, { query: `userId=${userId}` });
+        const socket = io.connect(`${SocketUrl}/chat-rooms?userId=${userId}`);
         socket.emit("get-chatrooms", {},(res) => {
             console.log(res)
             dispatch(setChatRooms(res, setIsChatLoading))
