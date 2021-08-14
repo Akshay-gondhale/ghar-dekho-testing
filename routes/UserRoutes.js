@@ -15,7 +15,9 @@ const {
     getProperties,
     saveHome,
     getOthersPropertyById,
-    removeSavedHome
+    removeSavedHome,
+    createChatRoom,
+    createMsg
 } = require("../controllers/UserController");
 const router = express.Router();
 
@@ -40,6 +42,8 @@ router.get("/getProperties", getProperties);
 router.post("/saveProperty/:propertyId", saveHome)
 router.delete("/removeSaveProperty/:propertyId", removeSavedHome)
 router.get("/property/:id", getOthersPropertyById)
+router.post("/createChatRoom", createChatRoom)
+router.post("/createChat", createMsg)
 
 
 module.exports = router;

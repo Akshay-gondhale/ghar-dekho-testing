@@ -10,6 +10,8 @@ const { nanoid } = require('nanoid');
 // const mongoose = require("mongoose")
 // const ObjectId = mongoose.Types.ObjectId;
 var ObjectId = require('mongodb').ObjectID;
+const ChatRoom = require("../models/ChatRoomsModel");
+const chatModel = require("../models/ChatModel");
 
 // const pipeline = [
 //     {
@@ -697,6 +699,67 @@ const getOthersPropertyById = async (req, res) => {
 
 }
 
+const createChatRoom = async (req, res) => {
+    try{
+        const {_id} = req.user;
+        const {
+            propertyId,
+            brokerId,
+            lastMsg,
+            lastMsgType,
+        } = req.body
+
+        const createChatRoom = new ChatRoom({
+            userId:_id,
+            propertyId,
+            brokerId,
+            lastMsg,
+            lastMsgType,
+            isUserSeen:true,
+            isBrokerSeen:false
+        })
+        const insertChatRoom = await createChatRoom.save();
+        res.status(200).json({
+            message:"Room Created",
+            data:[insertChatRoom]
+        })
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something went wrong!",
+            data: []
+        })
+    }
+}
+
+const createMsg = async (req, res) => {
+    try{
+        const {userId, chatRoomId, brokerId, message,msgType} = req.body;
+        const createChatMsg = new chatModel({
+            userId,
+            chatRoomId,
+            brokerId,
+            message,
+            msgType
+        })
+
+        const insertChatMsg = await createChatMsg.save();
+        res.status(200).json({
+            message:"Chat message inserted",
+            data:[insertChatMsg]
+        })
+
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something went wrong!",
+            data: []
+        })
+    }
+}
+
 module.exports = {
     userExists,
     register,
@@ -712,5 +775,7 @@ module.exports = {
     getProperties,
     saveHome,
     removeSavedHome,
-    getOthersPropertyById
+    getOthersPropertyById,
+    createChatRoom,
+    createMsg
 }
