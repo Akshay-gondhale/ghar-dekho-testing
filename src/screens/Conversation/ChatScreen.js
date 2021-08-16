@@ -149,7 +149,7 @@ const ChatScreen = () => {
         boxSizing: "border-box",
         fontSize: "15px",
         lineHeight: "1rem",
-        padding: ".8rem 1rem",
+        padding: ".8rem 0rem",
         whiteSpace: "pre-line"
     };
 
