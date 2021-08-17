@@ -12,11 +12,11 @@ const Navbar = () => {
     const [isUserDetailOpen, setIsUserDetailOpen] = useState(false)
     const [mobMenuOpen, setMobMenuOpen] = useState(false)
 
-    const [scroll, setScroll] = useState(100);
+    const [scroll, setScroll] = useState(10);
 
     useEffect(() => {
         document.addEventListener("scroll", () => {
-          const scrollCheck = window.scrollY < 100;
+          const scrollCheck = window.scrollY < 10;
           if (scrollCheck !== scroll) {
             setScroll(scrollCheck);
           }

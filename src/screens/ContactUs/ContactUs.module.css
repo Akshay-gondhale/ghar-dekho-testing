@@ -1,0 +1,188 @@
+.mainDiv {
+  width: 100%;
+  height: 100%;
+}
+.upperDiv {
+  min-height: 60vh;
+  background-image: linear-gradient(90deg, #98fb98, #3cb371);
+  width: 100%;
+  padding-top: 6rem;
+  padding-bottom: 10rem;
+}
+.contactHeading {
+  color: white;
+  width: 100%;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+}
+.contactSubHeading {
+  margin-top: 1rem;
+  color: white;
+  width: 100%;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+.formDiv {
+  font-family: "Poppins", sans-serif;
+  width: 80vw;
+  max-width: 80rem;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: -9rem;
+  margin-bottom: 3rem;
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.formLeftSection {
+  /* background-color: red; */
+  width: 48%;
+  min-height: 100%;
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.leftSectionImg {
+  width: 70%;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.contactDetials {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  width: 100%;
+  height: 100%;
+}
+.contactDetial {
+  display: flex;
+  width: 100%;
+  /* background-color: red; */
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.contactDetial > i {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: 1px solid #3cb371;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  color: #3cb371;
+}
+
+.contactDetial > p {
+  margin: 0;
+  padding: 0;
+  width: 70%;
+  margin-left: 5%;
+  font-size: 1.1rem;
+  font-weight: 900;
+  font-family: "Poppins", sans-serif;
+}
+
+.formRightSection {
+  width: 48%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputDiv {
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.inputLabel {
+  margin: 0;
+  padding: 0;
+  margin-left: 1rem;
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+.inputTag {
+  border: none;
+  outline: none;
+  background-color: #e9f7ef;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  max-height: 5rem;
+  resize: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.submitDataWrapper {
+  display: flex;
+  align-items: center;
+}
+.submitBtn {
+  border-radius: 5rem;
+  margin-right: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border: none;
+  background-color: #fff;
+  outline: none;
+}
+.contactNote {
+  margin: 0;
+  padding: 0;
+  margin-top: 0.7rem;
+  text-align: center;
+  font-weight: 900;
+  opacity: 0.5;
+}
+
+@media only screen and (max-width: 850px) {
+  .formDiv {
+    overflow: hidden;
+  }
+  .contactHeading {
+    font-size: 2rem;
+  }
+  .formDiv {
+    width: 95vw;
+    border-radius: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 0.5rem;
+  }
+  .formLeftSection {
+    width: 100%;
+    padding: 0;
+  }
+  .leftSectionImg {
+    width: 90%;
+  }
+  .contactDetial > i {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+
+  .contactDetial > p {
+    width: 75%;
+    margin-left: 4%;
+    font-size: 0.9rem;
+  }
+
+  .formRightSection {
+    width: 100%;
+  }
+}

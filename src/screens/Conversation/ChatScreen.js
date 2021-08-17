@@ -10,6 +10,7 @@ import { firstMsgInit, initChatRoom, insertNewMsg } from "../../redux/actions/Ch
 import ScrollableFeed from 'react-scrollable-feed'
 import { toast } from "react-toastify"
 import imageCompression from "browser-image-compression"
+import { motion } from "framer-motion"
 const ChatScreen = () => {
 
     const { id } = useParams();
@@ -274,7 +275,7 @@ const ChatScreen = () => {
 
 
                                                 var isSameDate = index > 0 ? new Date(data.createdAt).getDate() !== new Date(arrayData[index - 1].createdAt).getDate() : true;
-                                               
+
                                                 return (
                                                     <div key={index}>
                                                         {
@@ -286,20 +287,30 @@ const ChatScreen = () => {
                                                         {
                                                             data.msgType === "text"
                                                                 ?
-                                                                <div key={index} className={!isUser ? style.leftMsgContainer : style.rightMsgContainer}>
+                                                                <motion.div
+                                                                    // framer motion animation
+                                                                    animate={{ x: 0, y: 0 }} initial={isUser ? { x: 20, y: 5 } : { x: -20, y: 5 }} transition={{ duration: .2 }}
+                                                                    key={index}
+                                                                    // class as per sender id 
+                                                                    className={!isUser ? style.leftMsgContainer : style.rightMsgContainer}>
                                                                     <p className={!isUser ? (isFirstMessage ? style.leftMsg + " " + style.firstLeftMsg : style.leftMsg) : (isFirstMessage ? style.rightMsg + " " + style.firstRightMsg : style.rightMsg)}>
                                                                         {data.message}
                                                                         <span className={style.msgTime}>{time}</span>
                                                                     </p>
-                                                                </div>
+                                                                </motion.div>
                                                                 :
 
                                                                 <a target="_blank" rel="noreferrer" href={`${ImageUrl}${data.fileUrl}`} key={index} className={style.rightMsgContainer}>
-                                                                    <div className={!isUser ? (isFirstMessage ? style.left_chatImgWrapper + " " + style.firstLeftMsg : style.left_chatImgWrapper) : (isFirstMessage ? style.right_chatImgWrapper + " " + style.firstRightMsg : style.right_chatImgWrapper)}>
+                                                                    <motion.div
+
+                                                                        // framer motion animation
+                                                                        animate={{ x: 0, y: 0 }} initial={isUser ? { x: 20, y: 5 } : { x: -20, y: 5 }} transition={{ duration: .2 }}
+
+                                                                        className={!isUser ? (isFirstMessage ? style.left_chatImgWrapper + " " + style.firstLeftMsg : style.left_chatImgWrapper) : (isFirstMessage ? style.right_chatImgWrapper + " " + style.firstRightMsg : style.right_chatImgWrapper)}>
                                                                         <img className={style.chatImg} src={`${ImageUrl}${data.fileUrl}`} alt={"/images/modiji.jpg"} />
                                                                         {data.message !== "" && <p className={style.right_chatImgCaption}>{data.message}</p>}
                                                                         <span className={style.msgTime}>{time}</span>
-                                                                    </div>
+                                                                    </motion.div>
                                                                 </a>
                                                         }
                                                     </div>
