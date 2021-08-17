@@ -29,8 +29,8 @@ import ContactUs from './screens/ContactUs/ContactUs';
 // import { useEffect } from 'react';
 // import "./utils/Axios"
 
-// axios.defaults.baseURL = 'https://ghar-dekho-backend.herokuapp.com';
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'https://ghar-dekho-backend.herokuapp.com';
+// axios.defaults.baseURL = 'http://localhost:4000';
 // axios.interceptors.request.use(function (config) {
 //   console.log("request ja rahi hai bhai")
 //   console.log(config)
