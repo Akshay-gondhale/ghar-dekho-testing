@@ -137,7 +137,7 @@
   background-color: #f2f3f4;
 }
 .rightMsgContainer {
-  padding: 0.2rem 0rem !important;
+  /* padding: 0.2rem 0rem !important; */
   width: 100%;
   margin: 0 !important;
   height: max-content;
@@ -145,7 +145,7 @@
   justify-content: flex-end;
 }
 .leftMsgContainer {
-  padding: 0.2rem 0rem !important;
+  /* padding: 0.2rem 0rem !important; */
   width: 100%;
   margin: 0 !important;
   height: max-content;
@@ -159,11 +159,17 @@
   justify-content: center;
   align-items: center;
   max-width: 60%;
-  border-radius: 1.2rem;
+  border-radius: .8rem;
   font-size: 0.9rem;
   white-space: pre-line;
+  padding-bottom: .7rem;
+  position: relative;
+  padding-bottom: .9rem;
+  padding-right: 1.7rem;
+  margin-top: 2px;
 }
 .rightMsg {
+  margin-top: 2px !important;
   font-size: 0.9rem;
   margin: 0;
   background-color: #2ecc71;
@@ -171,11 +177,48 @@
   padding: 0.5rem 1.2rem;
   justify-content: center;
   align-items: center;
-  border-radius: 1.2rem;
+  border-radius: .8rem;
   float: right;
   color: #fff;
   max-width: 60%;
   white-space: pre-line;
+  position: relative;
+  padding-bottom: .9rem;
+  padding-right: 1.7rem;
+}
+
+.msgTime{
+  position: absolute;
+  font-size: .6rem;
+  bottom: 0;
+  right: .5rem;
+}
+
+.firstRightMsg{
+  margin-top: .5rem;
+  border-top-right-radius: .2rem !important;
+}
+
+.centerDivWrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: .4rem 0;
+}
+
+.dateStyle{
+  margin: 0;
+  padding:.2rem 1rem;
+  font-size: .9rem;
+  text-align: center;
+  background-color: #ECF0F1;
+  border-radius: 15px;
+}
+
+.firstLeftMsg{
+  margin-top: .5rem;
+  margin-top: 0;
+  border-top-left-radius: .2rem !important;
 }
 
 .right_chatImgWrapper {
@@ -184,15 +227,22 @@
   background-color: #2ecc71;
   padding: 5px;
   overflow: hidden;
-  border-radius: 1.2rem;
+  border-radius: .8rem;
+  padding-bottom: .9rem;
+  position: relative;
+  color: #fff;
+  margin-top: 2px;
 }
 .left_chatImgWrapper {
+  position: relative;
+  margin-top: 2px;
   max-width: 60%;
   flex-direction: column;
   background-color: #eaeded;
   padding: 0px 3px;
   overflow: hidden;
-  border-radius: 1.2rem;
+  border-radius: .8rem;
+  padding-bottom: .9rem;
 }
 .chatImg {
   border-radius: 1.2rem;
@@ -331,9 +381,11 @@ textarea::-webkit-scrollbar-track {
   }
   .leftMsg {
     max-width: 80%;
+    padding-right: .8rem;
   }
   .rightMsg {
     max-width: 80%;
+    padding-right: .8rem;
   }
 
   .inputSection {

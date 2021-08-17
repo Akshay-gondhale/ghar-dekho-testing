@@ -118,6 +118,7 @@ const ChatScreen = () => {
     }
 
     const imageSelector = async (e) => {
+        e.preventDefault()
         if (e.target.files.length > 0 && (e.target.files[0].type === "image/jpeg" || e.target.files[0].type === "image/png")) {
             setIsImgPreviewOpen(true)
             setImageProcessLoading(true)
@@ -167,7 +168,10 @@ const ChatScreen = () => {
         }, (res) => {
             if (res.status === "ok") {
                 setSendMsgLoading(false)
-                closeImgPreview()
+                setImage(null)
+                setImgCaption("")
+                setIsImgPreviewOpen(false)
+
             }
             else {
                 setSendMsgLoading(false)
@@ -175,6 +179,14 @@ const ChatScreen = () => {
             }
         })
     }
+
+    const months = [
+        "Jan", "Feb",
+        "Mar", "Apr", "May",
+        "Jun", "Jul", "Aug",
+        "Sept", "Oct",
+        "Nov", "Dec"
+    ];
     return (
         <>
 
@@ -249,22 +261,44 @@ const ChatScreen = () => {
                                     :
                                     <ScrollableFeed className={style.messagesWrapper}>
                                         {
-                                            chatData.messages.slice(0).reverse().map((data, index) => {
+                                            chatData.messages.slice(0).reverse().map((data, index, arrayData) => {
                                                 const isUser = data.userId === data.senderId;
+                                                const isFirstMessage = index > 0 ? data.senderId !== arrayData[index - 1].senderId : true;
+
+                                                // time stamp
+                                                var utcDate = new Date(data.createdAt);
+                                                var hour = utcDate.getHours() === 0 ? 12 : (utcDate.getHours() > 12 ? utcDate.getHours() - 12 : utcDate.getHours());
+                                                var min = utcDate.getMinutes() < 10 ? '0' + utcDate.getMinutes() : utcDate.getMinutes();
+                                                var ampm = utcDate.getHours() < 12 ? 'AM' : 'PM';
+                                                var time = hour + ':' + min + ' ' + ampm;
+
+
+                                                var isSameDate = index > 0 ? new Date(data.createdAt).getDate() !== new Date(arrayData[index - 1].createdAt).getDate() : true;
+                                               
                                                 return (
                                                     <div key={index}>
+                                                        {
+                                                            isSameDate &&
+                                                            <div className={style.centerDivWrapper}>
+                                                                <p className={style.dateStyle}>{`${new Date(data.createdAt).getDate()} ${months[new Date(data.createdAt).getMonth()]} ${new Date(data.createdAt).getFullYear()}`}</p>
+                                                            </div>
+                                                        }
                                                         {
                                                             data.msgType === "text"
                                                                 ?
                                                                 <div key={index} className={!isUser ? style.leftMsgContainer : style.rightMsgContainer}>
-                                                                    <p className={!isUser ? style.leftMsg : style.rightMsg}>{data.message}</p>
+                                                                    <p className={!isUser ? (isFirstMessage ? style.leftMsg + " " + style.firstLeftMsg : style.leftMsg) : (isFirstMessage ? style.rightMsg + " " + style.firstRightMsg : style.rightMsg)}>
+                                                                        {data.message}
+                                                                        <span className={style.msgTime}>{time}</span>
+                                                                    </p>
                                                                 </div>
                                                                 :
 
                                                                 <a target="_blank" rel="noreferrer" href={`${ImageUrl}${data.fileUrl}`} key={index} className={style.rightMsgContainer}>
-                                                                    <div className={style.right_chatImgWrapper}>
-                                                                        <img className={style.chatImg} src={`${ImageUrl}${data.fileUrl}`} alt="/images/modiji.jpg" />
+                                                                    <div className={!isUser ? (isFirstMessage ? style.left_chatImgWrapper + " " + style.firstLeftMsg : style.left_chatImgWrapper) : (isFirstMessage ? style.right_chatImgWrapper + " " + style.firstRightMsg : style.right_chatImgWrapper)}>
+                                                                        <img className={style.chatImg} src={`${ImageUrl}${data.fileUrl}`} alt={"/images/modiji.jpg"} />
                                                                         {data.message !== "" && <p className={style.right_chatImgCaption}>{data.message}</p>}
+                                                                        <span className={style.msgTime}>{time}</span>
                                                                     </div>
                                                                 </a>
                                                         }
@@ -276,11 +310,11 @@ const ChatScreen = () => {
                                     </ScrollableFeed>
 
                             }
-                            <div className={style.inputSection}>
+                            <form className={style.inputSection}>
                                 {chatData.data._id !== null && chatData.messages.length !== 0 &&
                                     <div className={style.selectFileStyle}>
                                         <i className="fas fa-paperclip"></i>
-                                        <input onChange={(e) => imageSelector(e)} accept=".jpeg, .jpg, .png" className={style.hiddenInputSelect} type="file" />
+                                        <input value="" onChange={(e) => imageSelector(e)} accept=".jpeg, .jpg, .png" className={style.hiddenInputSelect} type="file" />
 
                                     </div>}
                                 <div className={style.textareaWrapper}>
@@ -304,7 +338,7 @@ const ChatScreen = () => {
                                         </div>
                                     }
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 }
