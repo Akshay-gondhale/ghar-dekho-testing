@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/Buttons/PrimaryButton"
 import style from "./Home.module.css"
 const Home = () => {
@@ -8,7 +9,7 @@ const Home = () => {
                 <div className={style.leftDiv}>
                     <p className={style.logo}><span className={style.greenLogo}>Ghar</span>Dekho</p>
                     <p className={style.slogan}>One of the best site to browse home across Bhiwandi.</p>
-                    <div><PrimaryButton heading={`Know More <i class="fas fa-arrow-circle-right"></i>`} /></div>
+                    <Link to="/about"><PrimaryButton heading={`Know More <i class="fas fa-arrow-circle-right"></i>`} /></Link>
                 </div>
                 <div className={style.rightDiv}>
                     <img className={style.bannerImg} src="/images/homeBanner.svg" alt="..."/>
@@ -46,7 +47,7 @@ const Home = () => {
                 <div className={style.infoDataCenter}>
                     <p className={style.infoHeadingCenter}>Excited To Browse Homes?</p>
                     <p className={style.infoTxtCenter}>Click the below button to find best deals across the Bhiwandi!</p>
-                    <div className={style.browseBtn}><PrimaryButton heading={`Browse <i class="fas fa-rocket"></i>`} /></div>
+                    <Link to="/properties" className={style.browseBtn}><PrimaryButton heading={`Browse <i class="fas fa-rocket"></i>`} /></Link>
                 </div>
                 <div className={style.infoImgCenter}>
                     <img src="/images/excitedToBrowseHomes.svg" alt="..." />

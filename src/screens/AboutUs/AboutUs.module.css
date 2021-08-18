@@ -1,0 +1,302 @@
+.mainDiv{
+    
+    font-family: "Poppins", sans-serif;
+}
+.bannerDiv{
+    min-height: 80vh;
+    max-height: 70rem;
+    /* background-color: red; */
+    position: relative;
+    z-index: -100;
+    padding-bottom: 17rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 8rem;
+}
+
+.bannerDiv::before{
+    content: "";
+    position: absolute;
+    top: -25%;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    transform: skewY(353deg);
+    background-image: linear-gradient(90deg, #98fb98, #3cb371);
+    z-index: -10;
+}
+
+.mainHeading{
+    margin: 0;
+    padding: 0;
+    font-size: 2.5rem;
+    color: #fff;
+    font-weight: 900;
+    text-align: center;
+}
+.headingDivider{
+    background-color: #fe676e;
+    height: 3px;
+    width: 25rem;
+}
+.aboutUsNote{
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 1rem 2rem;
+    width: 90vw;
+    max-width: 90rem;
+    margin: 0 auto;
+    margin-top: -14rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+.noteRightSection{
+    width: 47%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noteRightSection > img{
+    width: 75%;
+    object-fit: c;
+}
+.noteLeftSection{
+    width: 50%;
+}
+.noteHeading{
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-decoration: underline;
+    margin: 0;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.notePara{
+    margin: 0;
+    padding: 0;
+    font-size: .95rem;
+    opacity: .8;
+}
+
+.contactUsLink{
+    text-decoration: underline !important;
+}
+.noteThankYou{
+    font-size: 1.1rem;
+    font-weight: 900;
+    opacity: 1;
+    margin-top: .5rem;
+}
+
+.ourServices{
+    margin: 0 auto;
+    padding: 2rem 2rem;
+    width: 90vw;
+    max-width: 90rem;
+}
+.ourServicesHeading{
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 900;
+}
+.cardsWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.serviceCard{
+    width: 17rem;
+    height: 20rem;
+    overflow: hidden;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    margin: .5rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 14px;
+    transition: .2s;
+}
+.serviceCard:hover{
+    transform: scale(1.05);
+    transition: .2s;
+    cursor: pointer;
+}
+
+.serviceCard > img{
+    width: 80%;
+    object-fit: contain;
+}
+
+.cardPara{
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.ourTeam{
+    margin: 0 auto;
+    padding: 2rem 2rem;
+    width: 90vw;
+    max-width: 90rem;
+
+}
+
+.innerOurServicesDiv{
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+.textWrapperDiv{
+    width: 45%;
+    margin-right: 5%;
+    min-height: 100%;
+}
+
+.teamPara{
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.teamQuote{
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-style: italic;
+    text-decoration: underline;
+
+}
+
+.ourTeamImgWrapper{
+    max-width: 40%;
+    width: 35rem;
+    border-radius: 1.5rem;
+    max-height: 25rem;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  
+    margin: 1rem 0;
+}
+
+.ourTeamImgWrapper > img{
+    object-fit: cover;
+    width: 100%;
+}
+
+.projectDetails{
+    margin: 0 auto;
+    padding: 2rem 2rem;
+    width: 90vw;
+    max-width: 90rem;
+
+}
+
+.technologiesWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.projectSubHeading{
+    text-align: center;
+    margin-top: -1rem;
+
+}
+
+.technologyCard{
+    width: 13rem;
+    height: 8rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: .5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: #fff;
+}
+
+.technologyCard > img{
+    width: 95%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+@media only screen and (max-width: 850px) {
+    .bannerDiv{
+        padding-bottom: 10rem;
+        padding-top: 0rem;
+        min-height: 60vh;
+        
+    }
+    
+    .noteRightSection{
+        display: none;
+    }
+
+    .mainHeading{
+        font-size: 2rem;
+    }
+    .headingDivider{
+        background-color: #fe676e;
+        height: 3px;
+        width: 14rem;
+    }
+    .noteLeftSection{
+        width: 100%;
+    }
+    .innerOurServicesDiv{
+        flex-direction: column-reverse;
+    }
+    .textWrapperDiv{
+        width: 100%;
+        margin-right: 0%;
+    }
+    
+    .teamPara{
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+    
+    .teamQuote{
+        font-size: 1.6rem;
+        font-weight: 600;
+        font-style: italic;
+        text-decoration: underline;
+    
+    }
+    
+    .ourTeamImgWrapper{
+        max-width: 100%;
+        min-width: 100%;
+        max-height: 20rem;
+    }
+    .ourServices{
+        padding: 2rem 1rem;
+        width: 97vw;
+    }
+    .ourTeam{
+        padding: 2rem 1rem;
+        width: 97vw;
+    
+    }
+    .projectDetails{
+        padding: 2rem 1rem;
+        width: 97vw;
+    
+    }
+    .technologyCard{
+        width: 100%;
+    }
+}

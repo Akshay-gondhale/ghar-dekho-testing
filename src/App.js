@@ -4,7 +4,7 @@ import Login from './screens/Login/Login';
 import Registration from './screens/Registration/Registration';
 import ForgotPassword from "./screens/ForgotPassword/ForgotPassword"
 import PostProperty from "./screens/PostProperty/PostProperty"
-import PendingScreen from "./screens/PendingScreen"
+// import PendingScreen from "./screens/PendingScreen"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -26,6 +26,7 @@ import SingleProperty from './screens/Properties/SingleProperty';
 import ChatScreen from './screens/Conversation/ChatScreen';
 import Temp from './screens/Temp';
 import ContactUs from './screens/ContactUs/ContactUs';
+import AboutUs from './screens/AboutUs/AboutUs';
 // import { useEffect } from 'react';
 // import "./utils/Axios"
 
@@ -60,12 +61,12 @@ function App() {
               <Navbar />
               <Route exact path='/' component={Home} />
               <Route exact path='/properties' component={Properties} />
+              <Route exact path='/about' component={AboutUs} />
               <Route exact path='/contact' component={ContactUs} />
               <Route exact path='/temp' component={Temp} />
               <ProtectedRoutes exact path='/properties/:id' component={SingleProperty} />
               <ProtectedRoutes exact path='/profile' component={Profile} />
               <ProtectedRoutes exact path='/profile/home/:id' component={SingleHome} />
-              <ProtectedRoutes exact path='/about' component={PendingScreen} />
               <ProtectedRoutes exact path='/post-property' component={PostProperty} />
               <ProtectedRoutes exact path="/conversation" component={Conversation} />
               <ProtectedRoutes exact path='/conversation/chat/:id' component={ChatScreen} />
