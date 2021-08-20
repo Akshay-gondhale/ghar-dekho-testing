@@ -48,7 +48,7 @@ const getUser = () => {
                     console.log("got user from db", res.data.data[0])
                     dispatch({
                         type: AuthAction.GET_USER_SUCCESS, payload: {
-                            _id:res.data.data[0]._id,
+                            _id: res.data.data[0]._id,
                             name: res.data.data[0].name,
                             phone: res.data.data[0].phone,
                             email: res.data.data[0].email,
@@ -89,7 +89,7 @@ const updateProfile = (formData, toast, history, setIsLoading) => {
             .then(res => {
                 dispatch({
                     type: AuthAction.PROFILE_UPDATE_SUCCESS, payload: {
-                        _id:res.data.data[0]._id,
+                        _id: res.data.data[0]._id,
                         name: res.data.data[0].name,
                         phone: res.data.data[0].phone,
                         email: res.data.data[0].email,
@@ -120,9 +120,23 @@ const updateProfile = (formData, toast, history, setIsLoading) => {
     }
 }
 
+const LogoutUser = (toast) => {
+    return async (dispatch) => {
+        try{
+            dispatch({type:AuthAction.LOGOUT_SUCCESS, payload:{}})
+            toast.success("Logout successfully.!")
+        }
+        catch(e){
+            console.log(e)
+            toast.error("Can't log you out. Something went wrong :(")
+
+        }
+    }
+}
 export {
     RegisterAuthAction,
     LoginAuthAction,
     getUser,
-    updateProfile
+    updateProfile,
+    LogoutUser
 }

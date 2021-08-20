@@ -185,4 +185,8 @@
   .formRightSection {
     width: 100%;
   }
+
+  .upperDiv {
+    max-height: 50rem;
+  }
 }

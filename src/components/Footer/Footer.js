@@ -20,7 +20,7 @@ const Footer = () => {
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/properties">Properties</Link></li>
                         <li><Link to="/contact">Contact Us</Link></li>
-                        <li><Link to="/PostProperty">Rent/Sell Home</Link></li>
+                        <li><Link to="/post-property">Rent/Sell Home</Link></li>
                     </div>
                     <div className={style.about + " " + style.mob_footer}>
                         <p className={style.footer_heading}>Contact Details </p>

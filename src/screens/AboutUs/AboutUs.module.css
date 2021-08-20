@@ -236,9 +236,13 @@
 @media only screen and (max-width: 850px) {
     .bannerDiv{
         padding-bottom: 10rem;
-        padding-top: 0rem;
+        padding-top: 5rem;
         min-height: 60vh;
+        max-height: 50rem;
         
+    }
+    .aboutUsNote{
+        margin-top: -8rem;
     }
     
     .noteRightSection{

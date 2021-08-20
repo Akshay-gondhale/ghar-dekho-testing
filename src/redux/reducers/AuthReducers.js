@@ -4,14 +4,14 @@ import { AuthAction } from "../constants/AuthActionsTypes";
 const authState = {
     isLoggedIn: null,
     user: {
-        _id:"",
+        _id: "",
         name: "",
         email: "",
         phone: "",
-        image:"",
+        image: "",
         jwt: "",
         expires: "",
-        createdAt:""
+        createdAt: ""
     }
 };
 
@@ -19,20 +19,20 @@ const authState = {
 export const AuthReducer = (state = authState, { type, payload }) => {
     switch (type) {
         case AuthAction.REGISTER_SUCCESS:
-            
+
             axios.defaults.headers.common['Authorization'] = `Bearer ${payload.token}`;
             localStorage.setItem("auth", JSON.stringify({ jwt: payload.token, expires: payload.expires }));
-            return{
+            return {
                 isLoggedIn: true,
                 user: {
-                    _id:payload._id,
+                    _id: payload._id,
                     name: payload.name,
                     phone: payload.phone,
                     email: payload.email,
-                    image:payload.image,
+                    image: payload.image,
                     jwt: payload.token,
                     expires: payload.expires,
-                    createdAt:payload.createdAt
+                    createdAt: payload.createdAt
                 }
             }
 
@@ -40,14 +40,14 @@ export const AuthReducer = (state = authState, { type, payload }) => {
             return {
                 isLoggedIn: false,
                 user: {
-                    _id:"",
+                    _id: "",
                     name: "",
                     phone: "",
                     email: "",
-                    image:"",
+                    image: "",
                     jwt: "",
                     expires: "",
-                    createdAt:""
+                    createdAt: ""
                 }
             };
         case AuthAction.LOGIN_SUCCESS:
@@ -55,14 +55,14 @@ export const AuthReducer = (state = authState, { type, payload }) => {
             const newAuthState = {
                 isLoggedIn: true,
                 user: {
-                    _id:payload._id,
+                    _id: payload._id,
                     name: payload.name,
                     phone: payload.phone,
                     email: payload.email,
-                    image:payload.image,
+                    image: payload.image,
                     jwt: payload.token,
                     expires: payload.expires,
-                    createdAt:payload.createdAt
+                    createdAt: payload.createdAt
                 }
             };
             localStorage.setItem("auth", JSON.stringify({ jwt: newAuthState.user.jwt, expires: newAuthState.user.expires }));
@@ -71,62 +71,78 @@ export const AuthReducer = (state = authState, { type, payload }) => {
             return {
                 isLoggedIn: false,
                 user: {
-                    _id:"",
+                    _id: "",
                     name: "",
                     phone: "",
                     email: "",
-                    image:"",
+                    image: "",
                     jwt: "",
                     expires: "",
-                    createdAt:""
+                    createdAt: ""
                 }
             };
 
         case AuthAction.GET_USER_SUCCESS:
             axios.defaults.headers.common['Authorization'] = `Bearer ${payload.jwt}`;
-            return  {
+            return {
                 isLoggedIn: true,
                 user: {
-                    _id:payload._id,
+                    _id: payload._id,
                     name: payload.name,
                     phone: payload.phone,
                     email: payload.email,
-                    image:payload.image,
+                    image: payload.image,
                     jwt: payload.jwt,
                     expires: payload.expires,
-                    createdAt:payload.createdAt
+                    createdAt: payload.createdAt
                 }
             };
         case AuthAction.GET_USER_FAIL:
             return {
                 isLoggedIn: false,
                 user: {
-                    _id:"",
+                    _id: "",
                     name: "",
                     phone: "",
                     email: "",
-                    image:"",
+                    image: "",
                     jwt: "",
                     expires: "",
-                    createdAt:""
+                    createdAt: ""
                 }
             };
         case AuthAction.PROFILE_UPDATE_SUCCESS:
-            return  {
+            return {
                 isLoggedIn: true,
                 user: {
-                    _id:payload._id,
+                    _id: payload._id,
                     name: payload.name,
                     phone: payload.phone,
                     email: payload.email,
-                    image:payload.image,
+                    image: payload.image,
                     jwt: payload.jwt,
                     expires: payload.expires,
-                    createdAt:payload.createdAt
+                    createdAt: payload.createdAt
                 }
             };
-            
-            default:
+
+        case AuthAction.LOGOUT_SUCCESS:
+            localStorage.removeItem("auth");
+            return {
+                isLoggedIn: false,
+                user: {
+                    _id: "",
+                    name: "",
+                    email: "",
+                    phone: "",
+                    image: "",
+                    jwt: "",
+                    expires: "",
+                    createdAt: ""
+                }
+            };
+
+        default:
             return state;
     }
 };

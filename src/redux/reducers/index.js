@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 import {AuthReducer} from "./AuthReducers"
 import {ProfileDataReducer,NotificationDataReducer} from "./ProfileDataReducers"
 import { SingleHomeDataReducer, othersSingleHomeDataReducer } from "./SingleHomeDataReducers";
-import { PropertiesDataReducer } from "./PropertiesDataReducer";
+import { SavedPropertiesDataReducer,PropertiesDataReducer } from "./PropertiesDataReducer";
 import { ConversationDataReducer } from "./ConversationDataReducer";
 import { ChatDataReducer } from "./ChatDataReducer";
 
@@ -15,7 +15,8 @@ const reducers = combineReducers({
   PropertiesDataReducer,
   othersSingleHomeDataReducer,
   ConversationDataReducer,
-  ChatDataReducer
+  ChatDataReducer,
+  SavedPropertiesDataReducer
 });
 
 export default reducers;

@@ -69,6 +69,9 @@ const AboutUs = () => {
                             <img src="/images/technologies/react.png" alt="..."/>
                         </div>
                         <div className={style.technologyCard}>
+                            <img src="/images/technologies/redux.png" alt="..."/>
+                        </div>
+                        <div className={style.technologyCard}>
                             <img src="/images/technologies/node.png" alt="..."/>
                         </div>
                         <div className={style.technologyCard}>

@@ -27,11 +27,12 @@ import ChatScreen from './screens/Conversation/ChatScreen';
 import Temp from './screens/Temp';
 import ContactUs from './screens/ContactUs/ContactUs';
 import AboutUs from './screens/AboutUs/AboutUs';
+import {BaseApi} from "./utils/BaseApi"
+import SavedHomes from "./screens/SavedHomes/SavedHomes"
 // import { useEffect } from 'react';
 // import "./utils/Axios"
 
-axios.defaults.baseURL = 'https://ghar-dekho-backend.herokuapp.com';
-// axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = BaseApi;
 // axios.interceptors.request.use(function (config) {
 //   console.log("request ja rahi hai bhai")
 //   console.log(config)
@@ -69,6 +70,7 @@ function App() {
               <ProtectedRoutes exact path='/profile/home/:id' component={SingleHome} />
               <ProtectedRoutes exact path='/post-property' component={PostProperty} />
               <ProtectedRoutes exact path="/conversation" component={Conversation} />
+              <ProtectedRoutes exact path="/saved-homes" component={SavedHomes} />
               <ProtectedRoutes exact path='/conversation/chat/:id' component={ChatScreen} />
               <Footer />
           </>
