@@ -32,7 +32,13 @@
   justify-content: center;
   align-items: center;
 }
-
+.loadingSpinnerWrapper{
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @media only screen and (max-width: 850px) {
   .PropertiesWrapper {
     margin: 0 1rem;

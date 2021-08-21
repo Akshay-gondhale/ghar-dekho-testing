@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
 import style from "./AboutUs.module.css"
+import { motion } from "framer-motion";
 const AboutUs = () => {
     return (
         <>
             <div className={style.mainDiv}>
                 <div className={style.bannerDiv}>
-                    <p className={style.mainHeading}>Hii! there :)</p>
-                    <p className={style.mainHeading}>We are GharDekho team.</p>
+                    <motion.p initial={{y:-20}} animate={{y:0}} transition={{duration:.5}}  className={style.mainHeading}>Hii! there :)</motion.p>
+                    <motion.p initial={{y:-20}} animate={{y:0}} transition={{duration:.5}}  className={style.mainHeading}>We are GharDekho team.</motion.p>
                     <span className={style.headingDivider}></span>
                 </div>
-                <div className={style.aboutUsNote}>
+                <motion.div initial={{y:-20}} animate={{y:0}} transition={{duration:.5}}  className={style.aboutUsNote}>
                     <div className={style.noteLeftSection}>
                         <p className={style.noteHeading}>A couple of words about us</p>
                         <p className={style.notePara}>Here we introducing an all new specialized home browsing site for people of Bhiwandi. "GharDekho.!". GharDekho is customized and highly specialized for people of Bhiwandi. We provide best options for buying and selling homes across all over Bhiwandi. All homes uploaded on website are verified by actually visiting to home by our brokers. So user can find best home for them without any hesitation. All the searching option likes Home Type, Parking available or not, etc. are available on site. So user can easily find best home for him by using filter section. And also uploading an home is a very easy process. User can easily sell or rent their home on our website by just visiting Sell/Rent Section. All the process of uploading home on site and browsing and finding home for user them self are totally free of cost. User's can sell or browse home to buy are totally free. After all of this if you have any kind of doubt in your mind or have any queries, you can contact us in our <Link className={style.contactUsLink} to="/contact">Contact Us</Link> section. Either you can get in touch by information present in Contact Us section or can simply drop a message for us. We are always there for your queries. After receiving your query we will contact you as soon as possible. <br /><span className={style.noteThankYou}>Thank You.!</span></p>
@@ -17,7 +18,7 @@ const AboutUs = () => {
                     <div className={style.noteRightSection}>
                         <img src="/images/about_us_banner.svg" alt="..." />
                     </div>
-                </div>
+                </motion.div>
                 <div className={style.ourServices}>
                     <p className={style.ourServicesHeading}>Our Services</p>
                     <div className={style.cardsWrapper}>

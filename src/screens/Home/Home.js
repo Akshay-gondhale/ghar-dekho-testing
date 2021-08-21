@@ -2,18 +2,19 @@
 import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/Buttons/PrimaryButton"
 import style from "./Home.module.css"
+import { motion } from "framer-motion";
 const Home = () => {
     return (
         <>
             <div className={style.homeBanner}>
                 <div className={style.leftDiv}>
-                    <p className={style.logo}><span className={style.greenLogo}>Ghar</span>Dekho</p>
-                    <p className={style.slogan}>One of the best site to browse home across Bhiwandi.</p>
-                    <Link to="/about"><PrimaryButton heading={`Know More <i class="fas fa-arrow-circle-right"></i>`} /></Link>
+                    <motion.p initial={{y:-20}} animate={{y:0}} transition={{duration:.5}} className={style.logo}><span className={style.greenLogo}>Ghar</span>Dekho</motion.p>
+                    <motion.p initial={{y:-20}} animate={{y:0}} transition={{duration:.5}} className={style.slogan}>One of the best site to browse home across Bhiwandi.</motion.p>
+                    <Link to="/about"><motion.div initial={{y:-20}} animate={{y:0}} transition={{duration:.5}} ><PrimaryButton heading={`Know More <i class="fas fa-arrow-circle-right"></i>`} /></motion.div></Link>
                 </div>
-                <div className={style.rightDiv}>
+                <motion.div initial={{y:-50}} animate={{y:0}} transition={{duration:.5}}  className={style.rightDiv}>
                     <img className={style.bannerImg} src="/images/homeBanner.svg" alt="..."/>
-                </div>
+                </motion.div>
             </div>
             <div className={style.infoDivRight}>
                 <div className={style.infoDataRight}>

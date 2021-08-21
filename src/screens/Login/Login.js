@@ -16,7 +16,8 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false)
 
 
-    const submitLogin = () => {
+    const submitLogin = (e) => {
+        e.preventDefault();
         if (phone.length === 0) {
             toast.error("Please provide a phone number.! 😔", {})
         }
@@ -40,7 +41,7 @@ const Login = () => {
                 </div>
                 <div className={style.rightDiv}>
                     <h4 className={style.heading}>Login</h4>
-                    <div className={style.inputDivWrapper}>
+                    <form className={style.inputDivWrapper}>
                         <div className={style.inputWrapper}>
                             <p className={style.inputLabel}>Phone</p>
                             <input className={style.inputTag} value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Enter phone" type="number" />
@@ -53,9 +54,9 @@ const Login = () => {
                             <Link to="/forgot-password"><p className={style.inputRightData}>Forgot Password?</p></Link>
                         </div>
 
-                        <div onClick={() => { submitLogin() }} className={style.buttonWrapper}>
+                        <div className={style.buttonWrapper}>
                             <div className={style.buttonWithLoading}>
-                                <PrimaryButton heading='Login <i class="fas fa-arrow-circle-right"></i>' />
+                                <button  onClick={(e) => { !isLoading && submitLogin(e) }} className={style.btnStyle}><PrimaryButton heading='Login <i class="fas fa-arrow-circle-right"></i>' /></button>
                                 <div className={isLoading ? "spinner-border text-success " + style.spinnerStyle : style.hidden} role="status">
                                     <span className="visually-hidden">Loading...</span>
                                 </div>
@@ -63,7 +64,7 @@ const Login = () => {
                         </div>
                         <p className={style.signupTag}>Don't Have Account? <Link to="/sign-up"><span className={style.linkStyle}>Sign In</span></Link> </p>
 
-                    </div>
+                    </form>
                 </div>
             </div>
         </React.Fragment>

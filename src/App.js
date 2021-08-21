@@ -27,8 +27,9 @@ import ChatScreen from './screens/Conversation/ChatScreen';
 import Temp from './screens/Temp';
 import ContactUs from './screens/ContactUs/ContactUs';
 import AboutUs from './screens/AboutUs/AboutUs';
-import {BaseApi} from "./utils/BaseApi"
+import { BaseApi } from "./utils/BaseApi"
 import SavedHomes from "./screens/SavedHomes/SavedHomes"
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 // import { useEffect } from 'react';
 // import "./utils/Axios"
 
@@ -52,13 +53,13 @@ function App() {
     <div className="App">
 
       <Router>
-
-      <Switch>
-        <AuthRoutes path='/login' component={Login} />
-        <AuthRoutes exact path='/sign-up' component={Registration} />
-        <AuthRoutes exact path='/forgot-password' component={ForgotPassword} />
-        {isLoggedIn === null ? <GlobalLoader /> :
-          <>
+        <ScrollToTop />
+        <Switch>
+          <AuthRoutes path='/login' component={Login} />
+          <AuthRoutes exact path='/sign-up' component={Registration} />
+          <AuthRoutes exact path='/forgot-password' component={ForgotPassword} />
+          {isLoggedIn === null ? <GlobalLoader /> :
+            <>
               <Navbar />
               <Route exact path='/' component={Home} />
               <Route exact path='/properties' component={Properties} />
@@ -73,8 +74,8 @@ function App() {
               <ProtectedRoutes exact path="/saved-homes" component={SavedHomes} />
               <ProtectedRoutes exact path='/conversation/chat/:id' component={ChatScreen} />
               <Footer />
-          </>
-        }
+            </>
+          }
         </Switch>
       </Router>
       <ToastContainer

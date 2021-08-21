@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LogoutUser } from "../../redux/actions/AuthActions";
+import { motion } from "framer-motion";
 import style from "./Navbar.module.css"
 const ImagUrl = "https://storage.googleapis.com/ghardekho-c3029.appspot.com/";
 const Navbar = () => {
@@ -38,20 +39,30 @@ const Navbar = () => {
     const userLogout = () => {
         dispatch(LogoutUser(toast))
     }
+
+    const logoutVariants = {
+        visible: {  y: 0, opacity: 1 },
+        hidden: { y: -50, opacity: 0 },
+      }
     return (
         <>
             {
                 isLogout &&
                 <div className={style.logoutDiv}>
-                    <div className={style.logoutWrapper}>
+                    <motion.div
+                        initial="hidden"
+                        animate={isLogout ? "visible" : "hidden"}
+                        transition={{ duration: .5 }}
+                        variants={logoutVariants}
+                        className={style.logoutWrapper}>
                         <img src="/images/logout.svg" alt="..." />
                         <p className={style.logoutMainHeading}>Confirm Logout?</p>
                         <p className={style.logoutSubHeading}>We will miss you!</p>
                         <div className={style.logoutBtnWrapper}>
                             <Link className={style.logoutBtn} onClick={() => userLogout()} to="/login">Logout</Link>
-                            <li onClick={()=>setIsLogout(false)}>Cancel</li>
+                            <li onClick={() => setIsLogout(false)}>Cancel</li>
                         </div>
-                    </div>
+                    </motion.div>
 
                 </div>
             }

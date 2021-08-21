@@ -125,7 +125,7 @@
   border-radius: 10px;
   max-height: 5rem;
   resize: none;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 6px;
 }
 .submitDataWrapper {
   display: flex;

@@ -193,6 +193,7 @@ const Properties = () => {
                             <div className={style.PropertiesWrapper}>
                                 {properties.data.map((data, index) => {
                                     return (
+                                        
                                         <SingleProperty
                                             key={index}
                                             id={data.shortId}

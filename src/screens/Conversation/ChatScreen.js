@@ -289,7 +289,7 @@ const ChatScreen = () => {
                                                                 ?
                                                                 <motion.div
                                                                     // framer motion animation
-                                                                    animate={{ x: 0, y: 0 }} initial={isUser ? { x: 20, y: 5 } : { x: -20, y: 5 }} transition={{ duration: .2 }}
+                                                                    animate={{ x: 0, y: 0, opacity:1 }} initial={isUser ? { x: 20, y: 5, opacity:0 } : { x: -20, y: 5, opacity:0 }} transition={{ duration: .2 }}
                                                                     key={index}
                                                                     // class as per sender id 
                                                                     className={!isUser ? style.leftMsgContainer : style.rightMsgContainer}>
@@ -304,7 +304,7 @@ const ChatScreen = () => {
                                                                     <motion.div
 
                                                                         // framer motion animation
-                                                                        animate={{ x: 0, y: 0 }} initial={isUser ? { x: 20, y: 5 } : { x: -20, y: 5 }} transition={{ duration: .2 }}
+                                                                        animate={{ x: 0, y: 0 , opacity:1}} initial={isUser ? { x: 20, y: 5, opacity:0 } : { x: -20, y: 5, opacity:0 }} transition={{ duration: .2 }}
 
                                                                         className={!isUser ? (isFirstMessage ? style.left_chatImgWrapper + " " + style.firstLeftMsg : style.left_chatImgWrapper) : (isFirstMessage ? style.right_chatImgWrapper + " " + style.firstRightMsg : style.right_chatImgWrapper)}>
                                                                         <img className={style.chatImg} src={`${ImageUrl}${data.fileUrl}`} alt={"/images/modiji.jpg"} />
