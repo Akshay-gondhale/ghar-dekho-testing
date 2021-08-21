@@ -166,10 +166,7 @@ const Chats = async (socket) => {
     socket.on("user-newMsg", async (data, callback) => {
         const { userId, chatRoomId, brokerId, message, msgType } = data;
 
-        console.log(chatRoomId)
         const foundChatRoom = await ChatRoom.findById(chatRoomId);
-        console.log(foundChatRoom)
-
         const createChatMsg = new Chat({
             userId,
             chatRoomId,
@@ -197,7 +194,6 @@ const Chats = async (socket) => {
             const { userId, chatRoomId, brokerId, message, msgType, blobData } = data;
             const fileExtArray = data.fileName.split(".")
             const fileExt = fileExtArray[fileExtArray.length - 1]
-            console.log(fileExt)
             const fileName = "Chat__" + Date.now() + "." + fileExt;
             var imagePath = path.join(__dirname, "../LocalStorage/") + fileName;
             var destinationPath = "Chat/" + fileName;
@@ -207,7 +203,6 @@ const Chats = async (socket) => {
                 await fs.unlinkSync(imagePath);
                 console.log("file uploaded")
                 const foundChatRoom = await ChatRoom.findById(chatRoomId);
-                console.log(foundChatRoom)
 
                 const createChatMsg = new Chat({
                     userId,

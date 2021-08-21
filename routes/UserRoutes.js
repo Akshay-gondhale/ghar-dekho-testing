@@ -17,7 +17,9 @@ const {
     getOthersPropertyById,
     removeSavedHome,
     createChatRoom,
-    createMsg
+    createMsg,
+    getSavedHomes,
+    PostContactUsMessage
 } = require("../controllers/UserController");
 const router = express.Router();
 
@@ -28,6 +30,7 @@ router.post("/register", register);
 router.post("/login", login);
 router.put("/resetPassword", resetPassword);
 router.get("/getProperties", getProperties);
+router.post("/contactUsMessage", PostContactUsMessage)
 
 router.use(require("../middlewares/AuthUser"));
 
@@ -39,6 +42,7 @@ router.get("/notifications", getNotifications);
 router.get("/home/:id", getHomeById)
 router.put("/setHomeUnavailable/:id", setHomeUnAvailable);
 router.get("/getProperties", getProperties);
+router.get("/getSavedHomes", getSavedHomes);
 router.post("/saveProperty/:propertyId", saveHome)
 router.delete("/removeSaveProperty/:propertyId", removeSavedHome)
 router.get("/property/:id", getOthersPropertyById)

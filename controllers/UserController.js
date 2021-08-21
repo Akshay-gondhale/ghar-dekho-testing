@@ -12,6 +12,7 @@ const { nanoid } = require('nanoid');
 var ObjectId = require('mongodb').ObjectID;
 const ChatRoom = require("../models/ChatRoomsModel");
 const chatModel = require("../models/ChatModel");
+const contactUsMessage = require("../models/ContactUsMessageModel");
 
 // const pipeline = [
 //     {
@@ -700,8 +701,8 @@ const getOthersPropertyById = async (req, res) => {
 }
 
 const createChatRoom = async (req, res) => {
-    try{
-        const {_id} = req.user;
+    try {
+        const { _id } = req.user;
         const {
             propertyId,
             brokerId,
@@ -710,18 +711,18 @@ const createChatRoom = async (req, res) => {
         } = req.body
 
         const createChatRoom = new ChatRoom({
-            userId:_id,
+            userId: _id,
             propertyId,
             brokerId,
             lastMsg,
             lastMsgType,
-            isUserSeen:true,
-            isBrokerSeen:false
+            isUserSeen: true,
+            isBrokerSeen: false
         })
         const insertChatRoom = await createChatRoom.save();
         res.status(200).json({
-            message:"Room Created",
-            data:[insertChatRoom]
+            message: "Room Created",
+            data: [insertChatRoom]
         })
     }
     catch (e) {
@@ -734,8 +735,8 @@ const createChatRoom = async (req, res) => {
 }
 
 const createMsg = async (req, res) => {
-    try{
-        const {userId, chatRoomId, brokerId, message,msgType} = req.body;
+    try {
+        const { userId, chatRoomId, brokerId, message, msgType } = req.body;
         const createChatMsg = new chatModel({
             userId,
             chatRoomId,
@@ -746,8 +747,8 @@ const createMsg = async (req, res) => {
 
         const insertChatMsg = await createChatMsg.save();
         res.status(200).json({
-            message:"Chat message inserted",
-            data:[insertChatMsg]
+            message: "Chat message inserted",
+            data: [insertChatMsg]
         })
 
     }
@@ -755,6 +756,87 @@ const createMsg = async (req, res) => {
         console.log(e)
         res.status(500).json({
             message: "Something went wrong!",
+            data: []
+        })
+    }
+}
+
+const getSavedHomes = async (req, res) => {
+    try {
+        var { _id } = req.user;
+        var { id, recordsPerPage } = req.query;
+        // console.log({ id, recordsPerPage })
+
+        if (typeof recordsPerPage == "undefined") {
+            // if no recordsPerPage is not passed in request then records will set to default value 5
+            recordsPerPage = 20;
+        }
+
+        var query = {};
+
+        if (id) {
+            query._id = { $lt: id };
+        }
+        var foundProperties = await SavedHome.find(query)
+            .sort({ createdAt: -1 })
+            .limit(parseInt(recordsPerPage))
+            .populate("propertyId");
+        var isNext = await SavedHome.find(query)
+            .sort({ createdAt: -1 })
+            .limit(parseInt(recordsPerPage) + 1)
+            .countDocuments();
+
+        var isNextAvailable;
+        if (isNext > parseInt(recordsPerPage)) {
+            // if next page is available
+            isNextAvailable = true;
+            lastId = foundProperties[parseInt(recordsPerPage) - 1]._id;
+        } else {
+            // if next is not available
+            isNextAvailable = false;
+            lastId = null;
+        }
+        res.status(200).json({
+            message: "Found Properties",
+            data: [
+                {
+                    lastId,
+                    isNextAvailable,
+                    data: foundProperties,
+                },
+            ],
+        });
+
+    }
+    catch (e) {
+        console.log(e)
+        res.status(500).json({
+            message: "Something went wrong..!",
+            data: []
+        })
+
+    }
+}
+
+const PostContactUsMessage = async (req, res) => {
+    try {
+        const { name, phone, message } = req.body
+        const createContactMessage = new contactUsMessage({
+            name,
+            phone,
+            message
+        })
+        const insertContactMessage = await createContactMessage.save();
+        res.status(200).json({
+            message:"Contact Us Message Inserted",
+            data:[insertContactMessage]
+        })
+
+    }
+    catch (e) {
+        console.log(e)
+        res.status(503).json({
+            message: "Something went wrong",
             data: []
         })
     }
@@ -777,5 +859,7 @@ module.exports = {
     removeSavedHome,
     getOthersPropertyById,
     createChatRoom,
-    createMsg
+    createMsg,
+    getSavedHomes,
+    PostContactUsMessage
 }
