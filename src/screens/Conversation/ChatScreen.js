@@ -275,7 +275,8 @@ const ChatScreen = () => {
                                                                 </motion.div>
                                                                 :
 
-                                                                <a target="_blank" rel="noreferrer" href={`${ImageUrl}${data.fileUrl}`} key={index}>
+                                                                <a target="_blank" rel="noreferrer" href={`${ImageUrl}${data.fileUrl}`} key={index}
+                                                                className={!isUser ? style.leftMsgContainer : style.rightMsgContainer}>
                                                                     <motion.div
 
                                                                         // framer motion animation
@@ -283,7 +284,7 @@ const ChatScreen = () => {
 
                                                                         className={!isUser ? (isFirstMessage ? style.left_chatImgWrapper + " " + style.firstLeftMsg : style.left_chatImgWrapper) : (isFirstMessage ? style.right_chatImgWrapper + " " + style.firstRightMsg : style.right_chatImgWrapper)}>
                                                                         <img className={style.chatImg} src={`${ImageUrl}${data.fileUrl}`} alt={"/images/modiji.jpg"} />
-                                                                        {data.message !== "" && <p className={style.right_chatImgCaption}>{data.message}</p>}
+                                                                        {data.message !== "" && <p className={!isUser ? style.left_chatImgCaption :style.right_chatImgCaption}>{data.message}</p>}
                                                                         <span className={style.msgTime}>{time}</span>
                                                                     </motion.div>
                                                                 </a>

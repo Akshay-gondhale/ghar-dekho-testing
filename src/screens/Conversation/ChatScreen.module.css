@@ -248,7 +248,8 @@
   border-radius: .8rem;
   padding-bottom: 1.1rem;
   position: relative;
-  color: #fff;
+  
+  color: #000 !important;
   margin-top: 2px;
 
 
@@ -282,6 +283,7 @@
   font-size: 0.9rem;
   margin: 0;
   padding: 0.5rem;
+  color: #000 !important;
 }
 
 .inputSection {
