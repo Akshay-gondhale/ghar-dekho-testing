@@ -196,7 +196,7 @@ const Chatrooms = async (socket) => {
         const pipeline = [
             {
                 '$match': {
-                    "fullDocument.userId": ObjectId(brokerId),
+                    "fullDocument.brokerId": ObjectId(brokerId),
                     // "fullDocument.isUserSeen": data.type === "oldMessage" ? true : false
                 }
             }

@@ -124,6 +124,9 @@ const Chats = async (socket) => {
 
     socket.on("user-init-room", async (data, callback) => {
         try {
+            console.log("----data -----")
+            console.log(data)
+            console.log("----data -----")
             const { userId, propertyId, brokerId, message, msgType } = data;
             const createNewChatRoom = new ChatRoom({
                 userId,
