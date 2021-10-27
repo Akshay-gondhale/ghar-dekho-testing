@@ -40,8 +40,10 @@ const ChatScreen = () => {
         const socket = io.connect(`${SocketUrl}/chat`);
         setSocketInstance(socket)
         console.log(id)
-        socket.emit("broker-join-room", { id }, (res) => {
+        socket.emit("user-join-room", { userId, id }, (res) => {
+            console.log("user-join-room")
             console.log(res)
+            console.log("user-join-room")
             if (res.status === "404") {
                 history.push("/conversation")
             }
@@ -67,6 +69,8 @@ const ChatScreen = () => {
         if (messageText.trim() !== "") {
             setSendMsgLoading(true)
             if (chatData.data._id === null && chatData.messages.length === 0) {
+                console.log("initiating room...")
+                console.log(chatData)
                 console.log("initiating room...")
                 socketInstance.emit("user-init-room", {
                     message: messageText.trim(),
@@ -301,7 +305,8 @@ const ChatScreen = () => {
                                                                 </motion.div>
                                                                 :
 
-                                                                <a target="_blank" rel="noreferrer" href={`${ImageUrl}${data.fileUrl}`} key={index}>
+                                                                <a target="_blank" rel="noreferrer" href={`${ImageUrl}${data.fileUrl}`} key={index} 
+                                                                className={!isUser ? style.leftMsgContainer : style.rightMsgContainer}>
                                                                     <motion.div
 
                                                                         // framer motion animation
@@ -309,7 +314,7 @@ const ChatScreen = () => {
 
                                                                         className={!isUser ? (isFirstMessage ? style.left_chatImgWrapper + " " + style.firstLeftMsg : style.left_chatImgWrapper) : (isFirstMessage ? style.right_chatImgWrapper + " " + style.firstRightMsg : style.right_chatImgWrapper)}>
                                                                         <img className={style.chatImg} src={`${ImageUrl}${data.fileUrl}`} alt={"/images/modiji.jpg"} />
-                                                                        {data.message !== "" && <p className={style.right_chatImgCaption}>{data.message}</p>}
+                                                                        {data.message !== "" && <p className={!isUser ?style.left_chatImgCaption:style.right_chatImgCaption}>{data.message}</p>}
                                                                         <span className={style.msgTime}>{time}</span>
                                                                     </motion.div>
                                                                 </a>
