@@ -78,8 +78,9 @@ const Chats = async (socket) => {
 
     socket.on("broker-join-room", async (data, callback) => {
         try {
+            console.log(data)
             const foundChatRoom = await ChatRoom.findOne({ _id: data.id }).populate("propertyId userId")
-
+            
             if (foundChatRoom) {
                 foundChatRoom.isBrokerSeen = true;
                 await foundChatRoom.save();
