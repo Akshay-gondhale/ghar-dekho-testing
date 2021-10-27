@@ -240,6 +240,57 @@ const Chats = async (socket) => {
 
         }
     })
+    socket.on("broker-newMsg-file", async (data, callback) => {
+        try {
+            const { userId, chatRoomId, brokerId, message, msgType, blobData } = data;
+            const fileExtArray = data.fileName.split(".")
+            const fileExt = fileExtArray[fileExtArray.length - 1]
+            const fileName = "Chat__" + Date.now() + "." + fileExt;
+            var imagePath = path.join(__dirname, "../LocalStorage/") + fileName;
+            var destinationPath = "Chat/" + fileName;
+            const uintData = new Uint8Array(blobData.buffer)
+            fs.createWriteStream(imagePath).write(uintData, async () => {
+                await bucket.upload(imagePath, { destination: destinationPath })
+                await fs.unlinkSync(imagePath);
+                console.log("file uploaded")
+                const foundChatRoom = await ChatRoom.findById(chatRoomId);
+
+                const createChatMsg = new Chat({
+                    userId,
+                    chatRoomId,
+                    brokerId,
+                    senderId: brokerId,
+                    msgType,
+                    message,
+                    fileUrl: destinationPath
+
+                })
+                const insertChatMsg = await createChatMsg.save();
+                
+                foundChatRoom.lastMsg = insertChatMsg;
+                foundChatRoom.isUserSeen = false
+
+                await foundChatRoom.save()
+
+                socket.nsp.to(`${foundChatRoom._id}`).emit("newMessage", insertChatMsg)
+
+                callback({
+                    status: "ok",
+                    message: "message inserted.!",
+                    messages: [insertChatMsg]
+                })
+            })
+
+        }
+        catch (e) {
+            console.log(e)
+            callback({
+                status: "503",
+                message: "Something went wrong"
+            })
+
+        }
+    })
 
     socket.on("broker-newMsg", async (data, callback) => {
         const { userId, chatRoomId, brokerId, message, msgType } = data;
