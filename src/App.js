@@ -17,6 +17,8 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Homes from './screens/Homes/Homes';
 import SingleHome from './screens/Homes/SingleHome';
 import PendingScreeen from "./screens/PendingScreen"
+import ConversationScreen from "./screens/Conversation/Conversation"
+import ChatScreen from './screens/Conversation/ChatScreen';
 
 
 axios.defaults.baseURL = 'https://ghar-dekho-backend.herokuapp.com';
@@ -43,7 +45,8 @@ function App() {
               <ProtectedRoutes exact path="/" component={PendingScreeen} />
               <ProtectedRoutes exact path="/homes" component={Homes} />
               <ProtectedRoutes exact path="/homes/:id" component={SingleHome} />
-              <ProtectedRoutes exact path="/users" component={PendingScreeen} />
+              <ProtectedRoutes exact path="/chats" component={ConversationScreen} />
+              <ProtectedRoutes exact path="/chats/:id" component={ChatScreen} />
             </div>
             </>
           }

@@ -1,0 +1,192 @@
+
+.mainDiv{
+    width: 100%;
+    /* max-width: 60rem; */
+    border-radius: 2rem;
+    min-height: calc(100vh - 5rem);
+    border-left: 1px solid #D6DBDF;
+    border-right: 1px solid #D6DBDF;
+    border-top: 1px solid #D6DBDF;
+    margin: 0 auto;
+    margin-top: 5rem;
+    position: relative;
+}
+.topSection{
+    display: flex;
+    align-items: center;
+}
+.activeTopSectionElement{
+    flex: 1;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    padding: 1rem 0;
+    font-family: "Poppins", sans-serif;
+    color: #2ECC71;
+    border-bottom: 2px solid #2ECC71;
+    cursor: pointer;
+    white-space: nowrap;
+
+}
+.topSectionElement{
+    flex: 1;
+    list-style: none;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    padding: 1rem 0;
+    font-family: "Poppins", sans-serif;
+    border-bottom: 2px solid #c6c6c6;
+    cursor: pointer;
+}
+.topSectionElement > i,.activeTopSectionElement > i{
+    margin: 0 1rem;
+    font-size: 1.3rem;
+
+}
+.topSectionElement > p,.activeTopSectionElement > p{
+    margin: 0;
+    padding: 0;
+
+}
+
+.chatRoom{
+    display: flex;
+    align-items: center;
+    padding: .5rem 0;
+    color: #34495E;
+    border-bottom: 1px solid #95A5A6;
+    padding: .5rem;
+    transition: .3s;
+}
+.chatRoom:hover{
+    color: #fff;
+    cursor: pointer;
+    background-color: #229954;
+    transition: .3s;
+
+}
+.chatRoom:hover .heading{
+    color: #fff;
+}
+.userIconWrapper{
+    width: 15%;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chatRoomsWrapper{
+    padding-bottom: 1rem;
+}
+
+.dataDiv{
+    width: 80%;
+}
+.heading{
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding: 0;
+    color: #2E4053;
+    text-transform: capitalize;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+.lastMsg{
+    margin: 0;
+    width: 100%;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+    font-size: .9rem;
+    opacity: .8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.spinnerWrapper{
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noChatRoom{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.noChatRoom > img{
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+}
+.noChatRoom > p{
+    
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    opacity: .8;
+    margin-top: 2rem;
+}
+
+.hidden{
+    display: none;
+}
+
+.visible{
+    display: block;
+}
+
+@media only screen and (max-width: 850px) {
+    .mainDiv{
+        width: 100%;
+        /* display: none; */
+        /* max-width: 100%; */
+        margin: 0;
+        margin-top: 5rem;
+        position: relative;
+    }
+    
+    .topSection{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .activeTopSectionElement{
+        padding: 1rem;
+    }
+    .topSectionElement{
+        padding: 1.1rem 1rem;
+
+    }
+    .topSectionElement > p{
+        display: none;
+        visibility: hidden;
+    }
+    .userIconWrapper{
+        width: 25%;
+        min-width: 25%;
+        max-width: 25%;
+        font-size: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .dataDiv{
+        width: 75%;
+    }
+}

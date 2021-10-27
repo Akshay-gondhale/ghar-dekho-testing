@@ -36,37 +36,45 @@ const LoginAuthAction = (loginState, toast, setIsLoading) => {
 };
 const getUser = () => {
     return async (dispatch) => {
-        const auth = JSON.parse(localStorage.getItem("auth"));
-        if (auth) {
-            axios.get(`/broker`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + auth.jwt
-                }
-            })
-                .then(res => {
-                    console.log("got user from db", res.data.data[0])
-                    dispatch({
-                        type: AuthAction.GET_USER_SUCCESS, payload: {
-                            name: res.data.data[0].name,
-                            phone: res.data.data[0].phone,
-                            email: res.data.data[0].email,
-                            jwt: auth.jwt,
-                            expires: auth.expires,
-                            createdAt: res.data.data[0].createdAt
-                        }
+        try {
+            const auth = JSON.parse(localStorage.getItem("auth"));
+            if (auth) {
+                axios.get(`/broker`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + auth.jwt
+                    }
+                })
+                    .then(res => {
+                        console.log("got user from db", res.data.data[0])
+                        dispatch({
+                            type: AuthAction.GET_USER_SUCCESS, payload: {
+                                _id:res.data.data[0]._id,
+                                name: res.data.data[0].name,
+                                phone: res.data.data[0].phone,
+                                email: res.data.data[0].email,
+                                jwt: auth.jwt,
+                                expires: auth.expires,
+                                createdAt: res.data.data[0].createdAt
+                            }
+                        })
                     })
-                })
-                .catch(err => {
-                    dispatch({ type: AuthAction.GET_USER_FAIL, payload: {} })
-                })
+                    .catch(err => {
+                        dispatch({ type: AuthAction.GET_USER_FAIL, payload: {} })
+                    })
 
-            console.log("logged in")
+                console.log("logged in")
+            }
+            else {
+                dispatch({ type: AuthAction.GET_USER_FAIL, payload: {} })
+                console.log("Not logged in")
+
+            }
+
         }
-        else {
+        catch (e) {
+            console.log(e)
             dispatch({ type: AuthAction.GET_USER_FAIL, payload: {} })
-            console.log("Not logged in")
-
         }
 
     };
@@ -86,6 +94,7 @@ const updateProfile = (formData, toast, history, setIsLoading) => {
             .then(res => {
                 dispatch({
                     type: AuthAction.PROFILE_UPDATE_SUCCESS, payload: {
+                        _id:res.data.data[0]._id,
                         name: res.data.data[0].name,
                         phone: res.data.data[0].phone,
                         email: res.data.data[0].email,

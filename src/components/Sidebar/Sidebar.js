@@ -38,13 +38,13 @@ const Sidebar = () => {
                         <i className="fas fa-igloo"></i> Homes
                     </NavLink>
                     <NavLink
-                        to="/users"
+                        to="/chats"
                         exact
                         onClick={()=>setIsSidebarOpen(false)}
                         className={style.sideElement}
                         activeClassName={style.activeSideElement}
                     >
-                        <i className="fas fa-users"></i> Users
+                        <i className="fas fa-comments"></i> Chats
                     </NavLink>
                 </div>
             </div>

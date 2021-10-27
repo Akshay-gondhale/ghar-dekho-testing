@@ -1,0 +1,4 @@
+export const ConversationActionTypes = {
+    GET_CHAT_ROOMS_SUCCESS :"GET_CHAT_ROOMS_SUCCESS",
+    GET_CHAT_ROOMS_FAILS :"GET_CHAT_ROOMS_FAILS",
+}
