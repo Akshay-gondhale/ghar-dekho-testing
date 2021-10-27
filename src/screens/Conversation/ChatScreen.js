@@ -39,7 +39,8 @@ const ChatScreen = () => {
         setIsChatLoading(true)
         const socket = io.connect(`${SocketUrl}/chat`);
         setSocketInstance(socket)
-        socket.emit("user-join-room", { id, userId }, (res) => {
+        console.log(id)
+        socket.emit("broker-join-room", { id }, (res) => {
             console.log(res)
             if (res.status === "404") {
                 history.push("/conversation")
@@ -300,7 +301,7 @@ const ChatScreen = () => {
                                                                 </motion.div>
                                                                 :
 
-                                                                <a target="_blank" rel="noreferrer" href={`${ImageUrl}${data.fileUrl}`} key={index} className={style.rightMsgContainer}>
+                                                                <a target="_blank" rel="noreferrer" href={`${ImageUrl}${data.fileUrl}`} key={index}>
                                                                     <motion.div
 
                                                                         // framer motion animation

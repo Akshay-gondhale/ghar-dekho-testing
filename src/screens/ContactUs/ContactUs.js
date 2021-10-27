@@ -51,7 +51,7 @@ const ContactUs = () => {
                     .catch(err => {
                         console.log(err)
                         if (err.response) {
-                            toast.error(err.response.submitDataWrapper.message)
+                            toast.error(err.response.data.message)
                         }
                         else {
                             toast.error("Something went wrong please try again later.")
