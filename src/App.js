@@ -33,6 +33,7 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 // import { useEffect } from 'react';
 // import "./utils/Axios"
 
+
 axios.defaults.baseURL = BaseApi;
 // axios.interceptors.request.use(function (config) {
 //   console.log("request ja rahi hai bhai")
