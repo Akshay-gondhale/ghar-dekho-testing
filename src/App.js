@@ -34,7 +34,7 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 // import "./utils/Axios"
 
 
-axios.defaults.baseURL = BaseApi;
+axios.defaults.baseURL = BaseApi; 
 // axios.interceptors.request.use(function (config) {
 //   console.log("request ja rahi hai bhai")
 //   console.log(config)
