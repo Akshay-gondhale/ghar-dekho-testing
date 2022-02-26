@@ -4175,6 +4175,8 @@ app.get("/mob/homeInterest", async (req,res)=>{
   }
 })
 
+
+
 app.get("*", async (req, res) => {
   try {
     const userToken = req.cookies.jwt;
