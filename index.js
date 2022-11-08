@@ -29,7 +29,7 @@ app.use("/broker", require("./routes/BrokerRoutes"));
 const server = app.listen(PORT, () => console.log("APP is running"));
 const io = require("socket.io")(server, {
     cors: {
-        origin: '*',
+        origin: '*', 
     }
 });
 
